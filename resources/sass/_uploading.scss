@@ -1,0 +1,55 @@
+.add-product-profile__upload {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-pack: justify;
+	-ms-flex-pack: justify;
+	justify-content: space-between;
+	-ms-flex-wrap: wrap;
+	flex-wrap: wrap;
+}
+
+.add-product-profile__upload-item {
+	position: relative;
+	margin: 0 5px 29px 0;
+}
+
+.add-product-profile__upload-label {
+	position: relative;
+	overflow: hidden;
+	display: -webkit-box !important;
+	display: -ms-flexbox !important;
+	display: flex !important;
+	-webkit-box-pack: center;
+	-ms-flex-pack: center;
+	justify-content: center;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	align-items: center;
+	border: none;
+	background-color: #C9C9C9;
+	width: 118px;
+	height: 118px;
+	border-radius: 8px;
+	cursor: pointer;
+	&:hover {
+		background-color: #A7A5A5;
+	}
+}
+
+.add-product-profile__upload-close {
+	//display: none;
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	width: 15px;
+	height: 15px;
+	z-index: 5;
+	background-image: url("../img/ic_close.svg");
+	background-repeat: no-repeat;
+	background-size: contain;
+}
+
+.add-product-profile__upload-input {
+	display: none !important;
+}

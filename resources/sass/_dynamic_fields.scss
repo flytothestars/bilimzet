@@ -1,0 +1,34 @@
+.dynamic-fields__list, .dynamic-fields__list_desc {
+	list-style-type: none;
+	padding: 0;
+	& .dynamic-fields__item {
+		position: relative;
+		display: flex;
+		justify-content: space-between;
+		padding: 15px;
+		& p {
+			margin: 0;
+			width: 50%;
+			padding: 0 25px;
+			&:first-of-type {
+				border-right: 1px solid #000000;
+			}
+		}
+
+		&::before {
+			display: none;
+		}
+	}
+
+	& .dynamic-fields__label--select::before {
+		display: none;
+	}
+}
+
+.dynamic-fields__btn-remove {
+	position: absolute;
+	top: 50%;
+	right: 10px;
+	-webkit-transform: translateY(-50%);
+	transform: translateY(-50%);
+}

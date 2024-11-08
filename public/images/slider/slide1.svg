@@ -1,0 +1,56 @@
+<svg id="Component_2_1" data-name="Component 2 – 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1237" height="527" viewBox="0 0 1237 527">
+  <defs>
+    <linearGradient id="linear-gradient" x1="1" x2="0" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#09f"/>
+      <stop offset="1" stop-color="#0075c3"/>
+    </linearGradient>
+    <clipPath id="clip-path">
+      <rect id="Rectangle_40" data-name="Rectangle 40" width="1088" height="450" transform="translate(139 238)" fill="none" stroke="#707070" stroke-width="1"/>
+    </clipPath>
+    <clipPath id="clip-path-2">
+      <circle id="Ellipse_13" data-name="Ellipse 13" cx="36" cy="36" r="36" transform="translate(462 301)" fill="none" stroke="#707070" stroke-width="1"/>
+    </clipPath>
+  </defs>
+  <rect id="Rectangle_38" data-name="Rectangle 38" width="1237" height="450" fill="url(#linear-gradient)"/>
+  <g id="Mask_Group_2" data-name="Mask Group 2" transform="translate(-139 -237)" clip-path="url(#clip-path)">
+    <g id="Ellipse_11" data-name="Ellipse 11" transform="translate(628 -30)" fill="none" stroke="#fff" stroke-width="122" opacity="0.13">
+      <circle cx="506.5" cy="506.5" r="506.5" stroke="none"/>
+      <circle cx="506.5" cy="506.5" r="445.5" fill="none"/>
+    </g>
+  </g>
+  <path id="Path_134" data-name="Path 134" d="M0,0,21.689,19.044,43.4,0,65.651,19.044,87.632,0l22.679,19.044L132.275,0" transform="translate(574 367)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="6" opacity="0.21"/>
+  <path id="Path_135" data-name="Path 135" d="M0,0,10.248,9l10.26-9L31.02,9,41.406,0,52.122,9,62.5,0" transform="translate(184 102.045)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="6" opacity="0.21"/>
+  <g id="Ellipse_12" data-name="Ellipse 12" transform="translate(736 111)" fill="none" stroke="#fff" stroke-width="23" opacity="0.39">
+    <circle cx="51" cy="51" r="51" stroke="none"/>
+    <circle cx="51" cy="51" r="39.5" fill="none"/>
+  </g>
+  <g id="Mask_Group_3" data-name="Mask Group 3" transform="translate(535.213 -318.583) rotate(48)" opacity="0.54" clip-path="url(#clip-path-2)">
+    <g id="Group_58" data-name="Group 58">
+      <line id="Line_29" data-name="Line 29" y2="78" transform="translate(457.5 297.5)" fill="none" stroke="#fff" stroke-width="1"/>
+      <line id="Line_29-2" data-name="Line 29" y2="78" transform="translate(461.5 297.5)" fill="none" stroke="#fff" stroke-width="1"/>
+      <line id="Line_29-3" data-name="Line 29" y2="78" transform="translate(465.5 297.5)" fill="none" stroke="#fff" stroke-width="1"/>
+      <line id="Line_29-4" data-name="Line 29" y2="78" transform="translate(469.5 297.5)" fill="none" stroke="#fff" stroke-width="1"/>
+      <line id="Line_29-5" data-name="Line 29" y2="78" transform="translate(473.5 297.5)" fill="none" stroke="#fff" stroke-width="1"/>
+      <line id="Line_29-6" data-name="Line 29" y2="78" transform="translate(477.5 297.5)" fill="none" stroke="#fff" stroke-width="1"/>
+      <line id="Line_29-7" data-name="Line 29" y2="78" transform="translate(481.5 297.5)" fill="none" stroke="#fff" stroke-width="1"/>
+      <line id="Line_29-8" data-name="Line 29" y2="78" transform="translate(485.5 297.5)" fill="none" stroke="#fff" stroke-width="1"/>
+      <line id="Line_29-9" data-name="Line 29" y2="78" transform="translate(489.5 297.5)" fill="none" stroke="#fff" stroke-width="1"/>
+      <line id="Line_29-10" data-name="Line 29" y2="78" transform="translate(493.5 297.5)" fill="none" stroke="#fff" stroke-width="1"/>
+      <line id="Line_29-11" data-name="Line 29" y2="78" transform="translate(497.5 297.5)" fill="none" stroke="#fff" stroke-width="1"/>
+      <line id="Line_29-12" data-name="Line 29" y2="78" transform="translate(501.5 297.5)" fill="none" stroke="#fff" stroke-width="1"/>
+      <line id="Line_29-13" data-name="Line 29" y2="78" transform="translate(505.5 297.5)" fill="none" stroke="#fff" stroke-width="1"/>
+      <line id="Line_29-14" data-name="Line 29" y2="78" transform="translate(509.5 297.5)" fill="none" stroke="#fff" stroke-width="1"/>
+      <line id="Line_29-15" data-name="Line 29" y2="78" transform="translate(513.5 297.5)" fill="none" stroke="#fff" stroke-width="1"/>
+      <line id="Line_29-16" data-name="Line 29" y2="78" transform="translate(517.5 297.5)" fill="none" stroke="#fff" stroke-width="1"/>
+      <line id="Line_29-17" data-name="Line 29" y2="78" transform="translate(521.5 297.5)" fill="none" stroke="#fff" stroke-width="1"/>
+      <line id="Line_29-18" data-name="Line 29" y2="78" transform="translate(525.5 297.5)" fill="none" stroke="#fff" stroke-width="1"/>
+      <line id="Line_29-19" data-name="Line 29" y2="78" transform="translate(529.5 297.5)" fill="none" stroke="#fff" stroke-width="1"/>
+      <line id="Line_29-20" data-name="Line 29" y2="78" transform="translate(533.5 297.5)" fill="none" stroke="#fff" stroke-width="1"/>
+      <line id="Line_29-21" data-name="Line 29" y2="78" transform="translate(537.5 297.5)" fill="none" stroke="#fff" stroke-width="1"/>
+    </g>
+  </g>
+  <g id="Ellipse_14" data-name="Ellipse 14" transform="translate(152 377)" fill="none" stroke="#fff" stroke-width="40" opacity="0.06">
+    <circle cx="75" cy="75" r="75" stroke="none"/>
+    <circle cx="75" cy="75" r="55" fill="none"/>
+  </g>
+</svg>

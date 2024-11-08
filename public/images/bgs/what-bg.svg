@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1090.312" height="316.018" viewBox="0 0 1090.312 316.018">
+  <defs>
+    <linearGradient id="linear-gradient" x1="1" x2="0" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#09f"/>
+      <stop offset="1" stop-color="#004d80"/>
+    </linearGradient>
+    <clipPath id="clip-path">
+      <rect id="Rectangle_69" data-name="Rectangle 69" width="644" height="262" transform="translate(583 2246)" fill="none" stroke="#707070" stroke-width="1"/>
+    </clipPath>
+  </defs>
+  <g id="what-bg" transform="translate(2.312)">
+    <rect id="Rectangle_68" data-name="Rectangle 68" width="1088" height="262" transform="translate(0)" fill="url(#linear-gradient)"/>
+    <g id="Mask_Group_9" data-name="Mask Group 9" transform="translate(-139 -2246)" clip-path="url(#clip-path)">
+      <g id="Group_78" data-name="Group 78">
+        <circle id="Ellipse_20" data-name="Ellipse 20" cx="136" cy="136" r="136" transform="translate(1091 2241)" fill="#fff" opacity="0.3"/>
+        <circle id="Ellipse_21" data-name="Ellipse 21" cx="263" cy="263" r="263" transform="translate(967 2114)" fill="#fff" opacity="0.3"/>
+        <circle id="Ellipse_22" data-name="Ellipse 22" cx="447" cy="447" r="447" transform="translate(783 1930)" fill="#fff" opacity="0.16"/>
+        <circle id="Ellipse_23" data-name="Ellipse 23" cx="631" cy="631" r="631" transform="translate(599 1744)" fill="#fff" opacity="0.13"/>
+      </g>
+    </g>
+    <path id="Path_202" data-name="Path 202" d="M0,0,21.689,19.044,43.4,0,65.651,19.044,87.632,0l22.679,19.044L132.275,0" transform="translate(736 127)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="6" opacity="0.21"/>
+    <g id="kazakhstan" transform="matrix(0.985, 0.174, -0.174, 0.985, 25.247, 115.9)" opacity="0.12">
+      <path id="Path_203" data-name="Path 203" d="M100.462,51.3c-16.425-6.946-34.157,2.206-51.126-6.782C31.195,34.944,16.009,50.552,4.42,60.575-8.1,71.362,9.418,78.948,14.607,88.1c6.85,12.121,12.884.068,19.067,1.158,4.44.79,10.691-2.084,12.693,3.623S44,100.616,38.59,102.4c-13.687,4.481-7.613,12.353-2.915,20.374,7.4,12.679,24.079,5.965,34.661,22.621.463-10.446-.027-14.069.9-17.242,2.261-7.654-6.074-17.555,6.932-23.207,11.753-5.148,18.7,1.457,26.2,6.973,5.611,4.181,9.765,9.37,18.059,7.545,10.9-2.438,17.841,1.267,22.022,12.938,3.391,9.465,12.257,16.1,22.254,7.722,22.227-18.563,47.871-16.329,72.9-11.467,10.623,2.057,12.094-1.144,13.115-8.744,2.234-16.207,12.966-24.978,26.993-30.33,5.788-2.22,21.7-24.882,18.972-25.046-12.925-.79-18.6-16.166-31.719-15.076-13.524,1.13-22.485-3.813-29.772-15.771C230.648,22.918,223.389,9,205.725,21.3c-2.983,2.07-13.306-1.471-16.466-5.42C176.825.3,162.865,6.466,148.483,10.7c-9.969,2.928-19.979,6.374-30.194,7.64-18.1,2.206-16.057,16.7-12.816,25.754C108.715,53.18,104.7,53.085,100.462,51.3Z" transform="translate(0 0)" fill="none" stroke="#fff" stroke-width="3"/>
+    </g>
+  </g>
+</svg>

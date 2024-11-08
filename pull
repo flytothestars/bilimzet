@@ -1,0 +1,23 @@
+#!/bin/bash
+
+git reset --hard
+git pull
+find . -type d -print0 | xargs -0 chmod 0755
+find . -type f -print0 | xargs -0 chmod 0644
+
+# custom rules
+files="cache"
+files="$files storage"
+files="$files public/uploads/profile"
+files="$files public/uploads/library"
+files="$files public/uploads/courses"
+files="$files public/forum/files"
+files="$files public/forum/cache"
+files="$files public/forum/store"
+files="$files public/forum/images/avatars/upload"
+
+for file in $files; do
+    mkdir -p "$file"
+    chmod -R 777 "$file"
+done
+

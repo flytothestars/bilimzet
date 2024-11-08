@@ -1,0 +1,22 @@
+.timer__box {
+	& figure {
+		display: inline-block;
+		margin: 5px;
+		& div {
+			font-size: 26px;
+			font-weight: bold;
+			color: #c00;
+		}
+		& figcaption {
+			font-size: 16px;
+			color: #333;
+		}
+	}
+	& span {
+		display: inline-block;
+		vertical-align: top;
+		font-size: 26px;
+		font-weight: bold;
+		color: #c00;
+	}
+}

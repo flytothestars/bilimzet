@@ -1,0 +1,252 @@
+.slider-block {
+	margin-top: 40px;
+	position: relative;
+	& .panel {
+		flex-basis: 121.5px;
+		flex-shrink: 0;
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		z-index: 5;
+
+		& .swiper-pagination {
+			position: static;
+			text-align: center;
+			-webkit-transition: 0.3s opacity;
+			-o-transition: 0.3s opacity;
+			transition: 0.3s opacity;
+			-webkit-transform: translate3d(0, 0, 0);
+			transform: translate3d(0, 0, 0);
+			z-index: 10;
+			width: 52px;
+		}
+
+		& .swiper-pagination-bullet {
+			font-size: 16px;
+			opacity: 0.43;
+			list-style: none;
+			margin-bottom: 27px;
+			width: 100%;
+			display: block;
+			-webkit-transition: all 200ms !important;
+			-moz-transition: all 200ms;
+			-o-transition: all 200ms;
+			transition: all 200ms;
+			color: white;
+		}
+
+		& .swiper-pagination-bullet-active {
+			font-size: 22px;
+			opacity: 1;
+		}
+
+		& .social {
+			background: #00b9ff;
+			text-align: center;
+			width: 52px;
+			height: 146px;
+			padding-top: 15px;
+
+			& li {
+				list-style: none;
+				margin-bottom: 27px;
+			}
+		}
+	}
+
+	& .slider {
+		position: relative;
+		flex-basis: 1160px;
+		flex-shrink: 1;
+		height: 500px;
+		max-width: 100%;
+
+		& .slide {
+			height: 500px;
+			background-size: 120% !important;
+			padding: 75px 0 0 0;
+			max-width: 100%;
+
+			& .slide-body {
+				padding: 50px 0 0 77px;
+				height: 100%;
+				background-size: cover !important;
+				max-width: 100%;
+			}
+
+			& .text-block {
+				color: white;
+				position: relative;
+
+				& .num {
+					font-size: 42px;
+					font-family: 'Open Sans';
+					font-weight: 700;
+					position: relative;
+					width: 100px;
+					margin-bottom: 40px;
+				}
+
+				& .num_1::after {
+					content: '';
+					width: 58px;
+					position: absolute;
+					bottom: -20px;
+					left: 0;
+					height: 4px;
+					background: #4ACEE9;
+				}
+
+				& .num_2::after {
+					content: '';
+					width: 58px;
+					position: absolute;
+					bottom: -20px;
+					left: 0;
+					height: 4px;
+					background: #10FF76;
+				}
+
+				& .num_3::after {
+					content: '';
+					width: 58px;
+					position: absolute;
+					bottom: -20px;
+					left: 0;
+					height: 4px;
+					background: #E94AE9;
+				}
+
+				& .title {
+					font-size: 25px;
+					font-family: 'Open Sans';
+					font-weight: 700;
+					width: 540px;
+				}
+
+				& .title_big {
+					width: 636px;
+				}
+
+				& .text {
+					font-size: 20px;
+					font-family: 'Proxima Nova Light';
+					font-weight: 300;
+					width: 540px;
+					margin-top: 20px;
+				}
+			}
+
+			& .slider-image {
+				position: absolute;
+				right: 115px;
+				bottom: 0;
+				height: 100%;
+			}
+		}
+		& .bottom-navi {
+			position: absolute;
+			bottom: 30px;
+			width: 100%;
+			padding: 0 60px;
+
+			& .left, & .right {
+				cursor: pointer;
+			}
+		}
+
+		& .swiper-button-next,
+		& .swiper-button-prev {
+			position: initial !important;
+		}
+	}
+}
+
+@media only screen and (max-width: 1280px) {
+	.slider-block {
+		margin-top: 20px;
+		& .slider .slide .slide-body {
+			padding: 20px 0 0 77px;
+			height: 100%;
+			background-size: 120% !important;
+		}
+	}
+}
+
+@media only screen and (max-width: 1020px) {
+	.slider-block {
+		& .slider {
+			& .slide {
+				& .slider-image {
+					right: 0;
+					height: 330px;
+				}
+				& .slide-body {
+					padding: 20px 0 0 77px;
+					height: 100%;
+					background-size: 160%!important;
+				}
+				& .text-block {
+					& .title, & .text {
+						width: 440px;
+					}
+				}
+			}
+		}
+		& .centered {
+			padding: 0;
+		}
+	}
+}
+
+@media only screen and (max-width: 750px) {
+	.slider-block {
+		margin-top: 0;
+		position: relative;
+		& .slider {
+			height: 100vh;
+			& .slide {
+				padding: 55px 0 0 0;
+				height: 100vh;
+				& .slider-image {
+					display: none;
+				}
+				& .slide-body {
+					background-size: 400% !important;
+					background-position: center center !important;
+				}
+				& .text-block {
+					& .title, & .text {
+						width: 300px;
+					}
+				}
+			}
+		}
+	}
+}
+
+@media only screen and (max-width: 560px) {
+	.slider-block {
+		margin-top: 0;
+		position: relative;
+		& .slider {
+			height: 100vh;
+			& .slide {
+				padding: 55px 0 0 0;
+				height: 100vh;
+				& .slider-image {
+					display: none;
+				}
+				& .slide-body {
+					background-size: 400% !important;
+					background-position: center center !important;
+				}
+				& .text-block {
+					& .title, & .text {
+						width: 200px;
+					}
+				}
+			}
+		}
+	}
+}

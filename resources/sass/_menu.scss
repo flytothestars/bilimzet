@@ -1,0 +1,79 @@
+header .left .menu {
+	margin-left: 52.3px;
+	height: 100%;
+	& li {
+		list-style: none;
+		margin-right: 20px;
+		height: 100%;
+	}
+	& a {
+		color: #6d6d6d;
+		height: 100%;
+		display: -webkit-box;
+		display: -moz-box;
+		display: -ms-flexbox;
+		display: -webkit-flex;
+		display: flex;
+		align-items: center;
+		align-content: center;
+		font-weight: 700;
+		font-size: 16px;
+		&.current {
+			border-bottom: 3px solid #00b9ff;
+		}
+		&:hover {
+			border-bottom: 3px solid #00b9ff;
+			text-decoration: none;
+		}
+	}
+}
+
+@media only screen and (max-width: 1300px) {
+	header .left .menu {
+		& li {
+			margin-right: 10px;
+		}
+		& a {
+			font-size: 14px;
+		}
+	}
+}
+
+@media only screen and (max-width: 1120px) {
+	header .left .menu {
+		margin-left: 30px;
+		& li {
+			margin-right: 10px;
+		}
+		& a {
+			font-size: 12px;
+		}
+	}
+}
+
+@media only screen and (max-width: 1030px) {
+	header .left .menu {
+		& li {
+			width: 100%;
+			text-align: center;
+			height: auto;
+			margin-right: 10px;
+		}
+		& a {
+			font-size: 24px;
+			text-align: center;
+			display: block;
+			margin-bottom: 20px;
+			&.current {
+				border-bottom: none;
+				color: #00b9ff;
+			}
+		}
+	}
+}
+
+@media only screen and (max-width: 860px) and (orientation:landscape){
+	header .left .menu a {
+		margin-bottom: 10px;
+	}
+}

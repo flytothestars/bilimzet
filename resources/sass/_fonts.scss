@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,700&display=swap&subset=cyrillic');
+
+@font-face {
+	font-family: 'Proxima Nova Light';
+	src: url('../fonts/Proxima Nova Light.eot');
+	src: local('☺'), url('../fonts/Proxima Nova Light.woff') format('woff'), url('../fonts/Proxima Nova Light.ttf') format('truetype'), url('../fonts/Proxima Nova Light.svg') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'Roboto Slab';
+	src: url('../fonts/ofont.ru_Roboto Slab.eot');
+	src: local('☺'), url('../fonts/ofont.ru_Roboto Slab.woff') format('woff'), url('../fonts/ofont.ru_Roboto Slab.ttf') format('truetype'), url('../fonts/ofont.ru_Roboto Slab.svg') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+body {
+	font-family: 'Proxima Nova Light';
+	font-weight: 300;
+	font-size: 18px;
+	line-height: 1.2;
+}

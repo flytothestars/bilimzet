@@ -1,0 +1,816 @@
+.product-card-wr {
+	padding: 20px 0 75px;
+	background-color: #fff;
+	border-radius: 25px;
+	-webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+	box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+}
+
+@media screen and (max-width: 1180px) {
+	.product-card-wr {
+		margin-bottom: 60px;
+		padding-top: 0;
+		padding-bottom: 0;
+		-webkit-box-shadow: none;
+		box-shadow: none;
+	}
+}
+
+.new-product-card-wr {
+	margin-bottom: 40px;
+	padding: 20px 0;
+
+	& .address {
+		margin: 0 16px 15px 36px;
+		width: 68.1%;
+		border-radius: 18px;
+		height: 66.2px;
+		-webkit-transition: .5s;
+		transition: .5s;
+		padding: 0 20px 0 20px;
+	}
+
+	& .address__button {
+		font-size: 10px;
+		padding: 6px 18px;
+		margin-right: 0;
+		& span {
+			opacity: 1;
+		}
+	}
+
+	& .address__article {
+		font-size: 14px;
+		margin-right: 0;
+	}
+
+	& .address__city {
+		font-size: 14px;
+		margin-right: 0;
+	}
+
+	& .address__streets {
+		font-size: 12px;
+	}
+
+	& .address__right {
+		height: auto;
+		width: auto;
+		border-radius: 26px;
+		background: 0;
+
+		& .custom-checkbox__label {
+			font-weight: normal;
+			background-color: #096777;
+			font-size: 10px;
+			padding: 6px 18px;
+		}
+	}
+
+	& .rent-form__fields {
+		top: -344px;
+	}
+
+	& .rent-form__right {
+		margin-top: -81px;
+		-webkit-transition: .5s;
+		transition: .5s;
+	}
+}
+
+@media screen and (max-width: 767px) {
+	.new-product-card-wr .rent-form__right {
+		margin-top: 0;
+	}
+}
+
+.new-product-card-wr.new-product-card-wr--delivery {
+	& .address {
+		width: 100%;
+		margin: 0;
+	}
+
+	& .address__wrap {
+		padding: 0 16px 15px 36px;
+	}
+
+	& .address__right {
+		display: -webkit-box;
+		display: -ms-flexbox;
+		display: flex;
+	}
+
+	& .address__button, & .address__right .custom-checkbox__label {
+		font-size: 12px;
+		-webkit-transition: .3s .3s;
+		transition: .3s .3s;
+	}
+
+	& .address__city, & .address__article {
+		font-size: 16px;
+	}
+
+	& .address__streets {
+		font-size: 14px;
+	}
+
+	& .rent-form__right {
+		margin-top: 0;
+	}
+}
+
+.product-card {
+	position: relative;
+	padding: 0 16px 26px 36px;
+}
+
+.product-card__wrap {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-pack: justify;
+	-ms-flex-pack: justify;
+	justify-content: space-between;
+}
+
+@media (max-width: 767.98px) {
+	.product-card__wrap {
+		-ms-flex-wrap: wrap;
+		flex-wrap: wrap;
+	}
+}
+
+.product-card__category {
+	position: absolute;
+	top: 0;
+	left: 40px;
+	text-transform: none;
+	padding: 6px 15px;
+	font-weight: 400;
+	font-size: 12px;
+}
+
+.product-card__left {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	align-items: center;
+	margin-top: 25px;
+}
+
+.product-card__right {
+	width: 560px;
+}
+
+.product-card__bottom {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-ms-flex-wrap: wrap;
+	flex-wrap: wrap;
+	& a:not(:last-child) {
+		margin-right: 26px;
+	}
+	& button {
+		display: -webkit-box;
+		display: -ms-flexbox;
+		display: flex;
+		-webkit-box-align: center;
+		-ms-flex-align: center;
+		align-items: center;
+		border: none;
+		outline: none;
+		color: #fff;
+		font-weight: 700;
+		font-size: 16px;
+		border-radius: 23px;
+		padding: 12px 24px 12px 19px;
+		cursor: pointer;
+		& img {
+			margin-right: 20px;
+		}
+		&:focus {
+			outline: none;
+		}
+	}
+}
+
+.product-card__bottom-write {
+	margin-right: 26px;
+	background-color: #096777;
+}
+
+@media (max-width: 767.98px) {
+	.product-card__bottom-write {
+		margin-top: 15px;
+		margin-right: 0;
+		width: 100%;
+	}
+}
+
+.product-card__bottom-call {
+	background-color: #39cc1a;
+	width: 185px;
+	height: 44px;
+	& a {
+		display: none;
+		width: 100%;
+		height: 100%;
+		color: #ffffff;
+		opacity: 0;
+		&:hover {
+			text-decoration: none;
+			color: #ffffff;
+		}
+	}
+
+	& div {
+		display: flex;
+	}
+
+	&.active {
+		& div {
+			display: none;
+		}
+
+		& a {
+			display: block;
+			opacity: 1;
+			transition: opacity 0.5s ease-in-out;
+		}
+	}
+}
+
+@media (max-width: 767.98px) {
+	.product-card__bottom-call {
+		margin-top: 15px;
+		width: 100%;
+	}
+}
+
+.product-card__name {
+	margin-top: 0;
+	margin-bottom: 13px;
+	font-weight: 700;
+	font-size: 36px;
+}
+
+@media (max-width: 424.98px) {
+	.product-card__name {
+		font-size: 20px;
+	}
+}
+
+.product-card__name--mobile {
+	display: none;
+}
+
+.product-card__status {
+	margin-bottom: 24px;
+}
+
+.product-card__button {
+	min-width: 205px;
+}
+
+@media screen and (max-width: 1180px) {
+	.product-card {
+		padding-right: 0;
+		padding-left: 0;
+	}
+	.product-card__category {
+		display: none;
+	}
+	.product-card__left {
+		-webkit-box-orient: vertical;
+		-webkit-box-direction: normal;
+		-ms-flex-direction: column;
+		flex-direction: column;
+	}
+}
+
+@media screen and (max-width: 992px) {
+	.product-card {
+		display: block;
+	}
+	.product-card__left {
+		margin-bottom: 40px;
+	}
+	.product-card__name--mobile {
+		display: block;
+	}
+	.product-card__name--desktop {
+		display: none;
+	}
+	.product-card__right {
+		width: 100%;
+	}
+	.product-card__button {
+		width: 100%;
+	}
+}
+
+.new-product-page {
+	padding-bottom: 40px;
+	& .product-status__share--mobil {
+		display: none;
+	}
+
+	& .product-card__bottom--share {
+		display: -webkit-box;
+		display: -ms-flexbox;
+		display: flex;
+		margin-right: 20px;
+		-webkit-box-align: center;
+		-ms-flex-align: center;
+		align-items: center;
+	}
+}
+
+@media (max-width: 767px) {
+	.new-product-page {
+		padding-top: 0;
+		& .breadcrumbs {
+			display: none;
+		}
+		& .product-card-wr {
+			margin: 0 -15px;
+			padding-top: 75px;
+
+		}
+		& .product-card__left {
+			margin-top: 0;
+			margin-bottom: 5px;
+		}
+		& .product-card__right {
+			padding: 0 20px;
+		}
+		& .product-card__name--mobile {
+			-webkit-box-ordinal-group: 3;
+			-ms-flex-order: 2;
+			order: 2;
+			padding: 0 20px;
+		}
+		& .product-card__category {
+			display: block;
+			top: 10px;
+			z-index: 1;
+			right: 20px;
+			left: auto;
+			font-size: 10px;
+		}
+
+		& .gallery {
+			position: relative;
+			-webkit-box-ordinal-group: 2;
+			-ms-flex-order: 1;
+			order: 1;
+			width: 100vw;
+			& .gallery__item {
+				height: 250px;
+			}
+			& .gallery__link {
+				height: 100%;
+			}
+			& img {
+				width: 100%;
+				-o-object-position: center;
+				object-position: center;
+				-o-object-fit: contain;
+				object-fit: contain;
+			}
+			& .slick-dots {
+				padding: 0;
+				margin: 0;
+				display: -webkit-box;
+				display: -ms-flexbox;
+				display: flex;
+				list-style: none;
+				position: absolute;
+				bottom: 20px;
+				left: 50%;
+				-webkit-transform: translateX(-50%);
+				transform: translateX(-50%);
+				& button {
+					font-size: 0;
+					position: relative;
+					background: 0;
+					border: 0;
+					margin: 0 2px;
+					&::before {
+						content: '';
+						background: #fff;
+						border-radius: 100%;
+						width: 8px;
+						height: 8px;
+						border: 1px solid #000;
+						position: absolute;
+						left: 0;
+						top: 0;
+						right: 0;
+					}
+				}
+				& .slick-active button::before {
+					content: '';
+					background: #49C6E6;
+				}
+			}
+		}
+
+		& .gallery-side {
+			display: none;
+		}
+		& .product-card__status {
+			display: -webkit-box;
+			display: -ms-flexbox;
+			display: flex;
+			-webkit-box-pack: justify;
+			-ms-flex-pack: justify;
+			justify-content: space-between;
+			& .product-status__share--mobil {
+				display: -webkit-box;
+				display: -ms-flexbox;
+				display: flex;
+				& a {
+					margin-left: 5px;
+				}
+			}
+			& .product-status__label--good {
+				font-size: 10px;
+				background: 0;
+				color: #000;
+				padding: 0;
+				margin: 5px 0;
+				& span {
+					background-color: #00DF0F;
+					padding: 5px 25px;
+					color: #fff;
+					border-radius: 14px;
+					margin-left: 5px;
+				}
+			}
+		}
+
+		& .rental-price {
+			display: -webkit-box;
+			display: -ms-flexbox;
+			display: flex;
+			background-color: #3BB5D3;
+		}
+		& .rental-price__sale {
+			background-color: #84d9ee;
+			-webkit-box-ordinal-group: 3;
+			-ms-flex-order: 2;
+			order: 2;
+			display: -webkit-box;
+			display: -ms-flexbox;
+			display: flex;
+			-webkit-box-orient: vertical;
+			-webkit-box-direction: normal;
+			-ms-flex-direction: column;
+			flex-direction: column;
+			-webkit-box-pack: center;
+			-ms-flex-pack: center;
+			justify-content: center;
+			-webkit-box-align: start;
+			-ms-flex-align: start;
+			align-items: flex-start;
+			padding: 20px;
+			-webkit-box-flex: 1;
+			-ms-flex: 1;
+			flex: 1;
+			border-radius: 10px;
+			& span {
+				font-size: 8px;
+				margin-bottom: 2px;
+				& span {
+					display: none;
+				}
+			}
+		}
+		& .rental-price__sale-amount {
+			font-size: 18px;
+		}
+		& .rental-price__total {
+			-webkit-box-flex: 2;
+			-ms-flex: 2;
+			flex: 2;
+			margin-top: 0;
+		}
+		& .rental-price__total-title {
+			font-size: 10px;
+			margin-top: 0;
+			margin-bottom: 0;
+		}
+		& .rental-price__total-amount {
+			font-size: 32px;
+			overflow: hidden;
+		}
+		& .rental-price__total-link {
+			font-size: 10px;
+		}
+		& .product-card__bottom {
+			padding: 0 20px;
+			& .product-card__bottom--share {
+				display: none;
+			}
+			& button {
+				-webkit-box-flex: 1;
+				-ms-flex: 1;
+				flex: 1;
+				display: -webkit-box;
+				display: -ms-flexbox;
+				display: flex;
+				-webkit-box-pack: center;
+				-ms-flex-pack: center;
+				justify-content: center;
+				margin-top: 0;
+				font-size: 14px;
+				& img {
+					margin-right: 10px;
+				}
+			}
+			& .product-card__bottom-write {
+				margin-right: 5px;
+				& .text span {
+					display: none;
+				}
+			}
+			& .product-card__bottom-call {
+				margin-left: 5px;
+			}
+		}
+		& .rent-form__left {
+			display: -webkit-box;
+			display: -ms-flexbox;
+			display: flex;
+			-webkit-box-orient: vertical;
+			-webkit-box-direction: normal;
+			-ms-flex-direction: column;
+			flex-direction: column;
+			margin-bottom: 20px;
+		}
+		& .rent-form__calculator {
+			padding-top: 0;
+			margin-bottom: 0;
+		}
+		& .rent-form__fields {
+			display: none;
+		}
+		& .rent-form__map {
+			border-radius: 0;
+			-webkit-box-ordinal-group: 3;
+			-ms-flex-order: 2;
+			order: 2;
+			margin-bottom: 0;
+		}
+		& .rent-form__controls {
+			display: none;
+		}
+		& .rent-form__box {
+			& .owner {
+				-webkit-box-ordinal-group: 2;
+				-ms-flex-order: 1;
+				order: 1;
+				border-radius: 0;
+				margin-bottom: 0;
+				background-color: #333739;
+				padding-bottom: 0;
+			}
+			& .owner__more-ads {
+				background: #000;
+				text-align: center;
+				margin: 10px -15px 0 -15px;
+				width: 100vw;
+				padding: 10px;
+			}
+		}
+		& .rent-form__button, & .edit-form__button {
+			font-size: 15px;
+			padding: 20px;
+			max-width: 70%;
+			border-radius: 26px;
+		}
+		& .address {
+			display: none;
+		}
+	}
+}
+
+.rent-form {
+	position: relative;
+}
+
+.rent-form__fields {
+	margin: 0 16px 0 0;
+}
+
+.rent-form__box {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-pack: justify;
+	-ms-flex-pack: justify;
+	justify-content: space-between;
+	margin: 0 16px 0 36px;
+}
+
+@media (max-width: 1180.98px) {
+	.rent-form__box {
+		margin: 0;
+	}
+}
+
+@media (max-width: 767.98px) {
+	.rent-form__box {
+		-ms-flex-wrap: wrap;
+		flex-wrap: wrap;
+	}
+}
+
+.rent-form__left {
+	width: 100%;
+	margin-right: 32px;
+}
+
+.rent-form__right {
+	position: relative;
+}
+
+@media (max-width: 767.98px) {
+	.rent-form__left {
+		margin-right: 0;
+	}
+	.rent-form__right {
+		width: 100%;
+	}
+	.rent-form__controls {
+		width: 100% !important;
+		margin: 15px 0;
+	}
+	.rent-form__controls .mobileToggle {
+		width: auto;
+	}
+}
+
+.rent-form__price-list {
+	margin: 0;
+}
+
+.rent-form__map {
+	height: 400px;
+	margin-bottom: 1rem;
+	border-radius: 16px;
+}
+
+.rent-form__button, .edit-form__button {
+	min-width: 100%;
+	font-size: 14px;
+}
+
+@media screen and (max-width: 1180px) {
+	.rent-form__calculator {
+		margin-bottom: 60px;
+		padding: 50px 0 0;
+		background-color: #fff;
+	}
+}
+
+@media screen and (max-width: 992px) {
+	.rent-form__calculator {
+		display: block;
+	}
+	.rent-form__fields {
+		margin: 0 0 25px 0;
+	}
+}
+
+@media screen and (max-width: 576px) {
+	.rent-form__right {
+		display: block;
+	}
+	.rent-form__controls {
+		margin-right: 0;
+		margin-bottom: 15px;
+	}
+	.rent-form__button-box {
+		text-align: center;
+	}
+	.rent-form__button, .edit-form__button {
+		min-width: auto;
+		width: 100%;
+	}
+}
+
+.rent-form-fields {
+	background-color: #e9e9e9;
+	border-radius: 18px;
+	padding: 22px 23px;
+	position: absolute;
+	right: 0;
+	top: -260px;
+	min-width: 260px;
+}
+
+@media (max-width: 1180.98px) {
+	.rent-form-fields {
+		top: -215px;
+	}
+}
+
+@media (max-width: 991.98px) {
+	.rent-form-fields {
+		top: -370px;
+	}
+}
+
+@media (max-width: 767.98px) {
+	.rent-form-fields {
+		position: relative;
+		top: 0;
+	}
+}
+
+.rent-form-fields-table {
+	border-collapse: collapse;
+	& td {
+		width: 82px;
+		padding-bottom: 20px;
+		&:nth-of-type(2) {
+			opacity: 0.52;
+		}
+	}
+}
+
+.rent-form-fields-list {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+	& input {
+		background-color: #fff;
+		border-radius: 14px;
+		border: none;
+		padding: 5px 11px 5px 17px;
+		width: 100%;
+		margin-bottom: 15px;
+		&:focus {
+			outline: 0;
+		}
+	}
+}
+
+.rent-form-fields__label {
+	display: none;
+}
+
+.rent-form-fields__field-box {
+	position: relative;
+	margin: 0;
+}
+
+.rent-form-fields__field-box--date::after {
+	content: "";
+	position: absolute;
+	top: 50%;
+	right: 12px;
+	width: 15px;
+	height: 18px;
+	background: url('../img/bg/calendar.svg') no-repeat 0 0;
+	background-size: contain;
+	-webkit-transform: translate(0, -50%);
+	transform: translate(0, -50%);
+	pointer-events: none;
+}
+
+.rent-form-fields__field:focus {
+	-webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+@media screen and (max-width: 992px) {
+	.rent-form-fields {
+		width: auto;
+	}
+}
+
+@media screen and (max-width: 576px) {
+	.rent-form-fields {
+		display: block;
+	}
+	.rent-form-fields__item {
+		margin-right: 0;
+		margin-bottom: 15px;
+		&:last-child {
+			margin-bottom: 0;
+		}
+		&:nth-child(1), &:nth-child(2) {
+			width: 100%;
+		}
+	}
+	.rent-form-fields__field-box,
+	.rent-form-fields__field {
+		width: 100%;
+	}
+}

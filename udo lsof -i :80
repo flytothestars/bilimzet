@@ -1,0 +1,16 @@
+[0;1;31m×[0m apache2.service - The Apache HTTP Server
+     Loaded: loaded (]8;;file://lenovo/usr/lib/systemd/system/apache2.service/usr/lib/systemd/system/apache2.service]8;;; [0;1;32menabled[0m; preset: [0;1;32menabled[0m)
+     Active: [0;1;31mfailed[0m (Result: exit-code) since Wed 2024-11-06 14:23:55 +05; 1min 24s ago
+       Docs: ]8;;https://httpd.apache.org/docs/2.4/https://httpd.apache.org/docs/2.4/]8;;
+    Process: 1540936 ExecStart=/usr/sbin/apachectl start [0;1;31m(code=exited, status=1/FAILURE)[0m
+        CPU: 26ms
+
+Nov 06 14:23:55 lenovo systemd[1]: Starting apache2.service - The Apache HTTP Server...
+Nov 06 14:23:55 lenovo apachectl[1540941]: AH00558: apache2: Could not reliably determine the server's fully qualified domain name, using 192.168.88.128. Set the 'ServerName' directive globally to suppress this message
+Nov 06 14:23:55 lenovo apachectl[1540941]: (98)Address already in use: AH00072: make_sock: could not bind to address [::]:80
+Nov 06 14:23:55 lenovo apachectl[1540941]: (98)Address already in use: AH00072: make_sock: could not bind to address 0.0.0.0:80
+Nov 06 14:23:55 lenovo apachectl[1540941]: no listening sockets available, shutting down
+Nov 06 14:23:55 lenovo apachectl[1540941]: AH00015: Unable to open logs
+Nov 06 14:23:55 lenovo systemd[1]: [0;1;39m[0;1;31m[0;1;39mapache2.service: Control process exited, code=exited, status=1/FAILURE[0m
+Nov 06 14:23:55 lenovo systemd[1]: [0;1;38;5;185m[0;1;39m[0;1;38;5;185mapache2.service: Failed with result 'exit-code'.[0m
+Nov 06 14:23:55 lenovo systemd[1]: [0;1;31m[0;1;39m[0;1;31mFailed to start apache2.service - The Apache HTTP Server.[0m

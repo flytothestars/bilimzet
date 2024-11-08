@@ -1,0 +1,285 @@
+div, p, form, input, a, span, button, ul, li {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+.cert {
+	width: 1052px;
+	height: 744px;
+	background: url(../img/cer-bg.jpg) no-repeat center center / cover;
+	padding: 63px;
+}
+
+.cert-head {
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin: 0 15px 13px;
+}
+
+.cert-head__left, .cert-head__right {
+	text-align: center;
+	font-size: 16px;
+	width: 160px;
+}
+
+.cert-head__img {
+	width: 130px;
+}
+
+.cert__title {
+	font-size: 45px;
+	color: #0f3f3a;
+	text-align: center;
+	font-weight: bold;
+	text-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.cert__disc {
+	text-align: center;
+	font-size: 15px;
+	font-style: italic;
+	text-shadow: 0 0 1px rgba(0,0,0,1);
+	line-height: 21px;
+	margin-bottom: 30px;
+}
+
+.name-wrap {
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+	align-items: center;
+	position: relative;
+}
+
+.name-lab {
+	font-size: 17px;
+	width: 140px;
+}
+
+.name-inp {
+	border: 0;
+	border-bottom: 1px solid #000;
+	width: 100%;
+	height: 30px;
+	background: transparent;
+	outline: none;
+	text-align: center;
+	font-size: 25px;
+	padding-bottom: 3px;
+	padding-right: 140px;
+	margin-top: -9px;
+	text-shadow: 0 4px 8px rgba(0,0,0,0.1);
+	font-style: italic;
+	font-weight: bold;
+}
+
+.name-hint {
+	position: absolute;
+	bottom: -13px;
+	left: 37%;
+	font-size: 11px;
+	font-style: italic;
+}
+
+.accept-wrap {
+	position: relative;
+	margin-top: 7px;
+}
+
+.accept-lab {
+	font-size: 17px;
+}
+
+.accept-inp {
+	border: 0;
+	border-bottom: 1px solid #000;
+	width: 100%;
+	height: 20px;
+	background: transparent;
+	outline: none;
+	text-align: center;
+	font-size: 16px;
+	padding-bottom: 1px;
+	margin-top: 5px;
+}
+
+.accept-hint {
+	position: absolute;
+	bottom: -13px;
+	left: 33%;
+	font-size: 11px;
+	font-style: italic;
+}
+
+.clock-wrap {
+	margin-top: 20px;
+	position: relative;
+}
+
+.clock-inp {
+	border: 0;
+	border-bottom: 1px solid #000;
+	width: 100%;
+	height: 25px;
+	background: transparent;
+	outline: none;
+	text-align: right;
+	font-size: 20px;
+	padding-bottom: 1px;
+	margin-top: 5px;
+	padding-right: 70px;
+}
+
+.clock-hint {
+	position: absolute;
+	bottom: -13px;
+	left: 28%;
+	font-size: 10px;
+	font-style: italic;
+}
+
+.sign-wrap {
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+	justify-content: space-between;
+	margin-top: 30px;
+}
+
+.sign-name {
+	font-size: 17px;
+}
+
+.sign-wr {
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+	align-items: center;
+	margin-top: 5px;
+}
+
+.sign-lab {
+	font-size: 15px;
+}
+
+.sign-wr label {
+	position: relative;
+	margin-right: 10px;
+}
+
+.sign-wr label span {
+	display: inline;
+	font-size: 15px;
+	margin-left: 3px;
+}
+
+.sign-inp {
+	border: 0;
+	border-bottom: 1px solid #000;
+	width: 130px;
+	height: 20px;
+	background: transparent;
+	outline: none;
+	display: inline;
+	font-size: 15px;
+	padding-left: 13px;
+}
+
+.sign-hint {
+	position: absolute;
+	left: 0;
+	text-align: center;
+	width: 100%;
+	font-size: 10px;
+	font-style: italic;
+}
+
+.foot {
+	margin: 80px 40px 0;
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+	justify-content: space-between;
+}
+
+.foot-date {
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+}
+
+.foot-labs {
+	margin-right: 30px;
+}
+
+.foot-lab {
+	font-size: 17px;
+	margin-bottom: 4px;
+}
+
+.foot-wrap {
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+}
+
+.foot-inp {
+	border: 0;
+	border-bottom: 1px solid #000;
+	height: 20px;
+	outline: none;
+	text-align: center;
+	font-size: 17px;
+	background: transparent;
+}
+
+.foot-wrap span {
+	font-size: 17px;
+	margin-right: 10px;
+}
+
+.foot-inp_d {
+	width: 20px;
+	position: relative;
+}
+
+.foot-inp_m {
+	width: 85px;
+	margin-right: 10px;
+}
+
+.foot-year {
+	font-size: 17px;
+}
+
+.foot-mo {
+	font-size: 17px;
+	text-shadow: 0 0 1px rgba(0,0,0,1);
+}
+
+.foot-reg {
+
+}
+
+.foot-reg div {
+	font-size: 17px;
+	margin-bottom: 4px;
+}

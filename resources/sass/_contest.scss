@@ -1,0 +1,179 @@
+.konkurs {
+	border: 1px solid #BCBCBC;
+	width: 32%;
+	margin-bottom:20px;
+	position:relative;
+	top:0;
+	-webkit-transition: all 200ms !important;
+	-moz-transition: all 200ms;
+	-o-transition: all 200ms;
+	transition: all 200ms;
+	&:hover {
+		border: 1px solid #0099ff;
+		top:3px;
+	}
+	& img {
+		width:100%;
+		display:block;
+	}
+	& a {
+		top:0 !important;
+		& span {
+			top:0 !important;
+		}
+		&:hover {
+			top:0 !important;
+			& span {
+				top:0 !important;
+			}
+		}
+	}
+
+	& .title {
+		padding: 0 15px;
+		margin-top: 20px;
+		display: block;
+		& a {
+			width:auto;
+			height:auto;
+			margin-bottom:0;
+			padding:0;
+			font-size: 16px;
+			line-height: 21px;
+			font-family: 'Open Sans';
+			font-weight: 600;
+			color: #111010;
+			-webkit-transition: all 0ms !important;
+			-moz-transition: all 0ms;
+			-o-transition: all 0ms;
+			transition: all 0ms;
+			&:hover {
+				color: #0099ff;
+			}
+		}
+	}
+	& .download {
+		color: #0099ff;
+		width:initial;
+		height:initial;
+		padding:0 15px;
+		margin-top:20px;
+		margin-bottom:0;
+		font-size: 18px;
+		text-decoration:underline;
+		&:hover {
+			color: #0099ff;
+			text-decoration:underline;
+		}
+		&::before {
+			display:none;
+		}
+	}
+
+	& .awards {
+		padding:0 15px;
+		margin-top:10px;
+		font-size:14px;
+		& img {
+			width:14px;
+			margin-right:10px;
+		}
+	}
+
+	& .members {
+		padding: 20px 15px;
+		background: #f0f6fb;
+		margin-top:20px;
+		& .title {
+			padding:0;
+			font-size:18px;
+			height: auto;
+			margin-top: 0;
+			margin-bottom: 20px;
+		}
+		& .member {
+			margin-top: 10px;
+			& img {
+				width: 40px;
+				margin-right:10px;
+			}
+			& span {
+				font-size: 16px;
+			}
+		}
+	}
+	& .bigbluebtn {
+		background:#0099FF;
+		color:white;
+		font-size:16px;
+		width:100%;
+		height:75px;
+		border-radius:0;
+		margin-bottom:0;
+	}
+}
+
+.konkurs-full {align-items: stretch;}
+.konkurs-full .top {background: #4ACEE9; height: 40px; line-height: 40px; color: white; padding-left: 30px;}
+.konkurs-full .left {width: 49%; border: 1px solid #cbcbcb;}
+.konkurs-full .left img {width:100%; display:block;}
+.konkurs-full .topblock {width: 100%; border: 1px solid #cbcbcb;}
+.konkurs-full .topblock .text {font-size: 16px; line-height: 23px; padding: 20px 35px;}
+
+.konkurs-benefits {margin-top: 100px; }
+.konkurs-benefits .width1088 > .title { font-size: 32px; font-family: 'Open Sans'; font-weight: 700; text-align:center; margin-bottom:50px;}
+.konkurs-benefits .item {width:32%; padding:20px; border:1px solid #cacaca; margin-bottom:20px; text-align:center;}
+.konkurs-benefits .item img {margin: 0 0 30px;}
+.konkurs-benefits .item .title {font-family: 'Open Sans'; font-weight: 700; text-align:center;}
+.konkurs-benefits .item .description {margin-top:20px;}
+
+.konkurs-members {margin-top:100px;}
+.konkurs-members .width1088 > .title {text-align:center; font-size: 34px; font-family: 'Open Sans'; font-weight: 700; color: #111010; margin-bottom:50px;}
+.konkurs-members table {width:100%;}
+.konkurs-members table td {border:1px solid #E0E0E0;}
+.konkurs-members table thead {}
+.konkurs-members table thead tr {background:#4ACEE9;}
+.konkurs-members table thead th {padding:20px; color:white; font-size:16px; text-align:left;}
+.konkurs-members table tbody {}
+.konkurs-members table tbody tr {}
+.konkurs-members table tbody td {padding:20px; font-size:16px;}
+.konkurs-members table tbody td:nth-child(1) {width:300px;}
+.konkurs-members table tbody td:nth-child(2) {}
+.konkurs-members table tbody td:nth-child(3) {}
+.konkurs-members table tbody td:nth-child(4) {}
+.konkurs-members table tbody td:nth-child(3) {}
+.konkurs-members table tbody .work-title {font-size: 20px; font-family: 'Open Sans'; font-weight: 700; color: #111010; margin-bottom:10px; display:block;}
+.konkurs-members table tbody .work-date {}
+.konkurs-members table tbody .work-date img {width:10px; margin-right:10px;}
+.konkurs-members table tbody .member img {width:25px; margin-right:10px;}
+.konkurs-members table tbody .member span {}
+.konkurs-members table tbody .member-organization {margin-top:10px; font-weight: 700;}
+.konkurs-members table tbody .member-role {margin-top:5px; font-size:14px; color:#525252;}
+.konkurs-members table tbody .reward-desc {margin-top:10px;}
+.konkurs-members table tbody .pdf img {width:15px; margin-right:10px;}
+.konkurs-members table tbody .pdf span {font-size:14px;}
+.konkurs-members table tbody .btn.bluebtn {background:#0099FF; font-size:15px; color:white; height:50px; line-height:50px; padding:0 20px; margin-top:10px;}
+.konkurs-members table tbody .btn.bluebtn:hover {background:#59b8f7; text-decoration:none;}
+
+.konkurs-link-file .col1 {flex-basis:100%; flex-shrink:1; margin-right:20px;}
+.konkurs-link-file .col1 label {text-align:left; font-size:14px; margin-bottom:10px;}
+.konkurs-link-file .col1 input[type="text"] {height: 40px; line-height: 40px; border:1px solid #d5d5d5; width:100%; padding:0 10px; font-size:16px;}
+.accordion  .chkbox {margin-top:10px;}
+.accordion  .chkbox input {margin-left:0;}
+.accordion  .chkbox label {font-family: 'Open Sans'; font-weight: 700; margin:0 10px 0 0; font-size:14px;}
+.accordion  .chkbox div {line-height:14px;}
+.accordion  .chkbox a {font-family: 'Open Sans'; font-weight: 700; font-size:14px;}
+.konkurs-link-file .col2 {flex-basis:290px; flex-shrink:0; margin-right:20px; margin-top:0;}
+.konkurs-link-file .col3 {flex-basis:150px; flex-shrink:0; position:relative;}
+.accordion .done {color:#12D0B9; font-family: 'Open Sans'; font-weight: 700; font-size:14px;}
+.konkurs-link-file .col3 button {border:none; cursor:pointer; width:100%;}
+.konkurs-link-file .col3 button:disabled {border:none; cursor:pointer; background:#B9B9B9;}
+.konkurs-link-file .job {text-align:left; margin-top:15px;}
+.konkurs-link-file .job label {text-align:left; font-size:14px; margin-bottom:10px;}
+.konkurs-link-file .job input {height: 40px; line-height: 40px; border:1px solid #d5d5d5; width:100%; padding:0 10px; font-size:16px;}
+
+@media screen and (max-width: 767px) {
+	.konkurs {
+		width: 100%;
+	}
+}

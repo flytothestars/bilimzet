@@ -1,0 +1,372 @@
+[
+    {
+        "name": "Повышение квалификации",
+        "cats": [
+            {
+                "name": "Дошкольное образование",
+                "items": [
+                    {
+                        "background": "#0c85d5",
+                        "title": "Менеджмент",
+                        "image": "management.svg"
+                    },
+                    {
+                        "background": "#d300ff",
+                        "title": "Воспитание",
+                        "image": "upbringing.svg"
+                    },
+                    {
+                        "background": "#ff0000",
+                        "title": "Русский язык",
+                        "image": "russian.svg"
+                    },
+                    {
+                        "background": "#12d88f",
+                        "title": "Изобразительная деятельность",
+                        "image": "pictorial-activity.svg"
+                    },
+                    {
+                        "background": "#ff9200",
+                        "title": "Физическое воспитание",
+                        "image": "physical-education.svg"
+                    },
+                    {
+                        "background": "#432e4e",
+                        "title": "Математика",
+                        "image": "mathematics.svg"
+                    },
+                    {
+                        "background": "#721e6f",
+                        "title": "Английский язык",
+                        "image": "english.svg"
+                    },
+                    {
+                        "background": "#78ce3f",
+                        "title": "Психология",
+                        "image": "psychology.svg"
+                    },
+                    {
+                        "background": "#15c2f7",
+                        "title": "Казахский язык",
+                        "image": "kazakh.svg"
+                    },
+                    {
+                        "background": "#537a7b",
+                        "title": "Музыка",
+                        "image": "music.svg"
+                    },
+                    {
+                        "background": "#185076",
+                        "title": "Методическая деятельность",
+                        "image": "methodical-activity.svg"
+                    }
+                ]
+            },
+            {
+                "name": "Коррекционное образование",
+                "items": [
+                    {
+                        "background": "#108de0",
+                        "title": "Тифлопедагогика",
+                        "image": "tiflopedagogika.svg"
+                    },
+                    {
+                        "background": "#0035ff",
+                        "title": "Логопедия",
+                        "image": "logopedia.svg"
+                    },
+                    {
+                        "background": "#00ff90",
+                        "title": "Дефектология",
+                        "image": "defectologia.svg"
+                    },
+                    {
+                        "background": "#a200ff",
+                        "title": "Олигофренопедагогика",
+                        "image": "oligofrenologika.svg"
+                    },
+                    {
+                        "background": "#6bb0ae",
+                        "title": "Сурдопедагогика",
+                        "image": "surdopedagogika.svg"
+                    }
+                ]
+            },
+            {
+                "name": "Дополнительное образование",
+                "items": [
+                    {
+                        "background": "#b78b51",
+                        "title": "Библиотечное дело",
+                        "image": "library-science.svg"
+                    },
+                    {
+                        "background": "#12d88f",
+                        "title": "Художественный труд",
+                        "image": "pictorial-activity.svg"
+                    },
+                    {
+                        "background": "#00ff77",
+                        "title": "Адаптивная физическая культура",
+                        "image": "adaptive-physical-education.svg"
+                    },
+                    {
+                        "background": "#537a7b",
+                        "title": "Музыка",
+                        "image": "music.svg"
+                    },
+                    {
+                        "background": "#efcb16",
+                        "title": "Хореография и ритмопластика",
+                        "image": "choreography-and-ritmoplastika.svg"
+                    }
+                ]
+            },
+            {
+                "name": "Общее-среднее образование",
+                "items": [
+                    {
+                        "background": "#0c85d5",
+                        "title": "Менеджмент",
+                        "image": "management.svg"
+                    },
+                    {
+                        "background": "#a6a6a6",
+                        "title": "Начальные классы",
+                        "image": "starters.svg"
+                    },
+                    {
+                        "background": "#565656",
+                        "title": "Общие предметы",
+                        "image": "general-subjects.svg"
+                    },
+                    {
+                        "background": "#721e6f",
+                        "title": "Английский язык",
+                        "image": "english.svg"
+                    },
+                    {
+                        "background": "#ff0000",
+                        "title": "Русский язык",
+                        "image": "russian.svg"
+                    },
+                    {
+                        "background": "#15c2f7",
+                        "title": "Казахский язык",
+                        "image": "kazakh.svg"
+                    },
+                    {
+                        "background": "#bc7735",
+                        "title": "История",
+                        "image": "history.svg"
+                    },
+                    {
+                        "background": "#6f00ff",
+                        "title": "Химия",
+                        "image": "chemistry.svg"
+                    },
+                    {
+                        "background": "#00ff21",
+                        "title": "Биология",
+                        "image": "biology.svg"
+                    },
+                    {
+                        "background": "#44cd76",
+                        "title": "География",
+                        "image": "geofraphy.svg"
+                    },
+                    {
+                        "background": "#432e4e",
+                        "title": "Математика",
+                        "image": "mathematics.svg"
+                    },
+                    {
+                        "background": "#ee00ff",
+                        "title": "Физика",
+                        "image": "physics.svg"
+                    },
+                    {
+                        "background": "#7ca2bc",
+                        "title": "Информатика",
+                        "image": "informatics.svg"
+                    },
+                    {
+                        "background": "#12d88f",
+                        "title": "Художественный труд",
+                        "image": "pictorial-activity.svg"
+                    },
+                    {
+                        "background": "#2b5414",
+                        "title": "НВТП",
+                        "image": "nvtp.svg"
+                    },
+                    {
+                        "background": "#ff9200",
+                        "title": "Физическая культура",
+                        "image": "physical-education.svg"
+                    },
+                    {
+                        "background": "#0099ff",
+                        "title": "Художественный труд",
+                        "image": "neiro.svg"
+                    },
+                    {
+                        "background": "#537a7b",
+                        "title": "Музыка",
+                        "image": "music.svg"
+                    },
+                    {
+                        "background": "#00ff99",
+                        "title": "Социальная педагогика",
+                        "image": "social.svg"
+                    },
+                    {
+                        "background": "#78ce3f",
+                        "title": "Психология",
+                        "image": "psychology.svg"
+                    }
+                ]
+            },
+            {
+                "name": "ТиПО",
+                "items": [
+                    {
+                        "background": "#0c85d5",
+                        "title": "Менеджмент",
+                        "image": "management.svg"
+                    },
+                    {
+                        "background": "#0b7013",
+                        "title": "Специальные дисциплины",
+                        "image": "special.svg"
+                    },
+                    {
+                        "background": "#cb1515",
+                        "title": "Общеобразовательные дисциплины",
+                        "image": "general-education-disciplines.svg"
+                    },
+                    {
+                        "background": "#721e6f",
+                        "title": "Производственное обучения",
+                        "image": "learning-process.svg"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "Переподготовка",
+        "cats": [
+            {
+                "name": "Дошкольное образование",
+                "items": [
+                    {
+                        "background": "#70ff6f",
+                        "title": "Воспитатель",
+                        "image": "educator.svg"
+                    },
+                    {
+                        "background": "#167bbf",
+                        "title": "Старший воспитатель",
+                        "image": "senior-educator.svg"
+                    },
+                    {
+                        "background": "#09ff00",
+                        "title": "Педагог-монтессори",
+                        "image": "teacher-montessori.svg"
+                    },
+                    {
+                        "background": "#4d00ff",
+                        "title": "Педагог предшкольной подготовки",
+                        "image": "teacher-pre-school-training.svg"
+                    },
+                    {
+                        "background": "#e600ff",
+                        "title": "Педагог русского языка",
+                        "image": "teacher-of-russian.svg"
+                    },
+                    {
+                        "background": "#00ff80",
+                        "title": "Инструктор по физической культуре",
+                        "image": "physical-education-instructor.svg"
+                    },
+                    {
+                        "background": "#ff1100",
+                        "title": "Педагог английского языка",
+                        "image": "teacher-of-english.svg"
+                    },
+                    {
+                        "background": "#e1c50f",
+                        "title": "Музыкальный руководитель",
+                        "image": "music-director.svg"
+                    }
+                ]
+            },
+            {
+                "name": "Коррекционное образование",
+                "items": [
+                    {
+                        "background": "#108de0",
+                        "title": "Тифлопедагогика",
+                        "image": "tiflopedagogika.svg"
+                    },
+                    {
+                        "background": "#0035ff",
+                        "title": "Логопедия",
+                        "image": "logopedia.svg"
+                    },
+                    {
+                        "background": "#00ff90",
+                        "title": "Дефектология",
+                        "image": "defectologia.svg"
+                    },
+                    {
+                        "background": "#a200ff",
+                        "title": "Олигофренопедагогика",
+                        "image": "oligofrenologika.svg"
+                    },
+                    {
+                        "background": "#6bb0ae",
+                        "title": "Сурдопедагогика",
+                        "image": "surdopedagogika.svg"
+                    },
+                    {
+                        "background": "#a100ff",
+                        "title": "Инструктор ЛФК",
+                        "image": "physical-therapy-instructor.svg"
+                    },
+                    {
+                        "background": "#7700ff",
+                        "title": "Педагог инклюзивного образования",
+                        "image": "teacher-of-inclusive-education.svg"
+                    }
+                ]
+            },
+            {
+                "name": "Дополнительное образование",
+                "items": [
+                    {
+                        "background": "#ff0092",
+                        "title": "Секретарь руководителя",
+                        "image": "secretary.svg"
+                    },
+                    {
+                        "background": "#0800ff",
+                        "title": "Помощник воспитателя",
+                        "image": "assistant.svg"
+                    },
+                    {
+                        "background": "#c0af58",
+                        "title": "Библиотекарь",
+                        "image": "librarian.svg"
+                    },
+                    {
+                        "background": "#4ae98e",
+                        "title": "Педагог дополнительного образования",
+                        "image": "teacher-of-additional-education.svg"
+                    }
+                ]
+            }
+        ]
+    }
+]

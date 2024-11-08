@@ -1,0 +1,25 @@
+.chat-overlay {width: 100%; height: 100vh; position: fixed; top: 0; left: 0; backdrop-filter: blur(5px); z-index: 5;}
+.chat-window {height:540px; background:white; -webkit-box-shadow: 2px 2px 5px 0px rgba(50, 50, 50, 0.05); -moz-box-shadow: 2px 2px 5px 0px rgba(50, 50, 50, 0.05); box-shadow: 2px 2px 5px 0px rgba(50, 50, 50, 0.05);}
+.chat-info {background:#12D0B9; flex-direction:column; padding:20px; color:white; flex-basis:250px; flex-shrink:0;}
+.chat-info .top {}
+.chat-info .top img {width:30px;}
+.chat-info .top p {font-family: 'Open Sans'; font-weight: 700; font-size:18px; margin-top:10px;}
+.chat-info .bottom {}
+.chat-info .bottom img {width:60px;}
+.chat-info .bottom .role {font-size:12px; margin:0;}
+.chat-info .bottom .name {font-size:16px; font-family: 'Open Sans'; font-weight: 700; margin:0;}
+.chat-body {flex-basis:100%; flex-shrink:1; padding:20px; flex-direction:column;}
+.chat-body .top {flex-basis:40px; flex-shrink:0; text-align:right; border-bottom:1px solid #d5d5d5; margin-bottom:20px;}
+.chat-body .top a {width:20px;}
+.chat-body .messages {flex-basis: 100%; flex-shrink: 1; overflow-y: scroll; padding-right:20px;}
+.chat-body .bottom {flex-basis:100px; flex-shrink:0;}
+.message {}
+.message.user {text-align:right;}
+.message.agent {text-align:left;}
+.message.user .message_text {background:#0099FF; color:white; padding:10px 20px; display:inline-block; margin-bottom:20px;}
+.message.agent .message_text {background:#EEEDF1; padding:10px 20px; display:inline-block; margin-bottom:20px;}
+.chat-body .bottom {position:relative; padding-top:20px;}
+.chat-body .bottom input {width:95%; border:1px solid #d5d5d5; height:50px; line-height:50px; padding:0 10px;}
+.chat-body .bottom a {position:absolute; right:100px; top:35px;}
+.chat-body .bottom img {width:20px;}
+.chat-body .bottom button {position:absolute; right:50px; top:35px; border:none; background:none; cursor:pointer;}
