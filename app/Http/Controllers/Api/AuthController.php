@@ -72,7 +72,7 @@ class AuthController extends Controller
     public function login($phone)
     {
         $user = User::where('phone', $phone)->first();
-        
+
         if(! $user)
         {
             $user = $this->register($phone);
@@ -89,7 +89,6 @@ class AuthController extends Controller
 
     public function register($phone)
     {
-        // dd(Hash::make($this->secret($phone)));
         return User::create([
             'name'      => $this->generateName(),
             'phone'     => $phone,

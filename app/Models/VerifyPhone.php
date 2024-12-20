@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class VerifyPhone extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'phone',
+        'code',
+        'is_verify',
+        'expired_at'
+    ];
 }

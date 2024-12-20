@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\NewsController;
 use App\Http\Controllers\Api\ArticleController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CourseController;
+use App\Http\Controllers\Api\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +31,13 @@ Route::get('/specialities', [CourseController::class, 'specialities'])->name('sp
 Route::get('sbp', [NewsController::class, 'sbp'])->name('news.sbp');
 
 Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/auth/token', [AuthController::class, 'token'])->name('auth.token');
+
+    Route::get('/profile/get', [ProfileController::class, 'get'])->name('profile.get');
+    Route::post('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
+
+
+
     Route::get('article/list', [ArticleController::class, 'index'])->name('article.index');
     Route::get('article/{id}', [ArticleController::class, 'show'])->name('article.show');
     Route::post('article/create', [ArticleController::class, 'create'])->name('article.create');

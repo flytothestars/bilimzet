@@ -23,6 +23,7 @@ class MobizonService {
         $message = "Ваш код для подтверждения: $code. Для получения дополнительной информации посетите наш сайт: bilimzet.kz";
         if ($phone == self::TEST_NUMBER)
         {
+            $this->save($phone, $code);
             return true;
         }
         else if(self::IS_PROD){
