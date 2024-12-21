@@ -10,6 +10,7 @@ use Orchid\Screen\Actions\ModalToggle;
 use Orchid\Screen\Fields\Group;
 use App\Models\Category;
 use App\Models\User;
+use Orchid\Support\Color;
 
 class ArticleListTable extends Table
 {
@@ -22,6 +23,8 @@ class ArticleListTable extends Table
      * @var string
      */
     protected $target = 'article_list';
+
+    protected $styleButtonRadius = 'border-radius: 7px;';
 
     protected $styleButton = '
                         display: flex;
@@ -54,6 +57,22 @@ class ArticleListTable extends Table
             }),
             TD::make('action', 'Действие')->render(function ($article) {
                 return Group::make([
+                    Button::make('')
+                        ->icon('bs.check')
+                        ->method('published')
+                        ->parameters([
+                            'article' => $article->id,
+                        ])
+                        ->type(Color::SUCCESS)
+                        ->style($this->styleButtonRadius),
+                    Button::make('')
+                        ->icon('bs.x')
+                        ->method('noPublished')
+                        ->parameters([
+                            'article' => $article->id,
+                        ])
+                        ->type(Color::DANGER)
+                        ->style($this->styleButtonRadius),
                     ModalToggle::make('')
                         ->icon('bs.pencil')
                         ->modal('editArticle')

@@ -131,4 +131,22 @@ class ArticleScreen extends Screen
             'article' => $article
         ];
     }
+
+    public function noPublished(LibraryItem $article)
+    {
+        $article->update([
+            'is_published' => 0,
+        ]);
+        Toast::info('Не публикован');
+
+    }
+
+    public function published(LibraryItem $article)
+    {
+        $article->update([
+            'is_published' => 1,
+        ]);
+        Toast::info('Публикован');
+
+    }
 }
