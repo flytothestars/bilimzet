@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\Models\Category;
 
 class ArticleResource extends JsonResource
 {
@@ -18,7 +19,7 @@ class ArticleResource extends JsonResource
             'id' => $this->id,
             'title' => $this->title,
             'title_kz' => $this->title_kz,
-            'category' => $this->getCategory(),
+            'category' => Category::find($this->category),
             'text' => $this->text,
             'text_kz' => $this->text_kz,
             'author_id' => $this->author,

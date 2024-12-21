@@ -4,16 +4,16 @@ namespace App\Helper;
 
 class Helper 
 {
-    public static function getUrl($item)
+    public static function getUrl($item, $group = null)
     {
-        $pictures = $item->attachments()->get();
+        $pictures = $item->attachment($group)->get();
         $relativeUrl = $pictures->first()?->relativeUrl;
         return $relativeUrl ? url($relativeUrl) : null;
     }
 
-    public static function getExtension($item)
+    public static function getExtension($item, $group = null)
     {
-        $pictures = $item->attachments()->get();
+        $pictures = $item->attachment($group)->get();
         $extension = $pictures->first()?->extension;
         return $extension ? $extension : null;
     } 

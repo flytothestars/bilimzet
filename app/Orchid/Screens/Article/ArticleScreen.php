@@ -108,7 +108,6 @@ class ArticleScreen extends Screen
         $validated = $request->validated();
         
         $articleId = $request->input('article.id');
-        $validated['article']['author_id'] = auth()->user()->id;  // Пример, если автор - текущий пользователь
         $article = LibraryItem::updateOrCreate([
             'id' => $articleId
         ], $validated['article']);

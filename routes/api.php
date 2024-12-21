@@ -42,10 +42,10 @@ Route::middleware('auth:sanctum')->group(function () {
 
 
 
-    // Route::get('article/list', [ArticleController::class, 'index'])->name('article.index');
-    // Route::get('article/{id}', [ArticleController::class, 'show'])->name('article.show');
+    Route::get('article/list', [ArticleController::class, 'index'])->name('article.index');
+    Route::get('article/{id}', [ArticleController::class, 'show'])->name('article.show');
     Route::post('article/create', [ArticleController::class, 'create'])->name('article.create');
-    // Route::get('article/list/user', [ArticleController::class, 'showUserArticle'])->name('article.user');
+    Route::get('article/list/user', [ArticleController::class, 'showUserArticle'])->name('article.user');
 
 
 });

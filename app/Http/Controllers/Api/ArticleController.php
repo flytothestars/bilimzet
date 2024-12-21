@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\LibraryItem;
 use App\Models\Category;
+use App\Models\User;
 use App\Helper\ApiResponseHelper;
 use App\Helper\Helper;
 use Orchid\Attachment\File;
@@ -13,45 +14,54 @@ use App\Http\Resources\ArticleResource;
 
 class ArticleController extends Controller
 {
-    // public function index()
-    // {
-	// 	$categories = Category::where('training', 1)
-    //         ->get()->map(function ($item) {
-    //             $item->picture = Helper::getUrl($item);
-    //             return $item;
-    //         });
-    //     $item = $categories->map(function ($category) {
-    //         $category->article = LibraryItem::with(['author' => function ($query) {
-    //                 // $query->selectRaw("id, full_name, CONCAT('" . url('uploads/profile/') . "/', photo) as photo");
-    //             }])
-    //             ->where('is_published', 1)
-    //             ->where('category', $category->id)
-    //             ->orderBy('created_at', 'DESC')
-    //             ->get()->map(function($item){
-    //                 $item->document = Helper::getUrl($item);
-    //                 $item->document_extension = Helper::getExtension($item);
-    //                 return $item;
-    //             });
-    //         return $category;
-    //     });
-    //     return ApiResponseHelper::success($item);
-	// }
+    public function index()
+    {
+		$categories = Category::where('training', 1)
+            ->get()->map(function ($item) {
+                $item->picture = Helper::getUrl($item);
+                return $item;
+            });
+        $item = $categories->map(function ($category) {
+            $category->article = LibraryItem::where('is_published', 1)
+                ->where('category', $category->id)
+                ->orderBy('created_at', 'DESC')
+                ->get()->map(function($item){
+                    $item->author = User::where('id', $item->author_id)->get()->map(function($user){
+                        $user->photo = Helper::getUrl($user, 'profilePhoto');
+                        return $user;
+                    });
+                    $item->category = Category::find($item->category);
+                    $item->document = Helper::getUrl($item, 'articleDocument');
+                    $item->document_extension = Helper::getExtension($item, 'articleDocument');
+                    $item->plain_text = strip_tags($item->text);
+                    $item->plain_text_kz = strip_tags($item->text_kz);
+                    return $item;
+                });
+            return $category;
+        });
+        return ApiResponseHelper::success($item);
+	}
 
-    // public function show($id)
-    // {
-    //     $article = LibraryItem::with(['author' => function ($query) {
-    //         // $query->selectRaw("id, full_name, CONCAT('" . url('uploads/profile/') . "/', photo) as photo");
-    //     }])
-    //     ->where('is_published', true)
-    //     ->where('id', $id)
-    //     ->get()->map(function ($item) {
-    //         $item->document = Helper::getUrl($item);
-    //         $item->document_extension = Helper::getExtension($item);
-    //         return $item;
-    //     });
+    public function show($id)
+    {
+        $article = LibraryItem::where('is_published', 1)
+            ->where('id', $id)
+            ->orderBy('created_at', 'DESC')
+            ->get()->map(function($item){
+                $item->author = User::where('id', $item->author_id)->get()->map(function($user){
+                $user->photo = Helper::getUrl($user, 'profilePhoto');
+                return $user;
+            });
+            $item->category = Category::find($item->category);
+            $item->document = Helper::getUrl($item, 'articleDocument');
+            $item->document_extension = Helper::getExtension($item, 'articleDocument');
+            $item->plain_text = strip_tags($item->text);
+            $item->plain_text_kz = strip_tags($item->text_kz);
+            return $item;
+        });
 
-    //     return ApiResponseHelper::success($article);
-    // }
+        return ApiResponseHelper::success($article);
+    }
 
     public function create(Request $request)
     {
@@ -82,12 +92,21 @@ class ArticleController extends Controller
 
     public function showUserArticle()
     {
-        $item = LibraryItem::where('author_id', auth()->user()->id)->get()->map(function ($item) {
-            $item->document = Helper::getUrl($item);
-            $item->document_extension = Helper::getExtension($item);
+        $article = LibraryItem::where('author_id', auth()->user()->id)
+            ->orderBy('created_at', 'DESC')
+            ->get()->map(function($item){
+                $item->author = User::where('id', $item->author_id)->get()->map(function($user){
+                $user->photo = Helper::getUrl($user, 'profilePhoto');
+                return $user;
+            });
+            $item->category = Category::find($item->category);
+            $item->document = Helper::getUrl($item, 'articleDocument');
+            $item->document_extension = Helper::getExtension($item, 'articleDocument');
+            $item->plain_text = strip_tags($item->text);
+            $item->plain_text_kz = strip_tags($item->text_kz);
             return $item;
         });
-        return ApiResponseHelper::success($item);
+        return ApiResponseHelper::success($article);
 
     }
 }

@@ -46,8 +46,8 @@ class ProfileController extends Controller
         $tmpFilePath = stream_get_meta_data($tmpFile)['uri'];
         file_put_contents($tmpFilePath, $imageData);
         $fileRequest = new \Illuminate\Http\UploadedFile($tmpFilePath, 'profile_photo.png', 'image/png', null, true);
-        $file = new File($fileRequest, null,'profilePhoto');
-        $attachmentPhoto = $file->load();
+        $filePhoto = new File($fileRequest, null,'profilePhoto');
+        $attachmentPhoto = $filePhoto->load();
         $user->attachments()->syncWithoutDetaching(
             $attachmentPhoto->id
         );
