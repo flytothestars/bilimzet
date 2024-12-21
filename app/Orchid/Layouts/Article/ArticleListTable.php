@@ -39,6 +39,7 @@ class ArticleListTable extends Table
     protected function columns(): iterable
     {
         return [
+            TD::make('id', 'ID'),
             TD::make('title', 'Заголовка'),
             TD::make('author_id', 'Автор')->render(function(LibraryItem $article){
                 $user = User::find($article->author_id);

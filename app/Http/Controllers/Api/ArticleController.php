@@ -60,8 +60,12 @@ class ArticleController extends Controller
             $item->plain_text = strip_tags($item->text);
             $item->plain_text_kz = strip_tags($item->text_kz);
             return $item;
-        });
-
+        })->first();
+        
+        $article->similar = LibraryItem::where('is_published', 1)
+            ->where('author_id', $article->author_id)
+            ->whereNot('id', $article->id)
+            ->get();
         return ApiResponseHelper::success($article);
     }
 

@@ -36,8 +36,8 @@ Route::get('/course/part/{id}', [CourseController::class, 'coursePartList'])->na
 
 Route::get('course/buy/success', [BuyController::class,'success'])->name('course.success.buy');
 
-
-Route::get('sbp', [NewsController::class, 'sbp'])->name('news.sbp');
+Route::get('/search', [MainController::class, 'search'])->name('search');
+Route::get('/search/article', [MainController::class, 'searchArticle'])->name('search.article');
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/auth/token', [AuthController::class, 'token'])->name('auth.token');
