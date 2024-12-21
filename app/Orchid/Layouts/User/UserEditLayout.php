@@ -24,6 +24,13 @@ class UserEditLayout extends Rows
                 ->required()
                 ->title(__('Name'))
                 ->placeholder(__('Name')),
+            
+            Input::make('user.full_name')
+                ->type('text')
+                ->max(255)
+                ->required()
+                ->title(__('Name'))
+                ->placeholder(__('Name')),
 
             Input::make('user.email')
                 ->type('email')
