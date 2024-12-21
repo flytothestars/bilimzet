@@ -71,6 +71,7 @@ class CourseSpecialityScreen extends Screen
                         ->horizontal(),
                 Upload::make('courseSpeciality.attachments')
                     ->title('Картинка')
+                    ->groups('courseSpecialityPicture')
                     ->required(),
             ]))->title('Создать cпециализации')->applyButton('Создать')->size(Modal::SIZE_LG),
             
@@ -86,6 +87,7 @@ class CourseSpecialityScreen extends Screen
                         ->horizontal(),
                 Upload::make('courseSpeciality.attachments')
                     ->title('Картинка')
+                    ->groups('courseSpecialityPicture')
                     ->required(),
             ]))->async('asyncGetCourseSpeciality')->size(Modal::SIZE_LG),
         ];

@@ -77,6 +77,7 @@ class CourseScreen extends Screen
                         Input::make('course.author_position_kz')->title('Должность автора KZ')->required(),
                         Upload::make('course.attachments')
                             ->title('Фото автора')
+                            ->groups('courseAuthorPhoto')
                             ->required(),
                     ])->title('Автор'),
                     Layout::rows([
@@ -113,6 +114,7 @@ class CourseScreen extends Screen
                     Input::make('course.author_position_kz')->title('Должность автора KZ')->required(),
                     Upload::make('course.attachments')
                         ->title('Фото автора')
+                        ->groups('courseAuthorPhoto')
                         ->required(),
                 ])->title('Автор'),
                 Layout::rows([

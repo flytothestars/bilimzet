@@ -66,6 +66,7 @@ class NewsScreen extends Screen
                 Input::make('news.name_kz')->title('Заголовка KZ')->required(),
                 Upload::make('news.attachments')
                     ->title('Миниатюра')
+                    ->groups('newsPicture')
                     ->required(),
                 Quill::make('news.text')->title('Описание RU')->required(),
                 Quill::make('news.text_kz')->title('Описание KZ')->required(),
@@ -77,6 +78,7 @@ class NewsScreen extends Screen
                 Input::make('news.name_kz')->title('Заголовка KZ')->required(),
                 Upload::make('news.attachments')
                     ->title('Миниатюра')
+                    ->groups('newsPicture')
                     ->required(),
                 Quill::make('news.text')->title('Описание RU')->required(),
                 Quill::make('news.text_kz')->title('Описание KZ')->required(),

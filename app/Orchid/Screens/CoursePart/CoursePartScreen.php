@@ -68,6 +68,7 @@ class CoursePartScreen extends Screen
                     Input::make('coursePart.price_kzt')->title('Стоимость (тенге)')->required(),
                     Upload::make('coursePart.attachments')
                         ->title('План')
+                        ->groups('coursePartPlan')
                         ->required(),
                     Input::make('coursePart.course_id')
                         ->type('hidden')
@@ -86,6 +87,7 @@ class CoursePartScreen extends Screen
                     Input::make('coursePart.price_kzt')->title('Стоимость (тенге)')->required(),
                     Upload::make('coursePart.attachments')
                         ->title('План')
+                        ->groups('coursePartPlan')
                         ->required(),
                     Input::make('coursePart.course_id')
                         ->type('hidden')

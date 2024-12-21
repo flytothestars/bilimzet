@@ -74,6 +74,7 @@ class ArticleScreen extends Screen
                 Relation::make('article.category')->fromModel(Category::class, 'name')->displayAppend('full')->title('Категория')->required(),
                 Upload::make('article.attachments')
                     ->title('Документ')
+                    ->groups('articleDocument')
                     ->required(),
                 Quill::make('article.text')->title('Описание RU')->required(),
                 Quill::make('article.text_kz')->title('Описание KZ')->required(),
@@ -91,6 +92,7 @@ class ArticleScreen extends Screen
                 Relation::make('article.category')->fromModel(Category::class, 'name')->displayAppend('full')->title('Категория')->required(),
                 Upload::make('article.attachments')
                     ->title('Документ')
+                    ->groups('articleDocument')
                     ->required(),
                 Quill::make('article.text')->title('Описание RU')->required(),
                 Quill::make('article.text_kz')->title('Описание KZ')->required(),

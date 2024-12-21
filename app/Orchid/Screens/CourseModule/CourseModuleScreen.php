@@ -70,11 +70,11 @@ class CourseModuleScreen extends Screen
                     Input::make('courseModule.lecture_kz')->title('Описание лекции KZ')->required(),
                     Upload::make('courseModule.attachments')
                         ->title('Лекция')
-                        ->required(),
+                        ->groups('courseModuleLecture'),
                     Upload::make('courseModule.files')
                         ->multiple()
                         ->title('Видео файлы')
-                        ->horizontal(),
+                        ->groups('courseModuleVideo'),
                     Input::make('courseModule.course_part_id')
                         ->type('hidden')
                         ->value($this->coursePart),
@@ -89,11 +89,11 @@ class CourseModuleScreen extends Screen
                     Input::make('courseModule.lecture_kz')->title('Описание лекции KZ')->required(),
                     Upload::make('courseModule.attachments')
                         ->title('Лекция')
-                        ->required(),
+                        ->groups('courseModuleLecture'),
                     Upload::make('courseModule.files')
                         ->multiple()
                         ->title('Видео файлы')
-                        ->horizontal(),
+                        ->groups('courseModuleVideo'),
                     Input::make('courseModule.course_part_id')
                         ->type('hidden')
                         ->value($this->coursePart),

@@ -69,6 +69,7 @@ class CategoryScreen extends Screen
                         ]),
                 Upload::make('category.attachments')
                     ->title('Иконка')
+                    ->groups('categoryIcon')
                     ->required(),
             ]))->title('Создать новости')->applyButton('Создать')->size(Modal::SIZE_LG),
 
@@ -83,6 +84,7 @@ class CategoryScreen extends Screen
                         ]),
                 Upload::make('category.attachments')
                     ->title('Иконка')
+                    ->groups('categoryIcon')
                     ->required(),
             ]))->async('asyncGetCategory')->size(Modal::SIZE_LG),
         ];
