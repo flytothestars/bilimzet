@@ -24,6 +24,7 @@ class PayboxService
             'pg_payment_route' => 'frame',
             'pg_currency' => 'KZT',
             'pg_language' => 'ru',
+            'pg_result_url' => route('course.result.buy'),
             // 'pg_success_url' => url('/success/pay/'. $user->id . '/' . $course_id . '/' . $part_id),
             'pg_success_url' => 'https://testbilimzet.kz/',
             'pg_failure_url' => 'https://testbilimzet.kz/courses',

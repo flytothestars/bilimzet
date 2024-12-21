@@ -35,6 +35,7 @@ Route::get('/category/{id}', [CourseController::class, 'courseList'])->name('cou
 Route::get('/course/part/{id}', [CourseController::class, 'coursePartList'])->name('course.part.list');
 
 Route::get('course/buy/success', [BuyController::class,'success'])->name('course.success.buy');
+Route::get('course/buy/result', [BuyController::class,'result'])->name('course.result.buy');
 
 Route::get('/search', [MainController::class, 'search'])->name('search');
 Route::get('/search/article', [MainController::class, 'searchArticle'])->name('search.article');

@@ -38,4 +38,12 @@ class BuyController extends Controller
         Log::info($request);
         Log::info('=====================================');
     }
+
+    public function result(Request $request)
+    {
+        Log::info('=====================================');
+        Log::info('result');
+        Log::info($request);
+        Log::info('=====================================');
+    }
 }
