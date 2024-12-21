@@ -7,7 +7,8 @@ use Illuminate\Http\Request;
 use App\Helper\ApiResponseHelper;
 use App\Http\Resources\ProfileResource;
 use App\Http\Requests\ProfileRequest;
-
+use Orchid\Screen\Fields\Upload;
+use Orchid\Attachment\File;
 class ProfileController extends Controller
 {
     public function get()
@@ -33,16 +34,18 @@ class ProfileController extends Controller
 
         $role = [2]; //User
         
-        $user
-            ->fill($request->collect()->except(['password', 'permissions', 'roles'])->toArray())
+        $user->fill($request->collect()->except(['password', 'permissions', 'roles'])->toArray())
             ->forceFill(['permissions' => $permissions])
             ->save();
 
         $user->replaceRoles($role);
 
-		// $this->updateFile($user, 'photo', $request);
-		// $this->updateFile($user, 'diploma', $request);
-
+        $file = new File($request->file('diplomas'), null,'profileDocument');
+        $attachment = $file->load();
+        $user->attachments()->syncWithoutDetaching(
+            $attachment->id
+        );
+        
         return ApiResponseHelper::success(new ProfileResource($user));
     }
 }

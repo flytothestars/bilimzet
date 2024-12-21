@@ -7,9 +7,12 @@ use Orchid\Filters\Types\Where;
 use Orchid\Filters\Types\WhereDateStartEnd;
 use Orchid\Platform\Models\User as Authenticatable;
 use Laravel\Sanctum\HasApiTokens;
+use Orchid\Screen\AsSource;
+use Orchid\Attachment\Attachable;
+
 class User extends Authenticatable
 {
-    use HasApiTokens;
+    use HasApiTokens, AsSource, Attachable;
     /**
      * The attributes that are mass assignable.
      *
