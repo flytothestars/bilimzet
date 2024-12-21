@@ -79,8 +79,8 @@ class CategoryScreen extends Screen
                 Input::make('category.name_kz')->title('Заголовка KZ')->required(),
                 Select::make('category.training')
                         ->options([
-                            '0'   => 'Нет',
-                            '1' => 'Да',
+                            '0'   => 'Переподготовка',
+                            '1' => 'Повышение квалификации',
                         ]),
                 Upload::make('category.attachments')
                     ->title('Иконка')

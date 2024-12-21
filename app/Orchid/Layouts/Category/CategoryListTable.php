@@ -38,7 +38,7 @@ class CategoryListTable extends Table
             TD::make('name', 'Наименование RU'),
             TD::make('name_kz', 'Наименование KZ'),
             TD::make('training', 'Обучение')->render(function(Category $category){
-                return $category->training === 1 ? 'Да' : 'Нет';
+                return $category->training === 1 ? 'Повышение квалификации' : 'Переподготовка';
             }),
             TD::make('action', 'Действие')->render(function ($category) {
                 return Group::make([
