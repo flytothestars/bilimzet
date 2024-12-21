@@ -12,24 +12,25 @@ class PayboxService
     const SECRET = 'oYhRW2DCMYnz5CbD'; //uwx6njhXevvcemMN
 
 
-    public function init($price, $name, $course_id, $part_id){
+    public function init($course, $part){
         $user = auth()->user();
+        $orderId = $course->id.'-'.$part->id.'-'.$user->id.'-'.rand(000000,999999);
         $url = 'https://api.freedompay.kz/init_payment.php';
         $request = $requestForSignature = [
-            'pg_order_id' => '25',
+            'pg_order_id' => $orderId,
             'pg_merchant_id'=> self::MERCHANT,
-            'pg_amount' => $price,
-            'pg_description' => $name,
+            'pg_amount' => '10',
+            'pg_description' => $course->title,
             'pg_salt' => 'molbulak',
             'pg_payment_route' => 'frame',
             'pg_currency' => 'KZT',
             'pg_language' => 'ru',
             'pg_result_url' => route('course.result.buy'),
-            // 'pg_success_url' => url('/success/pay/'. $user->id . '/' . $course_id . '/' . $part_id),
-            'pg_success_url' => 'https://testbilimzet.kz/',
-            'pg_failure_url' => 'https://testbilimzet.kz/courses',
+            'pg_success_url' => route('course.success.buy'),
+            'pg_success_url_method' => 'GET',
+            'pg_failure_url' => 'https://testbilimzet.kz/',
             'pg_testing_mode' => '1',
-            'pg_user_id' => '25095',
+            'pg_user_id' => auth()->user()->id,
         ];    
         $requestForSignature = $this->makeFlatParamsArray($requestForSignature);
 
@@ -46,7 +47,7 @@ class PayboxService
         curl_setopt($ch, CURLOPT_POSTFIELDS, $request);
         $response = curl_exec($ch);
         curl_close($ch);
-
+        
         $xml = new \SimpleXMLElement($response);
 
         // Извлекаем нужные данные

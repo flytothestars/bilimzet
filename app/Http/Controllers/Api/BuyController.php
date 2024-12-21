@@ -24,10 +24,7 @@ class BuyController extends Controller
             $query->where('id', $part_id); // Фильтруем части по ID
         }])->find($course_id);
         $part = $course->parts->first();
-        
-        $name = $course->title;
-        $price = $part->price_kzt;
-        $paybox = $this->payboxService->init($price, $name, $course_id, $part_id);
+        $paybox = $this->payboxService->init($course, $part);
         return ApiResponseHelper::success(['pg_redirect_url' => $paybox['pg_redirect_url']]);
     }
 

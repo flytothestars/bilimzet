@@ -36,6 +36,7 @@ class CourseSpecialityListTable extends Table
     protected function columns(): iterable
     {
         return [
+            TD::make('id', 'ID'),
             TD::make('title', 'Заголовка'),
             TD::make('category', 'Категория')->render(function(CourseSpeciality $courseSpeciality){
                 $category = Category::find($courseSpeciality->category);
