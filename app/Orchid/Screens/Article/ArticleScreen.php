@@ -29,7 +29,7 @@ class ArticleScreen extends Screen
     public function query(): iterable
     {
         return [
-            'article_list' =>LibraryItem::paginate(10)
+            'article_list' =>LibraryItem::orderby('created_at', 'desc')->paginate(10)
         ];
     }
 
