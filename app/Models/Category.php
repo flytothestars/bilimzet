@@ -19,6 +19,6 @@ class Category extends Model
 
     public function getFullAttribute(): string
     {
-        return sprintf('%s (%s)', $this->name, $this->training === 1 ? 'Да':'Нет');
+        return sprintf('%s (%s)', $this->name, $this->training === 1 ? 'Повышение квалификации':'Переподготовка');
     }
 }

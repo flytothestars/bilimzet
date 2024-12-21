@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CourseController;
 use App\Http\Controllers\Api\ProfileController;
 use App\Http\Controllers\Api\MainController;
+use App\Http\Controllers\Api\BuyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,14 +29,22 @@ Route::get('/news/{id}', [NewsController::class, 'detail'])->name('news.detail')
 
 Route::post('/feedback', [MainController::class, 'feedback'])->name('feedback');
 
+Route::get('/category/list', [CourseController::class, 'getCategory'])->name('category.list');
+Route::get('/category', [CourseController::class, 'category'])->name('category');
+Route::get('/category/{id}', [CourseController::class, 'courseList'])->name('course.list');
+Route::get('/course/part/{id}', [CourseController::class, 'coursePartList'])->name('course.part.list');
 
-Route::get('/specialities', [CourseController::class, 'specialities'])->name('specialities');
+Route::get('course/buy/success', [BuyController::class,'success'])->name('course.success.buy');
 
 
 Route::get('sbp', [NewsController::class, 'sbp'])->name('news.sbp');
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/auth/token', [AuthController::class, 'token'])->name('auth.token');
+
+    Route::get('course/{course_id}/part/{part_id}/buy', [BuyController::class,'generateFrame'])->name('course.part.pay');
+    Route::get('course/{course_id}/part/{part_id}/module', [BuyController::class,'coursePartModuleList'])->name('course.part.module.list');
+    Route::get('course/{course_id}/part/{part_id}/module/{module_id}', [BuyController::class,'coursePartModule'])->name('course.part.module');
 
     Route::get('/profile/get', [ProfileController::class, 'get'])->name('profile.get');
     Route::post('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
