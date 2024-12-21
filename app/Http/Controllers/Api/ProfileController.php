@@ -33,13 +33,28 @@ class ProfileController extends Controller
         ];
 
         $role = [2]; //User
-        
-        $user->fill($request->collect()->except(['password', 'permissions', 'roles'])->toArray())
+
+        $user->fill($request->collect()->except(['photo', 'diplomas','password', 'permissions', 'roles'])->toArray())
             ->forceFill(['permissions' => $permissions])
             ->save();
 
         $user->replaceRoles($role);
-
+        
+        // Files
+        // photo
+        $imageData = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $request->photo));
+        $tmpFile = tmpfile();
+        $tmpFilePath = stream_get_meta_data($tmpFile)['uri'];
+        file_put_contents($tmpFilePath, $imageData);
+        $fileRequest = new \Illuminate\Http\UploadedFile($tmpFilePath, 'profile_photo.png', 'image/png', null, true);
+        $file = new File($fileRequest, null,'profilePhoto');
+        $attachmentPhoto = $file->load();
+        $user->attachments()->syncWithoutDetaching(
+            $attachmentPhoto->id
+        );
+        unlink($tmpFilePath);
+        
+        // documents
         $file = new File($request->file('diplomas'), null,'profileDocument');
         $attachment = $file->load();
         $user->attachments()->syncWithoutDetaching(

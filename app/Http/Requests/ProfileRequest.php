@@ -28,7 +28,7 @@ class ProfileRequest extends FormRequest
             'user.position' => 'nullable|string|max:255',
             'user.company_name' => 'nullable|string|max:255',
             'user.email' => 'nullable|email|max:255|unique:users,email',
-			// 'user.photo' => 'nullable|file|max:2048',
+			'user.photo' => 'nullable|string',
             'user.diplomas' => 'nullable|array',
 			'user.diplomas.*' => 'nullable|file|mimes:pdf,doc,docx,txt,jpg,jpeg,png|max:10240',
         ];

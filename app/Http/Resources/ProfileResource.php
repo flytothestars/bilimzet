@@ -21,7 +21,7 @@ class ProfileResource extends JsonResource
             'address' => $this->address,
             'position' => $this->position,
             'company_name' => $this->company_name,
-            'photo' => '',
+            'photo' => $this->attachment('profilePhoto')->get(),
             'diploma' => $this->attachment('profileDocument')->get(),
             'iin' => $this->iin,
             'phone' => $this->phone
