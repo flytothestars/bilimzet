@@ -26,7 +26,7 @@ class NewsScreen extends Screen
     public function query(): iterable
     {
         return [
-            'news_list' => News::paginate(10)
+            'news_list' => News::orderby('created_at', 'desc')->paginate(10)
         ];
     }
 
