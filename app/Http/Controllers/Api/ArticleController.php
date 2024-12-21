@@ -8,67 +8,75 @@ use App\Models\LibraryItem;
 use App\Models\Category;
 use App\Helper\ApiResponseHelper;
 use App\Helper\Helper;
+use Orchid\Attachment\File;
+use App\Http\Resources\ArticleResource;
 
 class ArticleController extends Controller
 {
-    public function index()
-    {
-		$categories = Category::where('training', 1)
-            ->get()->map(function ($item) {
-                $item->picture = Helper::getUrl($item);
-                return $item;
-            });
-        $item = $categories->map(function ($category) {
-            $category->article = LibraryItem::with(['author' => function ($query) {
-                    // $query->selectRaw("id, full_name, CONCAT('" . url('uploads/profile/') . "/', photo) as photo");
-                }])
-                ->where('is_published', 1)
-                ->where('category', $category->id)
-                ->orderBy('created_at', 'DESC')
-                ->get()->map(function($item){
-                    $item->document = Helper::getUrl($item);
-                    $item->document_extension = Helper::getExtension($item);
-                    return $item;
-                });
-            return $category;
-        });
-        return ApiResponseHelper::success($item);
-	}
+    // public function index()
+    // {
+	// 	$categories = Category::where('training', 1)
+    //         ->get()->map(function ($item) {
+    //             $item->picture = Helper::getUrl($item);
+    //             return $item;
+    //         });
+    //     $item = $categories->map(function ($category) {
+    //         $category->article = LibraryItem::with(['author' => function ($query) {
+    //                 // $query->selectRaw("id, full_name, CONCAT('" . url('uploads/profile/') . "/', photo) as photo");
+    //             }])
+    //             ->where('is_published', 1)
+    //             ->where('category', $category->id)
+    //             ->orderBy('created_at', 'DESC')
+    //             ->get()->map(function($item){
+    //                 $item->document = Helper::getUrl($item);
+    //                 $item->document_extension = Helper::getExtension($item);
+    //                 return $item;
+    //             });
+    //         return $category;
+    //     });
+    //     return ApiResponseHelper::success($item);
+	// }
 
-    public function show($id)
-    {
-        $article = LibraryItem::with(['author' => function ($query) {
-            // $query->selectRaw("id, full_name, CONCAT('" . url('uploads/profile/') . "/', photo) as photo");
-        }])
-        ->where('is_published', true)
-        ->where('id', $id)
-        ->get()->map(function ($item) {
-            $item->document = Helper::getUrl($item);
-            $item->document_extension = Helper::getExtension($item);
-            return $item;
-        });
+    // public function show($id)
+    // {
+    //     $article = LibraryItem::with(['author' => function ($query) {
+    //         // $query->selectRaw("id, full_name, CONCAT('" . url('uploads/profile/') . "/', photo) as photo");
+    //     }])
+    //     ->where('is_published', true)
+    //     ->where('id', $id)
+    //     ->get()->map(function ($item) {
+    //         $item->document = Helper::getUrl($item);
+    //         $item->document_extension = Helper::getExtension($item);
+    //         return $item;
+    //     });
 
-        return ApiResponseHelper::success($article);
-    }
+    //     return ApiResponseHelper::success($article);
+    // }
 
     public function create(Request $request)
     {
-        dd($request);
+        $user = auth()->user()->id;
+        
+        if (!$user) {
+            return ApiResponseHelper::error('User not found', 404);
+        }
+
         $item = new LibraryItem();
 		$item->title = $request['title'];
 		$item->title_kz = $request['title_kz'];
-		$item->document_extension = '';
 		$item->category = $request['category'];
 		$item->text = $request['text'];
 		$item->text_kz = $request['text_kz'];
-		$item->document_extension = '';
-		$item->document = '';
-		// auth()->user()->libraryItems()->save($item);
-        // $item->attachments()->syncWithoutDetaching(
-        //     $request->input('document', [])
-        // );
+        $item->author_id = $user;
+        $item->save();
+        $file = new File($request->file('document'), null,'articleDocument');
+        $attachment = $file->load();
+        // dd($attachment);
+        $item->attachments()->syncWithoutDetaching(
+            $attachment->id
+        );
         
-        return ApiResponseHelper::success($item);
+        return ApiResponseHelper::success(new ArticleResource($item));
 
     }
 

@@ -22,5 +22,10 @@ class LibraryItem extends Model
     {
         return $this->belongsTo('App\Models\User', 'author_id');
     }
+
+    public function getCategory()
+    {
+        return $this->belongsTo('App\Models\Category', 'category');
+    }
 }
 

@@ -14,6 +14,7 @@ use Orchid\Support\Facades\Toast;
 use App\Models\LibraryItem;
 use Orchid\Screen\Fields\Relation;
 use App\Models\Category;
+use App\Models\User;
 use App\Http\Requests\ArticleRequest;
 use Orchid\Screen\Fields\Select;
 use Orchid\Screen\Layouts\Modal;
@@ -72,6 +73,7 @@ class ArticleScreen extends Screen
                             '1' => 'Да',
                         ])->title('Опубликовать статью'),
                 Relation::make('article.category')->fromModel(Category::class, 'name')->displayAppend('full')->title('Категория')->required(),
+                Relation::make('article.author_id')->fromModel(User::class, 'full_name')->title('Автор')->required(),
                 Upload::make('article.attachments')
                     ->title('Документ')
                     ->groups('articleDocument')
@@ -90,6 +92,7 @@ class ArticleScreen extends Screen
                             '1' => 'Да',
                         ])->title('Опубликовать статью'),
                 Relation::make('article.category')->fromModel(Category::class, 'name')->displayAppend('full')->title('Категория')->required(),
+                Relation::make('article.author_id')->fromModel(User::class, 'full_name')->title('Автор')->required(),
                 Upload::make('article.attachments')
                     ->title('Документ')
                     ->groups('articleDocument')

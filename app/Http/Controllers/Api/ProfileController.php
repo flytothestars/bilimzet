@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use App\Helper\ApiResponseHelper;
 use App\Http\Resources\ProfileResource;
 use App\Http\Requests\ProfileRequest;
-use Orchid\Screen\Fields\Upload;
 use Orchid\Attachment\File;
 class ProfileController extends Controller
 {

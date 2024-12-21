@@ -28,6 +28,8 @@ class ArticleRequest extends FormRequest
             'article.text' => ['nullable'],
             'article.text_kz' => ['nullable'],
             'article.is_published' => ['nullable'],
+            'article.author_id' => ['nullable'],
+
         ];
     }
 }

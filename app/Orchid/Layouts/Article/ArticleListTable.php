@@ -9,6 +9,7 @@ use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Actions\ModalToggle;
 use Orchid\Screen\Fields\Group;
 use App\Models\Category;
+use App\Models\User;
 
 class ArticleListTable extends Table
 {
@@ -36,6 +37,12 @@ class ArticleListTable extends Table
     {
         return [
             TD::make('title', 'Заголовка'),
+            TD::make('author_id', 'Автор')->render(function(LibraryItem $article){
+                $user = User::find($article->author_id);
+                if($user){
+                    return $user->full_name;
+                }
+            }),
             TD::make('category', 'Категория')->render(function(LibraryItem $article){
                 $category = Category::find($article->category);
                 if($category){
