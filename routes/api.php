@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\ArticleController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CourseController;
 use App\Http\Controllers\Api\ProfileController;
+use App\Http\Controllers\Api\MainController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +25,9 @@ Route::post('/auth/verify', [AuthController::class, 'verify'])->name('auth.verif
 
 Route::get('/news', [NewsController::class, 'list'])->name('news.list');
 Route::get('/news/{id}', [NewsController::class, 'detail'])->name('news.detail');
+
+Route::post('/feedback', [MainController::class, 'feedback'])->name('feedback');
+
 
 Route::get('/specialities', [CourseController::class, 'specialities'])->name('specialities');
 

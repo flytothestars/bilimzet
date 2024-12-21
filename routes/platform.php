@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Models\CourseTestResult;
+use App\Models\Feedback;
 use App\Orchid\Screens\Examples\ExampleActionsScreen;
 use App\Orchid\Screens\Examples\ExampleCardsScreen;
 use App\Orchid\Screens\Examples\ExampleChartsScreen;
@@ -30,6 +31,7 @@ use App\Orchid\Screens\CourseTest\CourseTestScreen;
 use App\Orchid\Screens\CourseQuestion\CourseQuestionScreen;
 use App\Orchid\Screens\CourseModule\CourseModuleScreen;
 use App\Orchid\Screens\CourseTestResult\CourseTestResultScreen;
+use App\Orchid\Screens\Feedback\FeedbackScreen;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,6 +57,12 @@ Route::screen('article', ArticleScreen::class)
     ->breadcrumbs(fn (Trail $trail) => $trail
         ->parent('platform.index')
         ->push(__('Статья'), route('platform.article.list')));
+
+Route::screen('feedback', FeedbackScreen::class)
+    ->name('platform.feedback.list')
+    ->breadcrumbs(fn (Trail $trail) => $trail
+        ->parent('platform.index')
+        ->push(__('Обратный связь'), route('platform.feedback.list')));
  
 Route::screen('category', CategoryScreen::class)
     ->name('platform.category.list')
