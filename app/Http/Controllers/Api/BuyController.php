@@ -7,7 +7,9 @@ use Illuminate\Http\Request;
 use App\Services\Pay\PayboxService;
 use App\Helper\ApiResponseHelper;
 use App\Models\Course;
+use App\Models\CourseBuy;
 use Illuminate\Support\Facades\Log;
+use App\Models\TransactionLog;
 
 class BuyController extends Controller
 {
@@ -30,6 +32,13 @@ class BuyController extends Controller
 
     public function success(Request $request)
     {
+        $order = explode('-', $request['pg_order_id']);
+        CourseBuy::create([
+            'user_id' => $order[2],
+            'course_part_id' => $order[1],
+            'course' => $order[0]
+        ]);
+        dd($order);
         Log::info('=====================================');
         Log::info('Оплачен');
         Log::info($request);
@@ -38,6 +47,7 @@ class BuyController extends Controller
 
     public function result(Request $request)
     {
+        TransactionLog::create($request);
         Log::info('=====================================');
         Log::info('result');
         Log::info($request);
