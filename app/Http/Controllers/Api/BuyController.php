@@ -33,21 +33,53 @@ class BuyController extends Controller
     public function success(Request $request)
     {
         $order = explode('-', $request['pg_order_id']);
-        CourseBuy::create([
+        $course = CourseBuy::create([
             'user_id' => $order[2],
             'course_part_id' => $order[1],
-            'course' => $order[0]
+            'course_id' => $order[0]
         ]);
-        dd($order);
         Log::info('=====================================');
         Log::info('Оплачен');
         Log::info($request);
+        Log::info($course);
         Log::info('=====================================');
+        return redirect()->to('https://testbilimzet.kz');
     }
 
     public function result(Request $request)
     {
-        TransactionLog::create($request);
+        $validatedData = $request->validate([
+            'pg_order_id' => 'required|string',
+            'pg_payment_id' => 'required|string',
+            'pg_amount' => 'required|numeric',
+            'pg_currency' => 'required|string',
+            'pg_net_amount' => 'required|numeric',
+            'pg_ps_amount' => 'required|numeric',
+            'pg_ps_full_amount' => 'required|numeric',
+            'pg_ps_currency' => 'required|string',
+            'pg_description' => 'required|string',
+            'pg_result' => 'required|boolean',
+            'pg_payment_date' => 'required|date',
+            'pg_can_reject' => 'required|boolean',
+            'pg_user_phone' => 'required|string',
+            'pg_need_phone_notification' => 'required|boolean',
+            'pg_user_contact_email' => 'required|email',
+            'pg_need_email_notification' => 'required|boolean',
+            'pg_testing_mode' => 'required|boolean',
+            'pg_payment_method' => 'required|string',
+            'pg_reference' => 'nullable|string',
+            'pg_captured' => 'required|boolean',
+            'pg_card_pan' => 'nullable|string',
+            'pg_card_exp' => 'nullable|string',
+            'pg_card_owner' => 'nullable|string',
+            'pg_card_brand' => 'nullable|string',
+            'pg_auth_code' => 'nullable|string',
+            'pg_salt' => 'required|string',
+            'pg_sig' => 'required|string',
+        ]);
+
+        TransactionLog::create($validatedData);
+
         Log::info('=====================================');
         Log::info('result');
         Log::info($request);
