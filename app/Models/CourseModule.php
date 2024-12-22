@@ -12,7 +12,9 @@ class CourseModule extends Model
     use HasFactory, AsSource, Attachable;
 
     protected $fillable = [
-        'title', 'title_kz', 'text', 'text_kz', 'lecture','lecture_kz', 'course_part_id'
+        'title', 'title_kz', 'course_part_id',
+        'is_lecture','is_video','is_present',
+        'goal','goal_kz','task','task_kz','result','result_kz','content','content_kz',
     ];
 
     public function coursePart()

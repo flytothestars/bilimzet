@@ -12,6 +12,7 @@ use Orchid\Screen\Fields\Input;
 use Orchid\Support\Facades\Toast;
 use Orchid\Screen\Layouts\Modal;
 use Orchid\Screen\Fields\Upload;
+use Illuminate\Http\Request;
 
 class CourseModuleScreen extends Screen
 {
@@ -64,17 +65,14 @@ class CourseModuleScreen extends Screen
                 Layout::rows([
                     Input::make('courseModule.title')->title('Заголовок вопроса RU')->required(),
                     Input::make('courseModule.title_kz')->title('Заголовок вопроса KZ')->required(),
-                    Input::make('courseModule.text')->title('Текст описание RU')->required(),
-                    Input::make('courseModule.text_kz')->title('Текст описание KZ')->required(),
-                    Input::make('courseModule.lecture')->title('Описание лекции RU')->required(),
-                    Input::make('courseModule.lecture_kz')->title('Описание лекции KZ')->required(),
-                    Upload::make('courseModule.attachments')
-                        ->title('Лекция')
-                        ->groups('courseModuleLecture'),
-                    Upload::make('courseModule.files')
-                        ->multiple()
-                        ->title('Видео файлы')
-                        ->groups('courseModuleVideo'),
+                    Input::make('courseModule.goal')->title('Цель RU')->required(),
+                    Input::make('courseModule.goal_kz')->title('Цель KZ')->required(),
+                    Input::make('courseModule.task')->title('Задача RU')->required(),
+                    Input::make('courseModule.task_kz')->title('Задача KZ')->required(),
+                    Input::make('courseModule.result')->title('Ожидаемый результат RU')->required(),
+                    Input::make('courseModule.result_kz')->title('Ожидаемый результат KZ')->required(),
+                    Input::make('courseModule.content')->title('Содержание урока RU')->required(),
+                    Input::make('courseModule.content_kz')->title('Содержание урока KZ')->required(),
                     Input::make('courseModule.course_part_id')
                         ->type('hidden')
                         ->value($this->coursePart),
@@ -83,23 +81,41 @@ class CourseModuleScreen extends Screen
                 Layout::rows([
                     Input::make('courseModule.title')->title('Заголовок вопроса RU')->required(),
                     Input::make('courseModule.title_kz')->title('Заголовок вопроса KZ')->required(),
-                    Input::make('courseModule.text')->title('Текст описание RU')->required(),
-                    Input::make('courseModule.text_kz')->title('Текст описание KZ')->required(),
-                    Input::make('courseModule.lecture')->title('Описание лекции RU')->required(),
-                    Input::make('courseModule.lecture_kz')->title('Описание лекции KZ')->required(),
-                    Upload::make('courseModule.attachments')
-                        ->title('Лекция')
-                        ->groups('courseModuleLecture'),
-                    Upload::make('courseModule.files')
-                        ->multiple()
-                        ->title('Видео файлы')
-                        ->groups('courseModuleVideo'),
+                    Input::make('courseModule.goal')->title('Цель RU')->required(),
+                    Input::make('courseModule.goal_kz')->title('Цель KZ')->required(),
+                    Input::make('courseModule.task')->title('Задача RU')->required(),
+                    Input::make('courseModule.task_kz')->title('Задача KZ')->required(),
+                    Input::make('courseModule.result')->title('Ожидаемый результат RU')->required(),
+                    Input::make('courseModule.result_kz')->title('Ожидаемый результат KZ')->required(),
+                    Input::make('courseModule.content')->title('Содержание урока RU')->required(),
+                    Input::make('courseModule.content_kz')->title('Содержание урока KZ')->required(),
                     Input::make('courseModule.course_part_id')
                         ->type('hidden')
                         ->value($this->coursePart),
                     Input::make('courseModule.id')
                         ->type('hidden')
                 ]))->async('asyncGetCourseModule')->title('Вопросы')->size(Modal::SIZE_LG),
+
+            Layout::modal('createOrEditVideo', 
+                    Layout::rows([
+                        Input::make('courseModule.id')
+                            ->type('hidden'),
+                        Upload::make('courseModule.attachments')
+                            ->multiple()
+                            ->title('Видео файлы')
+                            ->groups('courseModuleVideo'),
+                    ])
+            )->async('asyncGetCourseModule')->title('Видеоуроки')->size(Modal::SIZE_LG),
+            Layout::modal('createOrEditPresent', 
+                    Layout::rows([
+                        Input::make('courseModule.id')
+                            ->type('hidden'),
+                        Upload::make('courseModule.attachments')
+                            ->multiple()
+                            ->title('Презентация файлы')
+                            ->groups('courseModulePresent'),
+                    ])
+            )->async('asyncGetCourseModule')->title('Презентация')->size(Modal::SIZE_LG),
         ];
     }
 
@@ -116,6 +132,36 @@ class CourseModuleScreen extends Screen
             $request->input('courseModule.files', [])
         );
         is_null($courseModuleId) ? Toast::info('Модуль успешно добавлено') : Toast::info('Модуль успешно обновлено');
+
+    }
+
+    public function createOrEditCourseModuleVideo(Request $request)
+    {
+        $courseModule = CourseModule::find($request->input('courseModule.id'));
+        $courseModule->attachments()->syncWithoutDetaching(
+            $request->input('courseModule.attachments', [])
+        );
+        $courseModule->load('attachments');
+        $courseModule->update([
+            'is_video' => $courseModule->attachments->isEmpty() ? 0 : 1
+        ]);
+        
+        Toast::info('Модуль успешно обновлен');
+
+    }
+
+    public function createOrEditCourseModulePresent(Request $request)
+    {
+        $courseModule = CourseModule::find($request->input('courseModule.id'));
+        $courseModule->attachments()->syncWithoutDetaching(
+            $request->input('courseModule.attachments', [])
+        );
+        $courseModule->load('attachments');
+        $courseModule->update([
+            'is_present' => $courseModule->attachments->isEmpty() ? 0 : 1
+        ]);
+        
+        Toast::info('Модуль успешно обновлен');
 
     }
 

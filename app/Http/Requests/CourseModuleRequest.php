@@ -24,10 +24,14 @@ class CourseModuleRequest extends FormRequest
         return [
             'courseModule.title' => ['required'],
             'courseModule.title_kz' => ['required'],
-            'courseModule.text' => ['required'],
-            'courseModule.text_kz' => ['required'],
-            'courseModule.lecture' => ['required'],
-            'courseModule.lecture_kz' => ['required'],
+            'courseModule.goal' => ['nullable'],
+            'courseModule.goal_kz' => ['nullable'],
+            'courseModule.task' => ['nullable'],
+            'courseModule.task_kz' => ['nullable'],
+            'courseModule.result' => ['nullable'],
+            'courseModule.result_kz' => ['nullable'],
+            'courseModule.content' => ['nullable'],
+            'courseModule.content_kz' => ['nullable'],
             'courseModule.course_part_id' => ['required'],
         ];
     }
