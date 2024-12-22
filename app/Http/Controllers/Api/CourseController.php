@@ -9,9 +9,13 @@ use App\Models\CourseSpeciality;
 use App\Helper\ApiResponseHelper;
 use App\Helper\Helper;
 use App\Models\Course;
+use App\Models\CoursePart;
+use App\Models\CourseBuy;
+use Illuminate\Support\Facades\Auth;
 
 class CourseController extends Controller
 {
+
     public function category()
     {
         $course_categories = Category::where('training', 1)
@@ -39,10 +43,33 @@ class CourseController extends Controller
         return ApiResponseHelper::success($item);
     }
 
-    public function coursePartList($id)
+    public function coursePartList(Request $request, $id)
     {
-        $user = auth()->user();
-        $item = Course::with('parts')->find($id);
+        $item = Course::where('id',$id)->get()->map(function($course){
+            $course->parts = CoursePart::where('course_id', $course->id)->get()->map(function($part){
+                $user = auth('sanctum')->user();
+                if($user){
+                    $courseBuy = CourseBuy::where('user_id', $user->id)
+                        ->where('course_part_id', $part->id)
+                        ->where('course_id', $part->course_id)->first();
+                    if($courseBuy){
+                        $part->is_purchased_user = true;
+                        $part->purchased = $courseBuy;
+                        $part->purchased->link = url('/api/course/'.$part->course_id.'/part/'.$part->id.'/module');
+
+                    }else {
+                        $part->is_purchased_user = false;
+                        $part->purchased = [];
+                    }
+                    return $part;
+                } else {
+                    $part->is_purchased_user = false;
+                    $part->purchased = [];
+                    return $part;
+                }
+            });
+            return $course;
+        });
 
         return ApiResponseHelper::success($item);    
     }
