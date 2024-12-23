@@ -19,4 +19,9 @@ class CoursePart extends Model
     {
         return $this->belongsTo('App\Models\Course', 'course_id');
     }
+
+    public function courseModule()
+    {
+        return $this->hasMany('App\Models\CourseModule', 'course_part_id');
+    }
 }

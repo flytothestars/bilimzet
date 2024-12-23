@@ -52,6 +52,10 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('course/part/module/{module_id}/video', [CourseController::class,'moduleVideo'])->name('course.part.module.video');
     Route::get('course/part/module/{module_id}/present', [CourseController::class,'modulePresent'])->name('course.part.module.present');
 
+    Route::post('process', [CourseController::class,'process'])->name('course.process');
+    Route::get('course/process/{part_id}', [CourseController::class,'courseProcess'])->name('course.process');
+    Route::get('course/module/process/{module_id}', [CourseController::class,'courseModuleProcess'])->name('course.module.process');
+
     Route::get('/profile/get', [ProfileController::class, 'get'])->name('profile.get');
     Route::post('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
 

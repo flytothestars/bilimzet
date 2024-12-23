@@ -13,6 +13,7 @@ use App\Models\CoursePart;
 use App\Models\CourseBuy;
 use App\Models\CourseModule;
 use App\Models\CourseModuleLecture;
+use App\Models\ModulePassed;
 use Illuminate\Support\Facades\Auth;
 
 class CourseController extends Controller
@@ -137,31 +138,32 @@ class CourseController extends Controller
         return ApiResponseHelper::success($item);
     }
 
-    public function courseModuleLectureList($module_id){
+    public function courseModuleLectureList($module_id)
+    {
         $lecture = CourseModuleLecture::where('course_module_id', $module_id)->get()
-                                ->map(function($lecture){
-                                    $lecture->plain_text = strip_tags($lecture->content);
-                                    $lecture->plain_text_kz = strip_tags($lecture->content_kz);
-                                    $lecture->file = Helper::getUrls($lecture, 'courseModuleLecture');
-                                    return $lecture;
-                                });
-                                return ApiResponseHelper::success($lecture);
-
+        ->map(function($lecture){
+            $lecture->plain_text = strip_tags($lecture->content);
+            $lecture->plain_text_kz = strip_tags($lecture->content_kz);
+            $lecture->file = Helper::getUrls($lecture, 'courseModuleLecture');
+            return $lecture;
+        });
+        return ApiResponseHelper::success($lecture);
     }
 
-    public function moduleLecture($module_id, $lecture_id){
+    public function moduleLecture($module_id, $lecture_id)
+    {
         $lecture = CourseModuleLecture::where('id', $lecture_id)->get()
-                                ->map(function($lecture){
-                                    $lecture->plain_text = strip_tags($lecture->content);
-                                    $lecture->plain_text_kz = strip_tags($lecture->content_kz);
-                                    $lecture->file = Helper::getUrls($lecture, 'courseModuleLecture');
-                                    return $lecture;
-                                });
-                                return ApiResponseHelper::success($lecture);
-
+        ->map(function($lecture){
+            $lecture->plain_text = strip_tags($lecture->content);
+            $lecture->plain_text_kz = strip_tags($lecture->content_kz);
+            $lecture->file = Helper::getUrls($lecture, 'courseModuleLecture');
+            return $lecture;
+        });
+        return ApiResponseHelper::success($lecture);
     }
 
-    public function moduleVideo($module_id){
+    public function moduleVideo($module_id)
+    {
         $modules = CourseModule::where('id', $module_id)
         ->get()->map(function($module){
             $module->video = Helper::getUrls($module, 'courseModuleVideo');
@@ -172,7 +174,8 @@ class CourseController extends Controller
         return ApiResponseHelper::success($modules);
     }
 
-    public function modulePresent($module_id){
+    public function modulePresent($module_id)
+    {
         $modules = CourseModule::where('id', $module_id)
         ->get()->map(function($module){
             $module->video = Helper::getUrls($module, 'courseModuleVideo');
@@ -181,5 +184,102 @@ class CourseController extends Controller
             return $module;
         });
         return ApiResponseHelper::success($modules);
+    }
+
+    public function process(Request $request)
+    {
+        ModulePassed::create([
+            'user_id' => auth()->user()->id,
+            'course_module_id' => $request->module_id,
+            'type' => $request->type
+        ]);
+        return ApiResponseHelper::success();
+    }
+
+    public function courseProcess($part_id)
+    {
+        $userId = auth()->id(); // Сразу получаем ID пользователя
+        $modules = CourseModule::where('course_part_id', $part_id)->get();
+
+        $counter = 0;
+        $passedCount = 0;
+
+        foreach ($modules as $module) {
+            // Список типов, которые нужно проверить
+            $types = ['basic'];
+
+            if ($module->is_video) {
+                $types[] = 'video';
+            }
+            if ($module->is_present) {
+                $types[] = 'present';
+            }
+            if ($module->is_lecture) {
+                $types[] = 'lecture';
+            }
+
+            $counter += count($types);
+
+            // Проверяем, какие модули пользователь прошел
+            $passed = ModulePassed::where('user_id', $userId)
+                ->where('course_module_id', $module->id)
+                ->whereIn('type', $types)
+                ->pluck('type')
+                ->toArray();
+
+            $passedCount += count($passed);
+        }
+
+        $data = [
+            'total_procent' => '100%',
+            'total_step' => $counter,
+            'passed_procent' => ($counter > 0 ? round(($passedCount / $counter) * 100, 2) : 0) . '%',
+            'passed_step' => $passedCount,
+        ];
+
+        return ApiResponseHelper::success($data);
+    }
+
+
+    public function courseModuleProcess($module_id)
+    {
+        $user = auth()->user()->id;
+        $module = CourseModule::where('id',$module_id)->first();
+        $counter = 1;
+        $passed_count = 0;
+        if($module->is_video){
+            $counter++;
+            $passed = ModulePassed::where('user_id', $user)->where('course_module_id', $module_id)->where('type', 'video')->first();
+            if($passed){
+                $passed_count++;
+            }
+        }
+        if($module->is_present){
+            $counter++;
+            $passed = ModulePassed::where('user_id', $user)->where('course_module_id', $module_id)->where('type', 'present')->first();
+            if($passed){
+                $passed_count++;
+            }
+        }
+        if($module->is_lecture){
+            $counter++;
+            $passed = ModulePassed::where('user_id', $user)->where('course_module_id', $module_id)->where('type', 'lecture')->first();
+            if($passed){
+                $passed_count++;
+            }
+        }
+
+        $passed = ModulePassed::where('user_id', $user)->where('course_module_id', $module_id)->where('type', 'basic')->first();
+        if($passed){
+            $passed_count++;
+        }
+
+        $data = [
+            'total_procent' => '100%',
+            'total_step' => $counter,
+            'passed_procent' => (($passed_count * 1) / $counter) * 100 . '%',
+            'passed_step' => $passed_count
+        ];
+        return ApiResponseHelper::success($data);
     }
 }
