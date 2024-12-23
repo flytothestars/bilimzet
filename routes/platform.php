@@ -32,6 +32,7 @@ use App\Orchid\Screens\CourseQuestion\CourseQuestionScreen;
 use App\Orchid\Screens\CourseModule\CourseModuleScreen;
 use App\Orchid\Screens\CourseTestResult\CourseTestResultScreen;
 use App\Orchid\Screens\Feedback\FeedbackScreen;
+use App\Orchid\Screens\CourseModuleLecture\CourseModuleLectureScreen;
 
 /*
 |--------------------------------------------------------------------------
@@ -124,8 +125,18 @@ Route::screen('course_module', CourseModuleScreen::class)
         ->parent('platform.index')
         ->push(__('Специализации'), route('platform.course_speciality.list'))
         ->push(__('Курс '), route('platform.course.list', ['courseSpeciality' => request()->get('courseSpeciality')]))
-        ->push(__('Части курса'), route('platform.course_test.list', ['course' => request()->get('course'), 'courseSpeciality' => request()->get('courseSpeciality')]))
+        ->push(__('Части курса'), route('platform.course_part.list', ['course' => request()->get('course'), 'courseSpeciality' => request()->get('courseSpeciality')]))
         ->push(__('Модули '), route('platform.course_module.list')));
+    
+Route::screen('course_module_lecture', CourseModuleLectureScreen::class)
+    ->name('platform.course_module_lecture.list')
+    ->breadcrumbs(fn (Trail $trail) => $trail
+        ->parent('platform.index')
+        ->push(__('Специализации'), route('platform.course_speciality.list'))
+        ->push(__('Курс '), route('platform.course.list', ['courseSpeciality' => request()->get('courseSpeciality')]))
+        ->push(__('Части курса'), route('platform.course_part.list', ['course' => request()->get('course'), 'courseSpeciality' => request()->get('courseSpeciality')]))
+        ->push(__('Модули '), route('platform.course_module.list', ['coursePart' => request()->get('coursePart'), 'course' => request()->get('course'), 'courseSpeciality' => request()->get('courseSpeciality')]))
+        ->push(__('Лекция '), route('platform.course_module_lecture.list')));
     
         // ===========================
 

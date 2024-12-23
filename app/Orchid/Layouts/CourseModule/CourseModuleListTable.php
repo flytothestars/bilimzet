@@ -8,6 +8,7 @@ use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Actions\ModalToggle;
 use Orchid\Screen\Fields\Group;
 use Orchid\Screen\Actions\Link;
+use App\Models\CourseModuleLecture;
 
 class CourseModuleListTable extends Table
 {
@@ -35,10 +36,16 @@ class CourseModuleListTable extends Table
     {
         return [
             TD::make('id', 'ID'),
-            TD::make('title', 'Заголовок вопроса RU'),
-            TD::make('title_kz', 'Заголовок вопроса KZ'),
+            TD::make('title', 'Заголовок RU'),
+            TD::make('title_kz', 'Заголовок KZ'),
             TD::make('is_lecture', 'Лекция')->render(function($item){
-                return $item->is_lecture === 1 ? 'Есть' : 'Нет';
+                $courseModuleLecture = CourseModuleLecture::where('course_module_id', $item->id)->count();
+                if($courseModuleLecture > 0){
+                    $item->update(['is_lecture' => 1]);
+                } else {
+                    $item->update(['is_lecture' => 0]);
+                }
+                return $courseModuleLecture > 0 ? 'Есть' : 'Нет';
             }),
             TD::make('is_video', 'Видеоуроки')->render(function($item){
                 return $item->is_video === 1 ? 'Есть' : 'Нет';
@@ -49,8 +56,10 @@ class CourseModuleListTable extends Table
 
             TD::make('action', 'Действие')->render(function ($courseModule) {
                 return Group::make([
-                    Link::make('Лекция')->href(route('platform.course_part.list', [
-                        'courseSpeciality' => $courseModule->speciality_id,
+                    Link::make('Лекция')->href(route('platform.course_module_lecture.list', [
+                        'courseSpeciality' => $courseModule->coursePart->course->speciality_id,
+                        'course' => $courseModule->coursePart->course_id,
+                        'coursePart' => $courseModule->course_part_id,
                         'courseModule' => $courseModule->id,
                     ])),
                     ModalToggle::make('Презентация')
