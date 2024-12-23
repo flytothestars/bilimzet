@@ -44,8 +44,13 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/auth/token', [AuthController::class, 'token'])->name('auth.token');
 
     Route::get('course/{course_id}/part/{part_id}/buy', [BuyController::class,'generateFrame'])->name('course.part.pay');
-    Route::get('course/{course_id}/part/{part_id}/module', [BuyController::class,'coursePartModuleList'])->name('course.part.module.list');
-    Route::get('course/{course_id}/part/{part_id}/module/{module_id}', [BuyController::class,'coursePartModule'])->name('course.part.module');
+    
+    Route::get('course/{course_id}/part/{part_id}/module/list', [CourseController::class,'coursePartModuleList'])->name('course.part.module.list');
+    Route::get('course/{course_id}/part/{part_id}/module/{module_id}', [CourseController::class,'coursePartModule'])->name('course.part.module');
+    Route::get('course/part/module/{module_id}/lecture/list', [CourseController::class,'coursePartModuleLectureList'])->name('course.part.module.lecture.list');
+    Route::get('course/part/module/{module_id}/lecture/{lecture_id}', [CourseController::class,'moduleLecture'])->name('course.part.module.lecture');
+    Route::get('course/part/module/{module_id}/video', [CourseController::class,'moduleVideo'])->name('course.part.module.video');
+    Route::get('course/part/module/{module_id}/present', [CourseController::class,'modulePresent'])->name('course.part.module.present');
 
     Route::get('/profile/get', [ProfileController::class, 'get'])->name('profile.get');
     Route::post('/profile/update', [ProfileController::class, 'update'])->name('profile.update');

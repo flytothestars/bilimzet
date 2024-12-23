@@ -70,11 +70,11 @@ class MainController extends Controller
             ->orderBy('created_at', 'DESC')
             ->get()->map(function($item){
                 $item->author = User::where('id', $item->author_id)->get()->map(function($user){
-                    $user->photo = Helper::getUrl($user, 'profilePhoto');
+                    $user->photo = Helper::getUrls($user, 'profilePhoto');
                     return $user;
                 });
                 $item->category = Category::find($item->category);
-                $item->document = Helper::getUrl($item, 'articleDocument');
+                $item->document = Helper::getUrls($item, 'articleDocument');
                 $item->document_extension = Helper::getExtension($item, 'articleDocument');
                 $item->document_extension = url('/images/extension/'.Helper::getExtension($item, 'articleDocument').'.png');                
                 $item->plain_text = strip_tags($item->text);

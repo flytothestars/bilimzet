@@ -13,7 +13,7 @@ class NewsController extends Controller
     public function list()
     {
         $items = News::orderBy('created_at', 'desc')->get()->map(function ($item) {
-            $item->miniature = Helper::getUrl($item);
+            $item->miniature = Helper::getUrls($item);
             $item->plain_text = strip_tags($item->text);
             $item->plain_text_kz = strip_tags($item->text_kz);
             return $item;
@@ -26,7 +26,7 @@ class NewsController extends Controller
     {
         $item = News::find($id);
         if($item){
-            $item->miniature = Helper::getUrl($item);
+            $item->miniature = Helper::getUrls($item);
             $item->plain_text = strip_tags($item->text);
             $item->plain_text_kz = strip_tags($item->text_kz);
         }

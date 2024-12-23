@@ -11,6 +11,16 @@ class Helper
         return $relativeUrl ? url($relativeUrl) : null;
     }
 
+    public static function getUrls($item, $group = null)
+    {
+        $pictures = $item->attachment($group)->get();
+        $relativeUrls = $pictures->map(function ($picture) {
+            return url($picture->relativeUrl);
+        })->toArray();
+
+        return $relativeUrls ?: null; 
+    }
+
     public static function getExtension($item, $group = null)
     {
         $pictures = $item->attachment($group)->get();

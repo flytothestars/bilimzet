@@ -18,7 +18,7 @@ class ArticleController extends Controller
     {
 		$categories = Category::where('training', 1)
             ->get()->map(function ($item) {
-                $item->picture = Helper::getUrl($item);
+                $item->picture = Helper::getUrls($item);
                 return $item;
             });
         $item = $categories->map(function ($category) {
@@ -27,11 +27,11 @@ class ArticleController extends Controller
                 ->orderBy('created_at', 'DESC')
                 ->get()->map(function($item){
                     $item->author = User::where('id', $item->author_id)->get()->map(function($user){
-                        $user->photo = Helper::getUrl($user, 'profilePhoto');
+                        $user->photo = Helper::getUrls($user, 'profilePhoto');
                         return $user;
                     });
                     $item->category = Category::find($item->category);
-                    $item->document = Helper::getUrl($item, 'articleDocument');
+                    $item->document = Helper::getUrls($item, 'articleDocument');
                     $item->document_extension = Helper::getExtension($item, 'articleDocument');
                     $item->document_extension = url('/images/extension/'.Helper::getExtension($item, 'articleDocument').'.png');
                     
@@ -51,11 +51,11 @@ class ArticleController extends Controller
             ->orderBy('created_at', 'DESC')
             ->get()->map(function($item){
                 $item->author = User::where('id', $item->author_id)->get()->map(function($user){
-                $user->photo = Helper::getUrl($user, 'profilePhoto');
+                $user->photo = Helper::getUrls($user, 'profilePhoto');
                 return $user;
             });
             $item->category = Category::find($item->category);
-            $item->document = Helper::getUrl($item, 'articleDocument');
+            $item->document = Helper::getUrls($item, 'articleDocument');
             $item->document_extension = Helper::getExtension($item, 'articleDocument');
             $item->plain_text = strip_tags($item->text);
             $item->plain_text_kz = strip_tags($item->text_kz);
@@ -102,11 +102,11 @@ class ArticleController extends Controller
             ->orderBy('created_at', 'DESC')
             ->get()->map(function($item){
                 $item->author = User::where('id', $item->author_id)->get()->map(function($user){
-                $user->photo = Helper::getUrl($user, 'profilePhoto');
+                $user->photo = Helper::getUrls($user, 'profilePhoto');
                 return $user;
             });
             $item->category = Category::find($item->category);
-            $item->document = Helper::getUrl($item, 'articleDocument');
+            $item->document = Helper::getUrls($item, 'articleDocument');
             $item->document_extension = Helper::getExtension($item, 'articleDocument');
             $item->plain_text = strip_tags($item->text);
             $item->plain_text_kz = strip_tags($item->text_kz);
