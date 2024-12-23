@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\CourseController;
 use App\Http\Controllers\Api\ProfileController;
 use App\Http\Controllers\Api\MainController;
 use App\Http\Controllers\Api\BuyController;
+use App\Http\Controllers\Api\TestController;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,6 +56,10 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('process', [CourseController::class,'process'])->name('course.process');
     Route::get('course/process/{part_id}', [CourseController::class,'courseProcess'])->name('course.process');
     Route::get('course/module/process/{module_id}', [CourseController::class,'courseModuleProcess'])->name('course.module.process');
+
+    Route::get('test/get/{part_id}', [TestController::class,'getTest'])->name('course.test.get');
+    Route::post('test/send', [TestController::class,'sendResultTest'])->name('course.test.send');
+
 
     Route::get('/profile/get', [ProfileController::class, 'get'])->name('profile.get');
     Route::post('/profile/update', [ProfileController::class, 'update'])->name('profile.update');

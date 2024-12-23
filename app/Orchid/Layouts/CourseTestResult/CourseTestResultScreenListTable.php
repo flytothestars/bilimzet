@@ -40,6 +40,7 @@ class CourseTestResultScreenListTable extends Table
             TD::make('result', 'Результат'),
             TD::make('action', 'Действие')->render(function ($courseTest) {
                 return Group::make([
+                    
                     ]);
             })->width('200px'),
         ];

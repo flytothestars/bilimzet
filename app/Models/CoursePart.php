@@ -24,4 +24,9 @@ class CoursePart extends Model
     {
         return $this->hasMany('App\Models\CourseModule', 'course_part_id');
     }
+
+    public function courseTest()
+    {
+        return $this->hasMany('App\Models\CourseTest', 'course_part_id');
+    }
 }
