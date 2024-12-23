@@ -63,6 +63,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::get('/profile/get', [ProfileController::class, 'get'])->name('profile.get');
     Route::post('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
+    Route::get('/profile/certificate', [ProfileController::class, 'certificate'])->name('profile.certificate');
 
 
 

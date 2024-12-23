@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Helper\ApiResponseHelper;
 use App\Http\Resources\ProfileResource;
 use App\Http\Requests\ProfileRequest;
+use App\Models\CourseTestResult;
 use Orchid\Attachment\File;
 class ProfileController extends Controller
 {
@@ -61,5 +62,21 @@ class ProfileController extends Controller
         );
         
         return ApiResponseHelper::success(new ProfileResource($user));
+    }
+
+    public function certificate(){
+        $user = auth()->user()->id;
+        $results = CourseTestResult::where('user_id', $user)->where('status_certificate', 2)->get();
+        $data = [];
+        foreach($results as $result){
+            $data[] = [
+                'url_link' => url('storage/cert-'.auth()->user()->id.'-'.$result->id.'-'.$result->rand.'.pdf'),
+                'name' => $result->coursePart->course->speciality->title,
+                'date' => $result->updated_at,
+            ];
+
+        }
+        return ApiResponseHelper::success($data);
+
     }
 }

@@ -5,6 +5,8 @@ namespace App\Orchid\Layouts\CourseTestResult;
 use Orchid\Screen\TD;
 use Orchid\Screen\Layouts\Table;
 use Orchid\Screen\Fields\Group;
+use Orchid\Screen\Actions\Button;
+use Orchid\Support\Color;
 
 class CourseTestResultScreenListTable extends Table
 {
@@ -40,7 +42,25 @@ class CourseTestResultScreenListTable extends Table
             TD::make('result', 'Результат'),
             TD::make('action', 'Действие')->render(function ($courseTest) {
                 return Group::make([
-                    
+                        Button::make('Посмотреть')
+                            ->method('noInterviewed')
+                            ->parameters([
+                            ])
+                            ->type(Color::SUCCESS)
+                            ->style($this->styleButton)
+                            ->canSee(),
+                        Button::make('Выдать')
+                            ->method('noInterviewed')
+                            ->parameters([
+                            ])
+                            ->type(Color::WARNING)
+                            ->style($this->styleButton),
+                        Button::make('Создать')
+                            ->method('noInterviewed')
+                            ->parameters([
+                            ])
+                            ->type(Color::PRIMARY)
+                            ->style($this->styleButton),
                     ]);
             })->width('200px'),
         ];

@@ -11,7 +11,7 @@ class CourseTestResult extends Model
 {
     use HasFactory,AsSource,Attachable;
 
-    protected $fillable = [ 'user_id', 'finish_time', 'total_question', 'total_correct_question', 'course_part_id' ];
+    protected $fillable = [ 'user_id', 'finish_time', 'total_question', 'total_correct_question', 'course_part_id', 'status_certificate', 'rand' ];
 
     public function user()
     {
