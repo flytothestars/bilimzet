@@ -44,7 +44,7 @@ Route::get('/search/article', [MainController::class, 'searchArticle'])->name('s
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/auth/token', [AuthController::class, 'token'])->name('auth.token');
 
-    Route::get('course/{course_id}/part/{part_id}/buy', [BuyController::class,'generateFrame'])->name('course.part.pay');
+    Route::post('course/part/buy', [BuyController::class,'generateFrame'])->name('course.part.pay');
     
     Route::get('course/{course_id}/part/{part_id}/module/list', [CourseController::class,'coursePartModuleList'])->name('course.part.module.list');
     Route::get('course/{course_id}/part/{part_id}/module/{module_id}', [CourseController::class,'coursePartModule'])->name('course.part.module');
@@ -54,7 +54,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('course/part/module/{module_id}/present', [CourseController::class,'modulePresent'])->name('course.part.module.present');
 
     Route::post('process', [CourseController::class,'process'])->name('course.process');
-    Route::get('course/process/{part_id}', [CourseController::class,'courseProcess'])->name('course.process');
+    Route::get('course/process/{part_id}', [CourseController::class,'courseProcess'])->name('course.part.process.');
     Route::get('course/module/process/{module_id}', [CourseController::class,'courseModuleProcess'])->name('course.module.process');
 
     Route::get('test/get/{part_id}', [TestController::class,'getTest'])->name('course.test.get');

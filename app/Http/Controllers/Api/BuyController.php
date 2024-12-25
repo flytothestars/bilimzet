@@ -20,13 +20,22 @@ class BuyController extends Controller
         $this->payboxService = $payboxService;
     }
 
-    public function generateFrame($course_id, $part_id)
+    public function generateFrame(Request $request)
     {
+        $request->validate([
+            'course_id' => 'required|string',
+            'part_id' => 'required|string',
+            'success_url'  => 'nullable|string',
+            'failure_url'  => 'nullable|string',
+        ]);
+        
+        $course_id = $request->course_id;
+        $part_id = $request->part_id;
         $course = Course::with(['parts' => function($query) use ($part_id) {
             $query->where('id', $part_id); // Фильтруем части по ID
         }])->find($course_id);
         $part = $course->parts->first();
-        $paybox = $this->payboxService->init($course, $part);
+        $paybox = $this->payboxService->init($course, $part, $request);
         return ApiResponseHelper::success(['pg_redirect_url' => $paybox['pg_redirect_url']]);
     }
 

@@ -12,7 +12,7 @@ class PayboxService
     const SECRET = 'oYhRW2DCMYnz5CbD'; //uwx6njhXevvcemMN
 
 
-    public function init($course, $part){
+    public function init($course, $part, $request){
         $user = auth()->user();
         $orderId = $course->id.'-'.$part->id.'-'.$user->id.'-'.rand(000000,999999);
         $url = 'https://api.freedompay.kz/init_payment.php';
@@ -26,9 +26,9 @@ class PayboxService
             'pg_currency' => 'KZT',
             'pg_language' => 'ru',
             'pg_result_url' => route('course.result.buy'),
-            'pg_success_url' => route('course.success.buy'),
+            'pg_success_url' => $request->success_url,
             'pg_success_url_method' => 'GET',
-            'pg_failure_url' => 'https://testbilimzet.kz/',
+            'pg_failure_url' => $request->failure_url,
             'pg_testing_mode' => '1',
             'pg_user_id' => auth()->user()->id,
         ];    

@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\CertificateController;
+use App\Http\Controllers\Api\MainController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,3 +20,4 @@ Route::get('/', function () {
 });
 
 Route::get('/pdf', [CertificateController::class, 'index']);
+Route::get('/sbp', [MainController::class, 'sbp']);

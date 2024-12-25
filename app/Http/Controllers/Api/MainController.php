@@ -11,6 +11,9 @@ use App\Models\LibraryItem;
 use App\Helper\Helper;
 use App\Models\User;
 use App\Models\Category;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
+use Exception;
 
 class MainController extends Controller
 {
@@ -84,5 +87,78 @@ class MainController extends Controller
             
         // dd($resultsModelCourse);
         return ApiResponseHelper::success($resultsModelArticle);
+    }
+
+    public function sbp()
+    {
+        $date = date('Y-m-d H:i:s');
+        $invoiceId = rand(00000000,99999999);
+        $amount = 200.00;
+        $control = md5($invoiceId . $amount . $date . 'K5a8F1rxGJCis60upTi597oI1');
+        $data = [
+            'orderid'       => $invoiceId,
+            'amount'        => $amount,
+            'dt'            => $date,
+            'control'       => $control,
+            'description'   => 'Покупка билета',
+            'redirect_url'  => 'www.youtube.com',
+            'account'       => '3107',
+            'merchant_site' => 'www.google.com',
+        ];
+        try {
+            $response = $this->makeRequest($data, 'https://sredapay.kz/sbp-qr/partner/3107/pay');
+            $redirectData = $this->getData($response);
+            // $data = json_decode($response, true);
+
+            return $redirectData['link'];
+        } catch (Exception $e) {
+            Log::error('sbp generate curl error ' . $e->getMessage());
+        }
+    }
+
+    private function getData($data): array
+    {
+        $xml = simplexml_load_string($data);
+        if ($xml === false) {
+            throw new Exception('Ошибка при загрузке XML');
+        }
+        
+
+        $result = [
+            'qr' => null,
+            'link' => null,
+        ];
+        
+        foreach ($xml->data->entry as $entry) {
+            $values = $entry->string;
+        
+            // qr
+            if ((string)$values[0] === 'qrlink') {
+                $result['qr'] = (string)$values[1];
+            }
+            
+            // link
+            if ((string)$values[0] === 'qrpayload') {
+                $result['link'] = base64_decode((string)$values[1]);
+            }
+        }
+        return $result;        
+    }
+
+    private function makeRequest($data, $url): string
+    {
+        $queryString = http_build_query($data);
+        $fullUrl = $url . '?' . $queryString;
+
+        $response = Http::timeout(30)
+            ->post($fullUrl); 
+
+        Log::info('SSBPPaymentServiceBP makeRequest ответ:' . json_encode($response->body()));
+
+        if ($response->failed()) {
+            throw new Exception('HTTP request failed: ' . $response->body());
+        }
+
+        return $response->body();
     }
 }
