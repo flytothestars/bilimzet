@@ -5,6 +5,8 @@ namespace App\Orchid\Screens\CourseTestResult;
 use Orchid\Screen\Screen;
 use App\Models\CourseTestResult;
 use App\Models\User;
+use App\Models\CoursePart;
+use App\Models\Course;
 use Orchid\Screen\TD;
 use Orchid\Screen\Fields\Group;
 use Orchid\Support\Facades\Layout;
@@ -140,31 +142,72 @@ class CourseTestResultScreen extends Screen
 
     public function generate(CourseTestResult $item)
     {
-        $templatePath = storage_path('app/templates/шаблон_1.pdf');
+        $user = User::find($item->user_id);
+        $part = CoursePart::where('id', $item->course_part_id)->first();
+        $course = Course::where('id', $part->course_id)->first();
+        $reg_number = rand(000000, 999999);
+        $date_day = date('d');
+        $date_month = date('m');
+
+        // dd($part);
+        $templatePath = storage_path('app/templates/certificate.pdf');
         $pdf = new Fpdi();
         $pageCount = $pdf->setSourceFile($templatePath);
-        for ($i = 1; $i <= $pageCount; $i++) {
-            $templateId = $pdf->importPage($i);
+        // dd($templatePath);
+        // for ($i = 1; $i <= $pageCount; $i++) {
+            $templateId = $pdf->importPage(1);
             $size = $pdf->getTemplateSize($templateId);
 
             $pdf->AddPage($size['orientation'], [$size['width'], $size['height']]);
 
             $pdf->useTemplate($templateId);
-
             $pdf->SetFont('FreeSerif', '', 12);
-            $pdf->SetTextColor(255, 0, 0);
-            $pdf->SetXY(10, 10);
-            // $text = mb_convert_encoding("Пример текста", 'UTF-8', 'auto');
-            $pdf->Write(0, 'Текст');
-        }
-        $number = rand(00000, 99999);
-        $outputPath = storage_path('app/public/cert-'.auth()->user()->id.'-'.$item->id.'-'.$number.'.pdf');
+            $pdf->SetTextColor(0, 0, 0);
+            
+            $pdf->SetXY(110, 93);
+            $pdf->Write(0, $user->full_name); 
+            $pdf->SetXY(110, 106.5);         
+            $pdf->Write(0, $course->title);
+            $pdf->SetXY(105, 120);         
+            $pdf->Write(0, $part->duration_hours . '(академиялық сағат/академических часов)');
+            $pdf->SetXY(248, 177);         
+            $pdf->Write(0, $reg_number);
+            $pdf->SetXY(66, 171);         
+            $pdf->Write(0, $date_day);
+            $pdf->SetXY(78, 171);         
+            $pdf->Write(0, $this->getNameMonth($date_month));
+
+            // dd($pdf);
+        // }
+        $outputPath = storage_path('app/public/cert-'.auth()->user()->id.'-'.$item->id.'-'.$reg_number.'.pdf');
         $pdf->Output($outputPath, 'F');
         $item->update([
             'status_certificate' => 1,
-            'rand' => $number
+            'rand' => $reg_number
         ]);
         Toast::info('Сертификат создан');
         return response()->download($outputPath);
     }
+
+    public function getNameMonth(int $month): string
+    {
+        $monthsKK = [
+            1 => 'Қаңтар',  2 => 'Ақпан',  3 => 'Наурыз',  4 => 'Сәуір',
+            5 => 'Мамыр',   6 => 'Маусым', 7 => 'Шілде',   8 => 'Тамыз',
+            9 => 'Қыркүйек', 10 => 'Қазан', 11 => 'Қараша', 12 => 'Желтоқсан'
+        ];
+
+        $monthsRU = [
+            1 => 'Январь',  2 => 'Февраль',  3 => 'Март',    4 => 'Апрель',
+            5 => 'Май',     6 => 'Июнь',     7 => 'Июль',    8 => 'Август',
+            9 => 'Сентябрь', 10 => 'Октябрь', 11 => 'Ноябрь', 12 => 'Декабрь'
+        ];
+
+        if ($month < 1 || $month > 12) {
+            return 'Неверный номер месяца';
+        }
+
+        return $monthsKK[$month] . ' / ' . $monthsRU[$month];
+    }
+
 }
