@@ -166,7 +166,7 @@ class CourseTestResultScreen extends Screen
             
             $pdf->SetXY(110, 93);
             $pdf->Write(0, $user->full_name); 
-            $pdf->SetXY(110, 106.5);         
+            $pdf->SetXY(40, 106.5);         
             $pdf->Write(0, $course->title);
             $pdf->SetXY(105, 120);         
             $pdf->Write(0, $part->duration_hours . '(академиялық сағат/академических часов)');
