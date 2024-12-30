@@ -64,6 +64,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/profile/get', [ProfileController::class, 'get'])->name('profile.get');
     Route::post('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
     Route::get('/profile/certificate', [ProfileController::class, 'certificate'])->name('profile.certificate');
+    Route::get('/profile/course', [ProfileController::class, 'course'])->name('profile.course');
+    Route::get('/profile/notification', [ProfileController::class, 'notification'])->name('profile.notification');
+
 
 
 

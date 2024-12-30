@@ -17,6 +17,12 @@ use Exception;
 
 class MainController extends Controller
 {
+    private mixed $config;
+
+    public function __construct(){
+        $this->config = config('payment.services.sbp.config');
+    }
+    
     public function feedback(Request $request)
     {
         $request->validate([
@@ -91,26 +97,44 @@ class MainController extends Controller
 
     public function sbp()
     {
+        $url = $this->generate();
+        // dd($url['link']);
+        return [
+            'url' => '',
+            'paymentUrl' => $url['link'],
+            'paymentUrlQr' => $url['qr'],
+            'fields' => '',
+        ];
+    }
+
+    public function generate()
+    {
         $date = date('Y-m-d H:i:s');
-        $invoiceId = rand(00000000,99999999);
-        $amount = 200.00;
-        $control = md5($invoiceId . $amount . $date . 'K5a8F1rxGJCis60upTi597oI1');
+        $invoiceId = rand(000000000,999999999);
+        $amount = 500;
+        $control = md5($invoiceId . $amount . $date . $this->config['secret_key']);
+        Log::info('SSBPPaymentServiceBP generateQrCode данный ответ:' . json_encode($control));
+
         $data = [
             'orderid'       => $invoiceId,
             'amount'        => $amount,
             'dt'            => $date,
             'control'       => $control,
             'description'   => 'Покупка билета',
-            'redirect_url'  => 'www.youtube.com',
+            'redirect_url'  => 'https://ticketon.kz/thank-you?sale=48507574&1ang=ru&token=76274b5a706729e846118c8f920ba9ddba4a6f29',
             'account'       => '3107',
-            'merchant_site' => 'www.google.com',
+            'merchant_site' => null,
         ];
-        try {
-            $response = $this->makeRequest($data, 'https://sredapay.kz/sbp-qr/partner/3107/pay');
-            $redirectData = $this->getData($response);
-            // $data = json_decode($response, true);
 
-            return $redirectData['link'];
+
+        Log::info('SSBPPaymentServiceBP generateQrCode данные ответ:' . json_encode($data));
+        Log::info('SSBPPaymentServiceBP generateQrCode данные ответ:' . json_encode($this->config['url_qr']));
+        Log::info('SSBPPaymentServiceBP generateQrCode данные ответ:' . json_encode($this->config['secret_key']));
+        try {
+            $response = $this->makeRequest($data, $this->config['url_qr']);
+            $redirectData = $this->getData($response);
+            
+            return $redirectData;
         } catch (Exception $e) {
             Log::error('sbp generate curl error ' . $e->getMessage());
         }
@@ -150,13 +174,15 @@ class MainController extends Controller
         $queryString = http_build_query($data);
         $fullUrl = $url . '?' . $queryString;
 
+        Log::info('SSBPPaymentServiceBP makeRequest full url ответ:' . json_encode($fullUrl));
+
         $response = Http::timeout(30)
             ->post($fullUrl); 
 
-        Log::info('SSBPPaymentServiceBP makeRequest ответ:' . json_encode($response->body()));
-
+        // Log::info('SSBPPaymentServiceBP makeRequest ответ:' . json_encode($response->body()));
         if ($response->failed()) {
             throw new Exception('HTTP request failed: ' . $response->body());
+        
         }
 
         return $response->body();

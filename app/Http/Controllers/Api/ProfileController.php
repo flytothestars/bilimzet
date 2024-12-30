@@ -9,6 +9,11 @@ use App\Http\Resources\ProfileResource;
 use App\Http\Requests\ProfileRequest;
 use App\Models\CourseTestResult;
 use Orchid\Attachment\File;
+use App\Models\CourseBuy;
+use App\Models\Course;
+use App\Models\CoursePart;
+use App\Http\Controllers\Api\CourseController;
+
 class ProfileController extends Controller
 {
     public function get()
@@ -78,5 +83,19 @@ class ProfileController extends Controller
         }
         return ApiResponseHelper::success($data);
 
+    }
+
+    public function course()
+    {
+        $user = auth()->user()->id;
+        $courseBuy = CourseBuy::where('user_id', $user)->get()->map(function($courseBuy){
+            $courseBuy->course = Course::where('id', $courseBuy->course_id)->first();
+            $courseBuy->part = CoursePart::where('id', $courseBuy->course_part_id)->first();
+            $courseController = new CourseController();
+            $process = $courseController->courseProcess($courseBuy->course_part_id);
+            $courseBuy->process = $process->original['data'];
+            return $courseBuy;
+        });
+        return ApiResponseHelper::success($courseBuy);
     }
 }
