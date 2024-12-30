@@ -138,7 +138,7 @@ class CourseController extends Controller
         return ApiResponseHelper::success($item);
     }
 
-    public function courseModuleLectureList($module_id)
+    public function coursePartModuleLectureList($module_id)
     {
         $lecture = CourseModuleLecture::where('course_module_id', $module_id)->get()
         ->map(function($lecture){
