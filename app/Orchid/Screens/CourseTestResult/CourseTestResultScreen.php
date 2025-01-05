@@ -149,10 +149,12 @@ class CourseTestResultScreen extends Screen
         $date_day = date('d');
         $date_month = date('m');
 
-        $templatePath = storage_path('app/templates/certificate_all.pdf');
+        $templatePath = storage_path('app/templates/certificate.pdf');
         $pdf = new Fpdi();
         $pageCount = $pdf->setSourceFile($templatePath);
+        // dd($templatePath);
         
+        // Page 1
         $templateId = $pdf->importPage(1);
         $size = $pdf->getTemplateSize($templateId);
 
@@ -175,6 +177,46 @@ class CourseTestResultScreen extends Screen
         $pdf->SetXY(78, 171);         
         $pdf->Write(0, $this->getNameMonth($date_month));
 
+        // Page 2
+        $templateId = $pdf->importPage(2);
+        $size = $pdf->getTemplateSize($templateId);
+        $pdf->AddPage($size['orientation'], [$size['width'], $size['height']]);
+        $pageWidth = round($size['width']);
+        $pageHeight = round($size['height']);
+        $pdf->useTemplate($templateId);
+        $pdf->SetFont('FreeSerif', '', 12);
+        $pdf->SetTextColor(0, 0, 0);
+        $pdf->SetXY(120, 64);
+        $pdf->Write(0, $user->full_name); 
+        $pdf->SetXY(245, 178);         
+        $pdf->Write(0, $reg_number);
+        $pdf->SetXY(46, 174);         
+        $pdf->Write(0, $date_day);
+        $pdf->SetXY(53, 174);         
+        $pdf->Write(0, $this->getNameMonth($date_month));
+
+        $header = ['№', 'Бағдарлама модульдерінің атауы / Наименование модулей программы', 'Сағат саны / Количество часов', 'Баға / Оценка'];
+
+        // Header
+        $pdf->SetFont('FreeSerif', 'B', 9);
+        $pdf->SetXY(50, 100);
+        $pdf->Cell(8,8, $header[0], 1, 0, 'C');
+        $pdf->SetXY(58, 100);
+        $pdf->Cell(110, 8, $header[1], 1, 'C'); 
+        $pdf->SetXY(168, 100);
+        $pdf->Cell(50, 8, $header[2], 1, 1, 'C');
+        $pdf->SetXY(218, 100);
+        $pdf->Cell(30, 8, $header[3], 1, 0, 'C');
+        // Content
+        $pdf->SetXY(50, 108);
+        $pdf->Cell(8,8, '1', 1, 0, 'C');
+        $pdf->SetXY(58, 108);
+        $pdf->Cell(110, 8, $part->title, 1, 'C'); 
+        $pdf->SetXY(168, 108);
+        $pdf->Cell(50, 8, $part->duration_hours, 1, 1, 'C');
+        $pdf->SetXY(218, 108);
+        $pdf->Cell(30, 8, 'Сынақ / Зачет', 1, 0, 'C');
+        
         $outputPath = storage_path('app/public/cert-'.auth()->user()->id.'-'.$item->id.'-'.$reg_number.'.pdf');
         $pdf->Output($outputPath, 'F');
         $item->update([
