@@ -149,36 +149,32 @@ class CourseTestResultScreen extends Screen
         $date_day = date('d');
         $date_month = date('m');
 
-        // dd($part);
-        $templatePath = storage_path('app/templates/certificate.pdf');
+        $templatePath = storage_path('app/templates/certificate_all.pdf');
         $pdf = new Fpdi();
         $pageCount = $pdf->setSourceFile($templatePath);
-        // dd($templatePath);
-        // for ($i = 1; $i <= $pageCount; $i++) {
-            $templateId = $pdf->importPage(1);
-            $size = $pdf->getTemplateSize($templateId);
+        
+        $templateId = $pdf->importPage(1);
+        $size = $pdf->getTemplateSize($templateId);
 
-            $pdf->AddPage($size['orientation'], [$size['width'], $size['height']]);
+        $pdf->AddPage($size['orientation'], [$size['width'], $size['height']]);
 
-            $pdf->useTemplate($templateId);
-            $pdf->SetFont('FreeSerif', '', 12);
-            $pdf->SetTextColor(0, 0, 0);
-            
-            $pdf->SetXY(110, 93);
-            $pdf->Write(0, $user->full_name); 
-            $pdf->SetXY(40, 106.5);         
-            $pdf->Write(0, $course->title);
-            $pdf->SetXY(105, 120);         
-            $pdf->Write(0, $part->duration_hours . '(академиялық сағат/академических часов)');
-            $pdf->SetXY(248, 177);         
-            $pdf->Write(0, $reg_number);
-            $pdf->SetXY(66, 171);         
-            $pdf->Write(0, $date_day);
-            $pdf->SetXY(78, 171);         
-            $pdf->Write(0, $this->getNameMonth($date_month));
+        $pdf->useTemplate($templateId);
+        $pdf->SetFont('FreeSerif', '', 12);
+        $pdf->SetTextColor(0, 0, 0);
+        
+        $pdf->SetXY(110, 93);
+        $pdf->Write(0, $user->full_name); 
+        $pdf->SetXY(40, 106.5);         
+        $pdf->Write(0, $course->title);
+        $pdf->SetXY(105, 120);         
+        $pdf->Write(0, $part->duration_hours . '(академиялық сағат/академических часов)');
+        $pdf->SetXY(248, 177);         
+        $pdf->Write(0, $reg_number);
+        $pdf->SetXY(66, 171);         
+        $pdf->Write(0, $date_day);
+        $pdf->SetXY(78, 171);         
+        $pdf->Write(0, $this->getNameMonth($date_month));
 
-            // dd($pdf);
-        // }
         $outputPath = storage_path('app/public/cert-'.auth()->user()->id.'-'.$item->id.'-'.$reg_number.'.pdf');
         $pdf->Output($outputPath, 'F');
         $item->update([
