@@ -25,11 +25,15 @@ class NewsController extends Controller
     public function detail($id)
     {
         $item = News::find($id);
+        $item->update([
+            'view_count' => $item->view_count + 1 
+        ]);
         if($item){
             $item->miniature = Helper::getUrls($item);
             $item->plain_text = strip_tags($item->text);
             $item->plain_text_kz = strip_tags($item->text_kz);
         }
+
         return ApiResponseHelper::success($item);
     }
 }

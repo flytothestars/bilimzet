@@ -11,5 +11,5 @@ class News extends Model
 {
     use HasFactory, AsSource, Attachable;
 
-    protected $fillable = [ 'id','name', 'text', 'name_kz', 'text_kz' ];
+    protected $fillable = [ 'id','name', 'text', 'name_kz', 'text_kz', 'view_count'];
 }

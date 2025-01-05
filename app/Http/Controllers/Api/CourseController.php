@@ -50,6 +50,8 @@ class CourseController extends Controller
     {
         $item = Course::where('id',$id)->get()->map(function($course){
             $course->parts = CoursePart::where('course_id', $course->id)->get()->map(function($part){
+                $part->document_plan = Helper::getUrls($part, 'coursePartPlan');
+
                 $user = auth('sanctum')->user();
                 if($user){
                     $courseBuy = CourseBuy::where('user_id', $user->id)
@@ -89,6 +91,7 @@ class CourseController extends Controller
             $course->parts = CoursePart::where('id', $part_id)
                 ->where('course_id', $course->id)
                 ->get()->map(function($part){
+                    $part->document_plan = Helper::getUrls($part, 'coursePartPlan');
                     $part->modules = CourseModule::where('course_part_id', $part->id)
                         ->get()->map(function($module){
                             $module->lecture = CourseModuleLecture::where('course_module_id', $module->id)->get()
@@ -117,6 +120,7 @@ class CourseController extends Controller
             $course->parts = CoursePart::where('id', $part_id)
                 ->where('course_id', $course->id)
                 ->get()->map(function($part) use ($module_id){
+                    $part->document_plan = Helper::getUrls($part, 'coursePartPlan');
                     $part->modules = CourseModule::where('id', $module_id)->where('course_part_id', $part->id)
                         ->get()->map(function($module){
                             $module->lecture = CourseModuleLecture::where('course_module_id', $module->id)->get()
