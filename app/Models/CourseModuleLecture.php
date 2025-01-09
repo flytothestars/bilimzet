@@ -12,11 +12,11 @@ class CourseModuleLecture extends Model
     use HasFactory, Attachable, AsSource;
 
     protected $fillable = [
-        'title', 'title_kz', 'content', 'content_kz', 'course_module_id'
+        'title', 'title_kz', 'content', 'content_kz', 'lesson_id'
     ];
 
-    public function courseModule()
+    public function lesson()
     {
-        return $this->belongsTo('App\Models\CourseModule', 'course_module_id');
+        return $this->belongsTo('App\Models\CourseModule', 'lesson_id');
     }
 }

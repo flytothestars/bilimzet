@@ -26,7 +26,7 @@ class CourseModuleLectureRequest extends FormRequest
             'courseModuleLecture.title_kz' => ['required'],
             'courseModuleLecture.content' => ['nullable'],
             'courseModuleLecture.content_kz' => ['nullable'],
-            'courseModuleLecture.course_module_id' => ['nullable'],
+            'courseModuleLecture.lesson_id' => ['nullable'],
         ];
     }
 }

@@ -64,7 +64,7 @@ class LessonScreen extends Screen
     {
         return [
             LessonListTable::class,
-            Layout::modal('createOrEditLessonVideo', 
+            Layout::modal('createOrEditVideo', 
                     Layout::rows([
                         Input::make('lesson.id')
                             ->type('hidden'),
@@ -73,7 +73,7 @@ class LessonScreen extends Screen
                             ->title('Видео файлы')
                             ->groups('lessonVideo'),
                     ])
-            )->async('asyncGetlesson')->title('Видеоуроки')->size(Modal::SIZE_LG),
+            )->async('asyncGetLesson')->title('Видеоуроки')->size(Modal::SIZE_LG),
             Layout::modal('createOrEditPresent', 
                     Layout::rows([
                         Input::make('lesson.id')
@@ -83,7 +83,7 @@ class LessonScreen extends Screen
                             ->title('Презентация файлы')
                             ->groups('lessonPresent'),
                     ])
-            )->async('asyncGetlesson')->title('Презентация')->size(Modal::SIZE_LG),
+            )->async('asyncGetLesson')->title('Презентация')->size(Modal::SIZE_LG),
         ];
     }
 
@@ -96,11 +96,7 @@ class LessonScreen extends Screen
             'title_kz' => 'Сабак ' . $count+1,
             'course_module_id' => $request->courseModule
         ]);
-        // $lesson->attachments()->syncWithoutDetaching(
-        //     $request->input('lesson.attachments', []),
-        //     $request->input('lesson.files', [])
-        // );
-        is_null($lesson) ? Toast::info('Модуль успешно добавлено') : Toast::info('Модуль успешно обновлено');
+        is_null($lesson) ? Toast::info('Урок успешно добавлено') : Toast::info('Урок успешно обновлено');
 
     }
 
@@ -115,7 +111,7 @@ class LessonScreen extends Screen
             'is_video' => $lesson->attachments->isEmpty() ? 0 : 1
         ]);
         
-        Toast::info('Модуль успешно обновлен');
+        Toast::info('Урок успешно обновлен');
 
     }
 
@@ -130,17 +126,17 @@ class LessonScreen extends Screen
             'is_present' => $lesson->attachments->isEmpty() ? 0 : 1
         ]);
         
-        Toast::info('Модуль успешно обновлен');
+        Toast::info('Урок успешно обновлен');
 
     }
 
     public function delete(Lesson $lesson)
     {
         $lesson->delete();
-        Toast::info('Модуль успешно удалено');
+        Toast::info('Урок успешно удалено');
     }
 
-    public function asyncGetlesson(Lesson $lesson): array
+    public function asyncGetLesson(Lesson $lesson): array
     {
         $lesson->load('attachments');
         return [
