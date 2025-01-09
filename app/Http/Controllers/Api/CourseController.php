@@ -14,6 +14,7 @@ use App\Models\CourseBuy;
 use App\Models\CourseModule;
 use App\Models\CourseModuleLecture;
 use App\Models\ModulePassed;
+use App\Models\Lesson;
 use Illuminate\Support\Facades\Auth;
 
 class CourseController extends Controller
@@ -94,16 +95,20 @@ class CourseController extends Controller
                     $part->document_plan = Helper::getUrls($part, 'coursePartPlan');
                     $part->modules = CourseModule::where('course_part_id', $part->id)
                         ->get()->map(function($module){
-                            $module->lecture = CourseModuleLecture::where('course_module_id', $module->id)->get()
-                                ->map(function($lecture){
-                                    $lecture->plain_text = strip_tags($lecture->content);
-                                    $lecture->plain_text_kz = strip_tags($lecture->content_kz);
-                                    $lecture->file = Helper::getUrls($lecture, 'courseModuleLecture');
-                                    return $lecture;
-                                });
-                            $module->video = Helper::getUrls($module, 'courseModuleVideo');
-                            $module->present = Helper::getUrls($module, 'courseModulePresent');
+                            $module->lesson = Lesson::where('course_module_id',$module->id)->get()
+                                ->map(function($lesson){
+                                    $lesson->lecture = CourseModuleLecture::where('lesson_id', $lesson->id)->get()
+                                        ->map(function($lecture){
+                                            $lecture->plain_text = strip_tags($lecture->content);
+                                            $lecture->plain_text_kz = strip_tags($lecture->content_kz);
+                                            $lecture->file = Helper::getUrls($lecture, 'courseModuleLecture');
+                                            return $lecture;
+                                        });
 
+                                    $lesson->video = Helper::getUrls($lesson, 'lessonVideo');
+                                    $lesson->present = Helper::getUrls($lesson, 'lessonPresent');
+                                    return $lesson;
+                                });            
                             return $module;
                         });
                     return $part;
@@ -114,37 +119,32 @@ class CourseController extends Controller
 
     }
 
-    public function coursePartModule($course_id, $part_id, $module_id)
+    public function coursePartModule($module_id, $lesson_id)
     {
-        $item = Course::where('id', $course_id)->get()->map(function($course) use ($part_id, $module_id){
-            $course->parts = CoursePart::where('id', $part_id)
-                ->where('course_id', $course->id)
-                ->get()->map(function($part) use ($module_id){
-                    $part->document_plan = Helper::getUrls($part, 'coursePartPlan');
-                    $part->modules = CourseModule::where('id', $module_id)->where('course_part_id', $part->id)
-                        ->get()->map(function($module){
-                            $module->lecture = CourseModuleLecture::where('course_module_id', $module->id)->get()
-                                ->map(function($lecture){
-                                    $lecture->plain_text = strip_tags($lecture->content);
-                                    $lecture->plain_text_kz = strip_tags($lecture->content_kz);
-                                    $lecture->file = Helper::getUrls($lecture, 'courseModuleLecture');
-                                    return $lecture;
-                                });
-                            $module->video = Helper::getUrls($module, 'courseModuleVideo');
-                            $module->present = Helper::getUrls($module, 'courseModulePresent');
+        $item = CourseModule::where('id', $module_id)
+            ->get()->map(function($module) use ($lesson_id){
+                $module->lesson = Lesson::where('course_module_id',$module->id)->where('id', $lesson_id)->get()
+                    ->map(function($lesson){
+                        $lesson->lecture = CourseModuleLecture::where('lesson_id', $lesson->id)->get()
+                            ->map(function($lecture){
+                                $lecture->plain_text = strip_tags($lecture->content);
+                                $lecture->plain_text_kz = strip_tags($lecture->content_kz);
+                                $lecture->file = Helper::getUrls($lecture, 'courseModuleLecture');
+                                return $lecture;
+                            });
 
-                            return $module;
-                        });
-                    return $part;
-                });
-            return $course;
-        });
+                        $lesson->video = Helper::getUrls($lesson, 'lessonVideo');
+                        $lesson->present = Helper::getUrls($lesson, 'lessonPresent');
+                        return $lesson;
+                    });      
+                return $module;
+            });
         return ApiResponseHelper::success($item);
     }
 
-    public function coursePartModuleLectureList($module_id)
+    public function coursePartModuleLectureList($lesson_id)
     {
-        $lecture = CourseModuleLecture::where('course_module_id', $module_id)->get()
+        $lecture = CourseModuleLecture::where('lesson_id', $lesson_id)->get()
         ->map(function($lecture){
             $lecture->plain_text = strip_tags($lecture->content);
             $lecture->plain_text_kz = strip_tags($lecture->content_kz);
@@ -154,7 +154,7 @@ class CourseController extends Controller
         return ApiResponseHelper::success($lecture);
     }
 
-    public function moduleLecture($module_id, $lecture_id)
+    public function moduleLecture($lesson_id, $lecture_id)
     {
         $lecture = CourseModuleLecture::where('id', $lecture_id)->get()
         ->map(function($lecture){
@@ -166,24 +166,24 @@ class CourseController extends Controller
         return ApiResponseHelper::success($lecture);
     }
 
-    public function moduleVideo($module_id)
+    public function moduleVideo($lesson_id)
     {
-        $modules = CourseModule::where('id', $module_id)
+        $modules = Lesson::where('id', $lesson_id)
         ->get()->map(function($module){
-            $module->video = Helper::getUrls($module, 'courseModuleVideo');
-            $module->present = Helper::getUrls($module, 'courseModulePresent');
+            $module->video = Helper::getUrls($module, 'lessonVideo');
+            $module->present = Helper::getUrls($module, 'lessonPresent');
 
             return $module;
         });
         return ApiResponseHelper::success($modules);
     }
 
-    public function modulePresent($module_id)
+    public function modulePresent($lesson_id)
     {
-        $modules = CourseModule::where('id', $module_id)
+        $modules = Lesson::where('id', $lesson_id)
         ->get()->map(function($module){
-            $module->video = Helper::getUrls($module, 'courseModuleVideo');
-            $module->present = Helper::getUrls($module, 'courseModulePresent');
+            $module->video = Helper::getUrls($module, 'lessonVideo');
+            $module->present = Helper::getUrls($module, 'lessonPresent');
 
             return $module;
         });
