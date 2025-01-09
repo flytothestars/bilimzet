@@ -96,26 +96,26 @@ class CourseModuleScreen extends Screen
                         ->type('hidden')
                 ]))->async('asyncGetCourseModule')->title('Вопросы')->size(Modal::SIZE_LG),
 
-            Layout::modal('createOrEditVideo', 
-                    Layout::rows([
-                        Input::make('courseModule.id')
-                            ->type('hidden'),
-                        Upload::make('courseModule.attachments')
-                            ->multiple()
-                            ->title('Видео файлы')
-                            ->groups('courseModuleVideo'),
-                    ])
-            )->async('asyncGetCourseModule')->title('Видеоуроки')->size(Modal::SIZE_LG),
-            Layout::modal('createOrEditPresent', 
-                    Layout::rows([
-                        Input::make('courseModule.id')
-                            ->type('hidden'),
-                        Upload::make('courseModule.attachments')
-                            ->multiple()
-                            ->title('Презентация файлы')
-                            ->groups('courseModulePresent'),
-                    ])
-            )->async('asyncGetCourseModule')->title('Презентация')->size(Modal::SIZE_LG),
+            // Layout::modal('createOrEditVideo', 
+            //         Layout::rows([
+            //             Input::make('courseModule.id')
+            //                 ->type('hidden'),
+            //             Upload::make('courseModule.attachments')
+            //                 ->multiple()
+            //                 ->title('Видео файлы')
+            //                 ->groups('courseModuleVideo'),
+            //         ])
+            // )->async('asyncGetCourseModule')->title('Видеоуроки')->size(Modal::SIZE_LG),
+            // Layout::modal('createOrEditPresent', 
+            //         Layout::rows([
+            //             Input::make('courseModule.id')
+            //                 ->type('hidden'),
+            //             Upload::make('courseModule.attachments')
+            //                 ->multiple()
+            //                 ->title('Презентация файлы')
+            //                 ->groups('courseModulePresent'),
+            //         ])
+            // )->async('asyncGetCourseModule')->title('Презентация')->size(Modal::SIZE_LG),
         ];
     }
 

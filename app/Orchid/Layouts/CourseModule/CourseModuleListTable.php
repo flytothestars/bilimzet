@@ -38,49 +38,39 @@ class CourseModuleListTable extends Table
             TD::make('id', 'ID'),
             TD::make('title', 'Заголовок RU'),
             TD::make('title_kz', 'Заголовок KZ'),
-            TD::make('is_lecture', 'Лекция')->render(function($item){
-                $courseModuleLecture = CourseModuleLecture::where('course_module_id', $item->id)->count();
-                if($courseModuleLecture > 0){
-                    $item->update(['is_lecture' => 1]);
-                } else {
-                    $item->update(['is_lecture' => 0]);
-                }
-                return $courseModuleLecture > 0 ? 'Есть' : 'Нет';
-            }),
-            TD::make('is_video', 'Видеоуроки')->render(function($item){
-                return $item->is_video === 1 ? 'Есть' : 'Нет';
-            }),
-            TD::make('is_present', 'Презентация')->render(function($item){
-                return $item->is_present === 1 ? 'Есть' : 'Нет';
-            }),
-
             TD::make('action', 'Действие')->render(function ($courseModule) {
                 return Group::make([
-                    Link::make('Лекция')->href(route('platform.course_module_lecture.list', [
+                    Link::make('Уроки')->href(route('platform.lesson.list', [
                         'courseSpeciality' => $courseModule->coursePart->course->speciality_id,
                         'course' => $courseModule->coursePart->course_id,
                         'coursePart' => $courseModule->course_part_id,
                         'courseModule' => $courseModule->id,
                     ])),
-                    ModalToggle::make('Презентация')
-                        ->modal('createOrEditPresent')
-                        ->method('createOrEditCourseModulePresent')
-                        ->modalTitle('Презентация - ' . $courseModule->title)
-                        ->asyncParameters([
-                            'courseModule' => $courseModule->id
-                        ])
-                        ->class('btn text-center rounded-2')
-                        ->style($this->styleButton),
+                    // Link::make('Лекция')->href(route('platform.course_module_lecture.list', [
+                    //     'courseSpeciality' => $courseModule->coursePart->course->speciality_id,
+                    //     'course' => $courseModule->coursePart->course_id,
+                    //     'coursePart' => $courseModule->course_part_id,
+                    //     'courseModule' => $courseModule->id,
+                    // ])),
+                    // ModalToggle::make('Презентация')
+                    //     ->modal('createOrEditPresent')
+                    //     ->method('createOrEditCourseModulePresent')
+                    //     ->modalTitle('Презентация - ' . $courseModule->title)
+                    //     ->asyncParameters([
+                    //         'courseModule' => $courseModule->id
+                    //     ])
+                    //     ->class('btn text-center rounded-2')
+                    //     ->style($this->styleButton),
                     
-                    ModalToggle::make('Видеоуроки')
-                        ->modal('createOrEditVideo')
-                        ->method('createOrEditCourseModuleVideo')
-                        ->modalTitle('Видеоуроки - ' . $courseModule->title)
-                        ->asyncParameters([
-                            'courseModule' => $courseModule->id
-                        ])
-                        ->class('btn text-center rounded-2')
-                        ->style($this->styleButton),
+                    // ModalToggle::make('Видеоуроки')
+                    //     ->modal('createOrEditVideo')
+                    //     ->method('createOrEditCourseModuleVideo')
+                    //     ->modalTitle('Видеоуроки - ' . $courseModule->title)
+                    //     ->asyncParameters([
+                    //         'courseModule' => $courseModule->id
+                    //     ])
+                    //     ->class('btn text-center rounded-2')
+                    //     ->style($this->styleButton),
                     ModalToggle::make('')
                         ->icon('bs.pencil')
                         ->modal('editCourseModule')

@@ -17,17 +17,17 @@ use Orchid\Screen\Fields\Quill;
 
 class CourseModuleLectureScreen extends Screen
 {
-    protected $courseModule;
+    protected $lesson;
     /**
      * Fetch data to be displayed on the screen.
      *
      * @return array
      */
-    public function query(int $courseModule): iterable
+    public function query(int $lesson): iterable
     {
-        $this->courseModule = $courseModule;
+        $this->lesson = $lesson;
         return [
-            'course_module_lecture_list' => CourseModuleLecture::where('course_module_id', $courseModule)->paginate(10)
+            'course_module_lecture_list' => CourseModuleLecture::where('lesson_id', $lesson)->paginate(10)
         ];
     }
 
@@ -73,9 +73,9 @@ class CourseModuleLectureScreen extends Screen
                             ->multiple()
                             ->title('Лекция файлы')
                             ->groups('courseModuleLecture'),
-                    Input::make('courseModuleLecture.course_module_id')
+                    Input::make('courseModuleLecture.lesson_id')
                         ->type('hidden')
-                        ->value($this->courseModule),
+                        ->value($this->lesson),
                 ]))->title('Вопросы')->size(Modal::SIZE_LG),
             Layout::modal('editCourseModuleLecture', 
                 Layout::rows([
@@ -87,9 +87,9 @@ class CourseModuleLectureScreen extends Screen
                             ->multiple()
                             ->title('Лекция файлы')
                             ->groups('courseModuleLecture'),
-                    Input::make('courseModuleLecture.course_module_id')
+                    Input::make('courseModuleLecture.lesson_id')
                         ->type('hidden')
-                        ->value($this->courseModule),
+                        ->value($this->lesson),
                     Input::make('courseModuleLecture.id')
                         ->type('hidden')
                 ]))->async('asyncGetCourseModuleLecture')->title('Вопросы')->size(Modal::SIZE_LG),
