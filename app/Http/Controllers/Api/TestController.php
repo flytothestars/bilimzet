@@ -11,8 +11,8 @@ use Illuminate\Http\Request;
 
 class TestController extends Controller
 {
-    public function getTest($part_id){
-        $test = CourseTest::where('course_part_id', $part_id)->get()->map(function($test){
+    public function getTest($part_id, $course_id){
+        $test = CourseTest::where('course_part_id', $part_id)->where('course_id', $course_id)->get()->map(function($test){
             $test->questions = CourseQuestion::where('course_test_id', $test->id)->get();
             $test->count_question = $test->questions->count();
             return $test;

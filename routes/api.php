@@ -60,7 +60,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('course/process/{part_id}', [CourseController::class,'courseProcess'])->name('course.part.process.');
     Route::get('course/module/process/{module_id}', [CourseController::class,'courseModuleProcess'])->name('course.module.process');
 
-    Route::get('test/get/{part_id}', [TestController::class,'getTest'])->name('course.test.get');
+    Route::get('test/get/course/{course_id}/part/{part_id}', [TestController::class,'getTest'])->name('course.test.get');
     Route::post('test/send', [TestController::class,'sendResultTest'])->name('course.test.send');
 
 

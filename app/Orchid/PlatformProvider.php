@@ -66,7 +66,11 @@ class PlatformProvider extends OrchidServiceProvider
                 ->icon('bs.telephone')
                 ->route('platform.feedback.list'),
 
-            // Menu::make('Get Started')
+            Menu::make('Лог транзакции')
+                ->icon('bs.list-columns')
+                ->route('platform.transaction_log.list'),
+        
+            //     Menu::make('Get Started')
             //     ->icon('bs.book')
             //     ->title('Navigation')
             //     ->route(config('platform.index')),

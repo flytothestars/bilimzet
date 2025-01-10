@@ -31,6 +31,7 @@ use App\Orchid\Screens\CourseModule\CourseModuleScreen;
 use App\Orchid\Screens\CourseTestResult\CourseTestResultScreen;
 use App\Orchid\Screens\Feedback\FeedbackScreen;
 use App\Orchid\Screens\Lesson\LessonScreen;
+use App\Orchid\Screens\TransactionLog\TransactionLogScreen;
 use App\Orchid\Screens\CourseModuleLecture\CourseModuleLectureScreen;
 
 /*
@@ -76,7 +77,13 @@ Route::screen('course_test_result', CourseTestResultScreen::class)
         ->parent('platform.index')
         ->push(__('Сертификат'), route('platform.course_test_result.list')));
 
+Route::screen('transaction_log', TransactionLogScreen::class)
+    ->name('platform.transaction_log.list')
+    ->breadcrumbs(fn (Trail $trail) => $trail
+        ->parent('platform.index')
+        ->push(__('Логи транзакции'), route('platform.transaction_log.list')));
 
+            
 Route::screen('/settings/form/basic', \App\Orchid\Screens\Setting\SettingFieldScreen::class)->name('platform.settings.basic');
 Route::screen('/settings/form/advanced', \App\Orchid\Screens\Setting\SettingsFieldsAdvancedScreen::class)->name('platform.settings.advanced');
 

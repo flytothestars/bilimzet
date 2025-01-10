@@ -2,12 +2,15 @@
 
 namespace App\Models;
 
+
+use Orchid\Screen\AsSource;
+use Orchid\Attachment\Attachable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class TransactionLog extends Model
 {
-    use HasFactory;
+    use HasFactory, AsSource, Attachable;
 
     protected $fillable = [
         'pg_order_id',
