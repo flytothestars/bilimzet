@@ -10,7 +10,7 @@ class ModulePassed extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id', 'course_module_id', 'type'
+        'user_id', 'course_module_id', 'type', 'course_id', 'part_id', 'lesson_id', 'lecture_id'
     ];
 
     public function courseModule()

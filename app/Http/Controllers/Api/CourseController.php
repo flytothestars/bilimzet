@@ -194,96 +194,116 @@ class CourseController extends Controller
     {
         ModulePassed::create([
             'user_id' => auth()->user()->id,
+            'course_id' => $request->course_id,
+            'part_id' => $request->part_id,
             'course_module_id' => $request->module_id,
-            'type' => $request->type
+            'lesson_id' => $request->lesson_id,
+            'type' => $request->type,
+            'lecture_id' => $request->lecture_id,
         ]);
         return ApiResponseHelper::success();
     }
 
-    public function courseProcess($part_id)
+    public function courseProcess($part_id, $course_id)
     {
-        $userId = auth()->id(); // Сразу получаем ID пользователя
-        $modules = CourseModule::where('course_part_id', $part_id)->get();
-
-        $counter = 0;
-        $passedCount = 0;
-
-        foreach ($modules as $module) {
-            // Список типов, которые нужно проверить
-            $types = ['basic'];
-
-            if ($module->is_video) {
-                $types[] = 'video';
+        $userId = auth()->id();
+        
+        $part = CoursePart::where('id', $part_id)->get();
+        
+        $count = 0;
+        foreach ($part as $key => $value) 
+        {
+            $modules = $value->courseModule()->get();
+            foreach($modules as $module)
+            {
+                $lessons = $module->courseLessons()->get();
+                $count++;
+                foreach ($lessons as $lesson) {
+                    if($lesson->is_lecture)
+                    {
+                        $count += $lesson->courseModuleLecture()->count();
+                    }
+                    if($lesson->is_video)
+                    {
+                        $count++;
+                    }
+                    if($lesson->is_present)
+                    {
+                        $count++;
+                    }
+                }
             }
-            if ($module->is_present) {
-                $types[] = 'present';
-            }
-            if ($module->is_lecture) {
-                $types[] = 'lecture';
-            }
-
-            $counter += count($types);
-
-            // Проверяем, какие модули пользователь прошел
-            $passed = ModulePassed::where('user_id', $userId)
-                ->where('course_module_id', $module->id)
-                ->whereIn('type', $types)
-                ->pluck('type')
-                ->toArray();
-
-            $passedCount += count($passed);
         }
-
-        $data = [
-            'total_procent' => '100%',
-            'total_step' => $counter,
-            'passed_procent' => ($counter > 0 ? round(($passedCount / $counter) * 100, 2) : 0) . '%',
-            'passed_step' => $passedCount,
-        ];
-
+        $count_passed = 0;
+        $passed = ModulePassed::where('course_id', $course_id)->where('part_id', $part_id)->get();
+        if($passed){
+            $count_passed = $passed->count();
+        }
+        
+        if($count > 0){
+            $data = [
+                'total' => round(($count_passed/$count)*100, 2),
+            ];    
+        } else {
+            $data = [
+                'total' => 0,
+            ]; 
+        }
         return ApiResponseHelper::success($data);
     }
 
 
-    public function courseModuleProcess($module_id)
+    public function courseModuleLessonProcess($module_id, $lesson_id)
     {
         $user = auth()->user()->id;
-        $module = CourseModule::where('id',$module_id)->first();
-        $counter = 1;
-        $passed_count = 0;
-        if($module->is_video){
-            $counter++;
-            $passed = ModulePassed::where('user_id', $user)->where('course_module_id', $module_id)->where('type', 'video')->first();
-            if($passed){
-                $passed_count++;
-            }
+        $count = 1;
+        $count_lecture = 0;
+        $lesson = Lesson::where('id', $lesson_id)->first();
+        if($lesson->is_lecture)
+        {
+            $count += $lesson->courseModuleLecture()->count();
         }
-        if($module->is_present){
-            $counter++;
-            $passed = ModulePassed::where('user_id', $user)->where('course_module_id', $module_id)->where('type', 'present')->first();
-            if($passed){
-                $passed_count++;
-            }
+        if($lesson->is_video)
+        {
+            $count++;
         }
-        if($module->is_lecture){
-            $counter++;
-            $passed = ModulePassed::where('user_id', $user)->where('course_module_id', $module_id)->where('type', 'lecture')->first();
-            if($passed){
-                $passed_count++;
+        if($lesson->is_present)
+        {
+            $count++;
+        }
+
+        // dd($count);
+        $count_passed = 0;
+        $passed = ModulePassed::where('lesson_id', $lesson_id)->where('course_module_id', $module_id)->where('user_id', $user)->get();
+        $lectures = $lesson->courseModuleLecture()->get();
+        foreach ($passed as $key => $value) {
+            if($value->type == 'lecture'){
+                foreach ($lectures as $key => $lecture) {
+                    if($value->lecture_id == $lecture->id){
+                        $count_passed++;
+                    }
+                }
+            }
+            if($value->type == 'basic'){
+                $count_passed++;
+            }
+            if($value->type == 'video'){
+                $count_passed++;
+            }
+            if($value->type == 'present'){
+                $count_passed++;
             }
         }
 
-        $passed = ModulePassed::where('user_id', $user)->where('course_module_id', $module_id)->where('type', 'basic')->first();
-        if($passed){
-            $passed_count++;
+        if($count > 0){
+            $data = [
+                'total' => round(($count_passed/$count)*100, 2),
+            ];    
+        } else {
+            $data = [
+                'total' => 0,
+            ]; 
         }
-
-        $data = [
-            'total_procent' => '100%',
-            'total_step' => $counter,
-            'passed_procent' => (($passed_count * 1) / $counter) * 100 . '%',
-            'passed_step' => $passed_count
-        ];
         return ApiResponseHelper::success($data);
     }
 }

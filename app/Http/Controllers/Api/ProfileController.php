@@ -92,7 +92,7 @@ class ProfileController extends Controller
             $courseBuy->course = Course::where('id', $courseBuy->course_id)->first();
             $courseBuy->part = CoursePart::where('id', $courseBuy->course_part_id)->first();
             $courseController = new CourseController();
-            $process = $courseController->courseProcess($courseBuy->course_part_id);
+            $process = $courseController->courseProcess($courseBuy->course_part_id, $courseBuy->course_id);
             $courseBuy->process = $process->original['data'];
             return $courseBuy;
         });

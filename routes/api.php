@@ -57,8 +57,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('lesson/{lesson_id}/present', [CourseController::class,'modulePresent'])->name('course.part.module.present');
 
     Route::post('process', [CourseController::class,'process'])->name('course.process');
-    Route::get('course/process/{part_id}', [CourseController::class,'courseProcess'])->name('course.part.process.');
-    Route::get('course/module/process/{module_id}', [CourseController::class,'courseModuleProcess'])->name('course.module.process');
+    Route::get('progress/course/{course_id}/{part_id}', [CourseController::class,'courseProcess'])->name('course.part.process.');
+    Route::get('progress/lesson/{module_id}/{lesson_id}', [CourseController::class,'courseModuleLessonProcess'])->name('course.module.process');
 
     Route::get('test/get/course/{course_id}/part/{part_id}', [TestController::class,'getTest'])->name('course.test.get');
     Route::post('test/send', [TestController::class,'sendResultTest'])->name('course.test.send');
