@@ -94,11 +94,35 @@ class CourseController extends Controller
                 ->get()->map(function($part){
                     $part->document_plan = Helper::getUrls($part, 'coursePartPlan');
                     $part->modules = CourseModule::where('course_part_id', $part->id)
-                        ->get()->map(function($module){
+                        ->get()->map(function($module) use ($part){
+                            $modulePassed = ModulePassed::where('part_id', $part->id)->where('course_module_id', $module->id)->first();
+                            if($modulePassed) {
+                                $module->passed = true;
+                            } else {
+                                $module->passed = false;
+                            }
                             $module->lesson = Lesson::where('course_module_id',$module->id)->get()
-                                ->map(function($lesson){
+                                ->map(function($lesson) use ($module){
+                                    $modulePassed = ModulePassed::where('lesson_id', $lesson->id)->where('course_module_id', $module->id)->first();
+                                    if($modulePassed) {
+                                        $lesson->passed = true;
+                                    } else {
+                                        $lesson->passed = false;
+                                    }
+                                    $modulePassedVideo = ModulePassed::where('lesson_id', $lesson->id)->where('course_module_id', $module->id)->where('type','basic')->first();
+                                    if($modulePassed) {
+                                        $lesson->passed_basic = true;
+                                    } else {
+                                        $lesson->passed_basic = false;
+                                    }
                                     $lesson->lecture = CourseModuleLecture::where('lesson_id', $lesson->id)->get()
-                                        ->map(function($lecture){
+                                        ->map(function($lecture) use ($lesson){
+                                            $modulePassed = ModulePassed::where('lesson_id', $lesson->id)->where('lecture_id', $lecture->id)->where('type', 'lecture')->first();
+                                            if($modulePassed) {
+                                                $lecture->passed = true;
+                                            } else {
+                                                $lecture->passed = false;
+                                            }
                                             $lecture->plain_text = strip_tags($lecture->content);
                                             $lecture->plain_text_kz = strip_tags($lecture->content_kz);
                                             $lecture->file = Helper::getUrls($lecture, 'courseModuleLecture');
@@ -106,7 +130,19 @@ class CourseController extends Controller
                                         });
 
                                     $lesson->video = Helper::getUrls($lesson, 'lessonVideo');
+                                    $modulePassedVideo = ModulePassed::where('lesson_id', $lesson->id)->where('course_module_id', $module->id)->where('type','video')->first();
+                                    if($modulePassed) {
+                                        $lesson->passed_video = true;
+                                    } else {
+                                        $lesson->passed_video = false;
+                                    }
                                     $lesson->present = Helper::getUrls($lesson, 'lessonPresent');
+                                    $modulePassedVideo = ModulePassed::where('lesson_id', $lesson->id)->where('course_module_id', $module->id)->where('type','present')->first();
+                                    if($modulePassed) {
+                                        $lesson->passed_present = true;
+                                    } else {
+                                        $lesson->passed_present = false;
+                                    }
                                     return $lesson;
                                 });            
                             return $module;
@@ -124,9 +160,27 @@ class CourseController extends Controller
         $item = CourseModule::where('id', $module_id)
             ->get()->map(function($module) use ($lesson_id){
                 $module->lesson = Lesson::where('course_module_id',$module->id)->where('id', $lesson_id)->get()
-                    ->map(function($lesson){
+                    ->map(function($lesson) use ($module){
+                        $modulePassed = ModulePassed::where('lesson_id', $lesson->id)->where('course_module_id', $module->id)->first();
+                        if($modulePassed) {
+                            $lesson->passed = true;
+                        } else {
+                            $lesson->passed = false;
+                        }
+                        $modulePassedVideo = ModulePassed::where('lesson_id', $lesson->id)->where('course_module_id', $module->id)->where('type','basic')->first();
+                        if($modulePassed) {
+                            $lesson->passed_basic = true;
+                        } else {
+                            $lesson->passed_basic = false;
+                        }
                         $lesson->lecture = CourseModuleLecture::where('lesson_id', $lesson->id)->get()
-                            ->map(function($lecture){
+                            ->map(function($lecture) use ($lesson){
+                                $modulePassed = ModulePassed::where('lesson_id', $lesson->id)->where('lecture_id', $lecture->id)->where('type', 'lecture')->first();
+                                if($modulePassed) {
+                                    $lecture->passed = true;
+                                } else {
+                                    $lecture->passed = false;
+                                }
                                 $lecture->plain_text = strip_tags($lecture->content);
                                 $lecture->plain_text_kz = strip_tags($lecture->content_kz);
                                 $lecture->file = Helper::getUrls($lecture, 'courseModuleLecture');
@@ -134,7 +188,19 @@ class CourseController extends Controller
                             });
 
                         $lesson->video = Helper::getUrls($lesson, 'lessonVideo');
+                        $modulePassedVideo = ModulePassed::where('lesson_id', $lesson->id)->where('course_module_id', $module->id)->where('type','video')->first();
+                        if($modulePassed) {
+                            $lesson->passed_video = true;
+                        } else {
+                            $lesson->passed_video = false;
+                        }
                         $lesson->present = Helper::getUrls($lesson, 'lessonPresent');
+                        $modulePassedVideo = ModulePassed::where('lesson_id', $lesson->id)->where('course_module_id', $module->id)->where('type','present')->first();
+                        if($modulePassed) {
+                            $lesson->passed_present = true;
+                        } else {
+                            $lesson->passed_present = false;
+                        }
                         return $lesson;
                     });      
                 return $module;
@@ -192,7 +258,7 @@ class CourseController extends Controller
 
     public function process(Request $request)
     {
-        ModulePassed::create([
+        ModulePassed::firstOrCreate([
             'user_id' => auth()->user()->id,
             'course_id' => $request->course_id,
             'part_id' => $request->part_id,
