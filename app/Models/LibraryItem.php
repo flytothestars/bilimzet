@@ -27,5 +27,10 @@ class LibraryItem extends Model
     {
         return $this->belongsTo('App\Models\Category', 'category');
     }
+
+    public function comment()
+    {
+        return $this->hasMany('App\Models\CommentArticle', 'article_id');
+    }
 }
 

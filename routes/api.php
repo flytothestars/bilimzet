@@ -10,6 +10,7 @@ use App\Http\Controllers\Api\ProfileController;
 use App\Http\Controllers\Api\MainController;
 use App\Http\Controllers\Api\BuyController;
 use App\Http\Controllers\Api\TestController;
+use App\Http\Controllers\Api\CommentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -73,5 +74,10 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::get('article/list/user', [ArticleController::class, 'showUserArticle'])->name('article.user');    
     Route::post('article/create', [ArticleController::class, 'create'])->name('article.create');
+
+    Route::post('article/comment/list', [CommentController::class, 'list'])->name('article.comment.list');
+    Route::post('article/comment/create', [CommentController::class, 'create'])->name('article.comment.create');
+    Route::post('article/comment/delete/{comment_id}', [CommentController::class, 'delete'])->name('article.comment.delete');
+    Route::post('article/comment/edit/{comment_id}', [CommentController::class, 'edit'])->name('article.comment.edit');
 
 });

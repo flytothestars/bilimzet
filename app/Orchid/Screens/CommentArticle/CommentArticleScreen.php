@@ -16,7 +16,7 @@ class CommentArticleScreen extends Screen
     public function query(): iterable
     {
         return [
-            'comment_list' =>CommentArticle::orderby('created_at', 'desc')->paginate(10)
+            'comment_list' => CommentArticle::orderby('created_at', 'desc')->paginate(10)
         ];
     }
 

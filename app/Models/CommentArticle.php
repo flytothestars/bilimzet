@@ -13,4 +13,9 @@ class CommentArticle extends Model
     protected $fillable = [
         'id', 'user_id', 'article_id', 'comment'
     ];
+
+    public function article()
+    {
+        return $this->belongsTo('App\Models\LibraryItem', 'article_id');
+    }
 }
