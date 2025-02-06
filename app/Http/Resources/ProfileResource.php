@@ -24,7 +24,8 @@ class ProfileResource extends JsonResource
             'photo' => $this->attachment('profilePhoto')->get(),
             'diploma' => $this->attachment('profileDocument')->get(),
             'iin' => $this->iin,
-            'phone' => $this->phone
+            'phone' => $this->phone,
+            'is_verification' => $this->is_verification
         ];
     }
 }

@@ -65,7 +65,7 @@ class ProfileController extends Controller
         $user->attachments()->syncWithoutDetaching(
             $attachment->id
         );
-        
+        $user->is_verification = true;
         return ApiResponseHelper::success(new ProfileResource($user));
     }
 
@@ -91,6 +91,11 @@ class ProfileController extends Controller
         $courseBuy = CourseBuy::where('user_id', $user)->get()->map(function($courseBuy){
             $courseBuy->course = Course::where('id', $courseBuy->course_id)->first();
             $courseBuy->part = CoursePart::where('id', $courseBuy->course_part_id)->first();
+            $courseBuy->test = [
+                'passed' => 0,
+                'limit' => 2,
+                'test' => false
+            ];
             $courseController = new CourseController();
             $process = $courseController->courseProcess($courseBuy->course_part_id, $courseBuy->course_id);
             $courseBuy->process = $process->original['data'];
