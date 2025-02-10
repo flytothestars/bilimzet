@@ -217,7 +217,7 @@ class CourseTestResultScreen extends Screen
         $pdf->SetXY(218, 108);
         $pdf->Cell(30, 8, 'Сынақ / Зачет', 1, 0, 'C');
         
-        $outputPath = storage_path('app/public/cert-'.auth()->user()->id.'-'.$item->id.'-'.$reg_number.'.pdf');
+        $outputPath = storage_path('app/public/cert-'.$item->user_id.'-'.$item->id.'-'.$reg_number.'.pdf');
         $pdf->Output($outputPath, 'F');
         $item->update([
             'status_certificate' => 1,

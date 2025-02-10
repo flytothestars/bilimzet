@@ -13,7 +13,7 @@ class CommentController extends Controller
     public function list($article_id)
     {
         $item = LibraryItem::where('id', $article_id)->first();
-        return ApiResponseHelper::success($item->comment->get());
+        return ApiResponseHelper::success($item->comment);
     }
 
     public function create(Request $request)

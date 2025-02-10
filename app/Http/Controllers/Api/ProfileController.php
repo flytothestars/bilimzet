@@ -75,7 +75,7 @@ class ProfileController extends Controller
         $data = [];
         foreach($results as $result){
             $data[] = [
-                'url_link' => url('storage/cert-'.auth()->user()->id.'-'.$result->id.'-'.$result->rand.'.pdf'),
+                'url_link' => url('storage/cert-'.$result->user_id.'-'.$result->id.'-'.$result->rand.'.pdf'),
                 'name' => $result->coursePart->course->speciality->title,
                 'date' => $result->updated_at,
             ];
@@ -94,7 +94,7 @@ class ProfileController extends Controller
             $courseBuy->test = [
                 'passed' => 0,
                 'limit' => 2,
-                'test' => false
+                'test' => true
             ];
             $courseController = new CourseController();
             $process = $courseController->courseProcess($courseBuy->course_part_id, $courseBuy->course_id);
