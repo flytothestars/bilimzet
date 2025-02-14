@@ -25,7 +25,7 @@ class CourseTestResultScreen extends Screen
     public function query(): iterable
     {
         return [
-            'course_test_result_list' => CourseTestResult::get()->map(function($result){
+            'course_test_result_list' => CourseTestResult::orderBy('id', 'desc')->get()->map(function($result){
                 $result->user = $result->user->full_name;
                 $result->speciality = $result->coursePart->course->speciality->title;
                 $result->course = $result->coursePart->course->title;

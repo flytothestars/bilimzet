@@ -38,6 +38,7 @@ class CourseSpecialityListTable extends Table
         return [
             TD::make('id', 'ID'),
             TD::make('title', 'Заголовка'),
+            TD::make('description', 'Описание'),
             TD::make('category', 'Категория')->render(function(CourseSpeciality $courseSpeciality){
                 $category = Category::find($courseSpeciality->category);
                 if($category){

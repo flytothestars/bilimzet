@@ -80,5 +80,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('article/comment/delete/{comment_id}', [CommentController::class, 'delete'])->name('article.comment.delete');
     Route::post('article/comment/edit', [CommentController::class, 'edit'])->name('article.comment.edit');
 
-
+    Route::get('course/comment/list/{course_id}/{part_id}', [CommentController::class, 'courseList'])->name('course.comment.list');
+    Route::post('course/comment/create', [CommentController::class, 'courseCreate'])->name('course.comment.create');
+    
 });

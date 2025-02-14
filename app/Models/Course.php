@@ -27,6 +27,11 @@ class Course extends Model
         return $this->hasMany('App\Models\CoursePart');
     }
 
+    public function comment()
+    {
+        return $this->hasMany('App\Models\CommentCourse');
+    }
+
     public function tests()
     {
         return $this->hasMany('App\Models\CourseTest');

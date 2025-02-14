@@ -11,6 +11,6 @@ class CourseSpeciality extends Model
 {
     use HasFactory, Attachable, AsSource;
 
-    protected $fillable = [ 'title', 'title_kz', 'category', 'picture_background' ];
+    protected $fillable = [ 'title', 'title_kz', 'category', 'picture_background', 'description', 'description_kz'];
 
 }

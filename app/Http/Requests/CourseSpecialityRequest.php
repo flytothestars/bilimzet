@@ -24,6 +24,8 @@ class CourseSpecialityRequest extends FormRequest
         return [
             'courseSpeciality.title' => ['required'],
             'courseSpeciality.title_kz' => ['required'],
+            'courseSpeciality.description' => ['required'],
+            'courseSpeciality.description_kz' => ['required'],
             'courseSpeciality.category' => ['required'],
             'courseSpeciality.picture_background' => ['required'],
         ];

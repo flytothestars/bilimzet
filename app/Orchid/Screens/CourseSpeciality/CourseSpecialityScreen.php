@@ -63,6 +63,8 @@ class CourseSpecialityScreen extends Screen
             Layout::modal('createCourseSpeciality', Layout::rows([
                 Input::make('courseSpeciality.title')->title('Заголовка RU')->required(),
                 Input::make('courseSpeciality.title_kz')->title('Заголовка KZ')->required(),
+                Input::make('courseSpeciality.description')->title('Описание')->required(),
+                Input::make('courseSpeciality.description_kz')->title('Описание KZ')->required(),
                 Relation::make('courseSpeciality.category')->fromModel(Category::class, 'name')->displayAppend('full')->title('Категория')->required(),
                 Input::make('courseSpeciality.picture_background')
                         ->type('color')
@@ -79,6 +81,8 @@ class CourseSpecialityScreen extends Screen
                 Input::make('courseSpeciality.id')->type('hidden'),
                 Input::make('courseSpeciality.title')->title('Заголовка RU')->required(),
                 Input::make('courseSpeciality.title_kz')->title('Заголовка KZ')->required(),
+                Input::make('courseSpeciality.description')->title('Описание')->required(),
+                Input::make('courseSpeciality.description_kz')->title('Описание KZ')->required(),
                 Relation::make('courseSpeciality.category')->fromModel(Category::class, 'name')->displayAppend('full')->title('Категория')->required(),
                 Input::make('courseSpeciality.picture_background')
                         ->type('color')

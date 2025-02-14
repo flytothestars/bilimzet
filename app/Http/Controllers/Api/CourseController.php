@@ -31,6 +31,7 @@ class CourseController extends Controller
         $result = $course_categories->map(function ($category) {
             $category->specialities = CourseSpeciality::where('category', $category->id)->get()->map(function ($item) {
                 $item->picture = Helper::getUrls($item);
+                $item->count_course = Course::where('speciality_id', $item->id)->count();
                 return $item;
             });
             return $category;
@@ -82,7 +83,10 @@ class CourseController extends Controller
 
     public function getCategory()
     {
-        $categories = Category::where('training', 1)->get();
+        $categories = Category::where('training', 1)->get()->map(function ($item) {
+            $item->picture = Helper::getUrls($item, 'categoryIcon');
+            return $item;
+        });
         return ApiResponseHelper::success($categories);
     }
 

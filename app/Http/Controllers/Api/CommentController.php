@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\LibraryItem;
 use App\Models\CommentArticle;
+use App\Models\CommentCourse;
+use App\Models\Course;
 use App\Helper\ApiResponseHelper;
 
 class CommentController extends Controller
@@ -50,5 +52,21 @@ class CommentController extends Controller
         $comment->update(['comment' => $request->comment]);
 
         return ApiResponseHelper::success($comment);
+    }
+
+    public function courseCreate(Request $request){
+        $user = auth()->user()->id;
+        $comment = CommentCourse::create([
+            'user_id' => $user,
+            'course_id' => $request->course_id,
+            'part_id' => $request->part_id,
+            'comment' => $request->comment
+        ]);
+        return ApiResponseHelper::success($comment);
+    }
+
+    public function courseList($course_id, $part_id){
+        $item = Course::where('id', $course_id)->first();
+        return ApiResponseHelper::success($item->comment);
     }
 }
