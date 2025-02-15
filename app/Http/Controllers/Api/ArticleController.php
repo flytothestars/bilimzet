@@ -65,7 +65,13 @@ class ArticleController extends Controller
         $article->similar = LibraryItem::where('is_published', 1)
             ->where('author_id', $article->author_id)
             ->whereNot('id', $article->id)
-            ->get();
+            ->get()->map(function($item){
+                $item->author = User::where('id', $item->author_id)->get()->map(function($user){
+                    $user->photo = Helper::getUrls($user, 'profilePhoto');
+                    return $user;
+                });
+                return $item;
+            });
         return ApiResponseHelper::success($article);
     }
 

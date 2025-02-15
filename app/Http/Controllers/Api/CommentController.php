@@ -8,14 +8,23 @@ use App\Models\LibraryItem;
 use App\Models\CommentArticle;
 use App\Models\CommentCourse;
 use App\Models\Course;
+use App\Models\User;
 use App\Helper\ApiResponseHelper;
+use App\Helper\Helper;
 
 class CommentController extends Controller
 {
     public function list($article_id)
     {
         $item = LibraryItem::where('id', $article_id)->first();
-        return ApiResponseHelper::success($item->comment);
+        $comment = $item->comment->map(function($item){
+            $item->author = User::where('id', $item->user_id)->get()->map(function($user){
+                $user->photo = Helper::getUrls($user, 'profilePhoto');
+                return $user;
+            });
+            return $item;
+        });
+        return ApiResponseHelper::success($comment);
     }
 
     public function create(Request $request)
