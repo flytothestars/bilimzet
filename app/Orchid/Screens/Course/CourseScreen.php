@@ -13,6 +13,7 @@ use Orchid\Screen\Fields\Input;
 use Orchid\Support\Facades\Toast;
 use Orchid\Screen\Fields\Select;
 use Orchid\Screen\Layouts\Modal;
+use Orchid\Screen\Fields\TextArea;
 
 class CourseScreen extends Screen
 {
@@ -89,16 +90,16 @@ class CourseScreen extends Screen
                             ->required(),
                     ])->title('Автор'),
                     Layout::rows([
-                        Input::make('course.desc_text')->title('Описание курса RU')->required(),
-                        Input::make('course.desc_text_kz')->title('Описание курса KZ')->required(),
-                        Input::make('course.listeners_category_text')->title('Категория слушателей RU')->required(),
-                        Input::make('course.listeners_category_text_kz')->title('Категория слушателей KZ')->required(),
-                        Input::make('course.goals_text')->title('Цели курсаRU')->required(),
-                        Input::make('course.goals_text_kz')->title('Цели курсаKZ')->required(),
-                        Input::make('course.tasks_text')->title('Задачи курса RU')->required(),
-                        Input::make('course.tasks_text_kz')->title('Задачи курса KZ')->required(),
-                        Input::make('course.organization_text')->title('Организация образовательного процесса, формы и методы, оценка результатов RU')->required(),
-                        Input::make('course.organization_text_kz')->title('Организация образовательного процесса, формы и методы, оценка результатов KZ')->required(),
+                        TextArea::make('course.desc_text')->title('Описание курса RU')->required()->rows(10),
+                        TextArea::make('course.desc_text_kz')->title('Описание курса KZ')->required()->rows(10),
+                        TextArea::make('course.listeners_category_text')->title('Категория слушателей RU')->required()->rows(10),
+                        TextArea::make('course.listeners_category_text_kz')->title('Категория слушателей KZ')->required()->rows(10),
+                        TextArea::make('course.goals_text')->title('Цели курса RU')->required()->rows(10),
+                        TextArea::make('course.goals_text_kz')->title('Цели курса KZ')->required()->rows(10),
+                        TextArea::make('course.tasks_text')->title('Задачи курса RU')->required()->rows(10),
+                        TextArea::make('course.tasks_text_kz')->title('Задачи курса KZ')->required()->rows(10),
+                        TextArea::make('course.organization_text')->title('Организация образовательного процесса, формы и методы, оценка результатов RU')->required()->rows(10),
+                        TextArea::make('course.organization_text_kz')->title('Организация образовательного процесса, формы и методы, оценка результатов KZ')->required()->rows(10),
                     ])->title('Подробности'),
                 ]
             )
@@ -134,16 +135,16 @@ class CourseScreen extends Screen
                         ->required(),
                 ])->title('Автор'),
                 Layout::rows([
-                    Input::make('course.desc_text')->title('Описание курса RU')->required(),
-                    Input::make('course.desc_text_kz')->title('Описание курса KZ')->required(),
-                    Input::make('course.listeners_category_text')->title('Категория слушателей RU')->required(),
-                    Input::make('course.listeners_category_text_kz')->title('Категория слушателей KZ')->required(),
-                    Input::make('course.goals_text')->title('Цели курсаRU')->required(),
-                    Input::make('course.goals_text_kz')->title('Цели курсаKZ')->required(),
-                    Input::make('course.tasks_text')->title('Задачи курса RU')->required(),
-                    Input::make('course.tasks_text_kz')->title('Задачи курса KZ')->required(),
-                    Input::make('course.organization_text')->title('Организация образовательного процесса, формы и методы, оценка результатов RU')->required(),
-                    Input::make('course.organization_text_kz')->title('Организация образовательного процесса, формы и методы, оценка результатов KZ')->required(),
+                    TextArea::make('course.desc_text')->title('Описание курса RU')->required()->rows(10),
+                    TextArea::make('course.desc_text_kz')->title('Описание курса KZ')->required()->rows(10),
+                    TextArea::make('course.listeners_category_text')->title('Категория слушателей RU')->required()->rows(10),
+                    TextArea::make('course.listeners_category_text_kz')->title('Категория слушателей KZ')->required()->rows(10),
+                    TextArea::make('course.goals_text')->title('Цели курсаRU')->required()->rows(10),
+                    TextArea::make('course.goals_text_kz')->title('Цели курсаKZ')->required()->rows(10),
+                    TextArea::make('course.tasks_text')->title('Задачи курса RU')->required()->rows(10),
+                    TextArea::make('course.tasks_text_kz')->title('Задачи курса KZ')->required()->rows(10),
+                    TextArea::make('course.organization_text')->title('Организация образовательного процесса, формы и методы, оценка результатов RU')->required()->rows(10),
+                    TextArea::make('course.organization_text_kz')->title('Организация образовательного процесса, формы и методы, оценка результатов KZ')->required()->rows(10),
                 ])->title('Подробности'),
             ])->async('asyncGetСourse')->size(Modal::SIZE_LG),
 
