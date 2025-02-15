@@ -13,6 +13,9 @@ use App\Models\CourseBuy;
 use App\Models\Course;
 use App\Models\CoursePart;
 use App\Http\Controllers\Api\CourseController;
+use App\Models\CourseSpeciality;
+use App\Helper\Helper;
+
 
 class ProfileController extends Controller
 {
@@ -90,6 +93,8 @@ class ProfileController extends Controller
         $user = auth()->user()->id;
         $courseBuy = CourseBuy::where('user_id', $user)->get()->map(function($courseBuy){
             $courseBuy->course = Course::where('id', $courseBuy->course_id)->first();
+            $speciality = CourseSpeciality::where('id', $courseBuy->course->speciality_id)->first();
+            $courseBuy->picture = Helper::getUrls($speciality);
             $courseBuy->part = CoursePart::where('id', $courseBuy->course_part_id)->first();
             $courseBuy->test = [
                 'passed' => 0,
