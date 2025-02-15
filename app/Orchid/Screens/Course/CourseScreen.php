@@ -66,6 +66,14 @@ class CourseScreen extends Screen
                     Layout::rows([
                         Input::make('course.title')->title('Название курса RU')->required(),
                         Input::make('course.title_kz')->title('Название курса KZ')->required(),
+                        Input::make('course.form_training')->title('Форма обучение')->required(),
+                        Input::make('course.form_training_kz')->title('Форма обучение KZ')->required(),
+                        Input::make('course.valid_period')->title('Срок действительности')->required(),
+                        Input::make('course.valid_period_kz')->title('Срок действительности KZ')->required(),
+                        Input::make('course.issuance_certificate')->title('Выдача сертификата')->required(),
+                        Input::make('course.issuance_certificate_kz')->title('Выдача сертификата KZ')->required(),
+                        Input::make('course.certificate_text')->title('Сертификаты')->required(),
+                        Input::make('course.certificate_text_kz')->title('Сертификаты KZ')->required(),
                         Input::make('course.speciality_id')
                             ->type('hidden')
                             ->value($this->courseSpeciality),
@@ -102,6 +110,14 @@ class CourseScreen extends Screen
                 Layout::rows([
                     Input::make('course.title')->title('Название курса RU')->required(),
                     Input::make('course.title_kz')->title('Название курса KZ')->required(),
+                    Input::make('course.form_training')->title('Форма обучение')->required(),
+                    Input::make('course.form_training_kz')->title('Форма обучение KZ')->required(),
+                    Input::make('course.valid_period')->title('Срок действительности')->required(),
+                    Input::make('course.valid_period_kz')->title('Срок действительности KZ')->required(),
+                    Input::make('course.issuance_certificate')->title('Выдача сертификата')->required(),
+                    Input::make('course.issuance_certificate_kz')->title('Выдача сертификата KZ')->required(),
+                    Input::make('course.certificate_text')->title('Сертификаты')->required(),
+                    Input::make('course.certificate_text_kz')->title('Сертификаты KZ')->required(),
                     Input::make('course.id')->type('hidden'),
                     Input::make('course.speciality_id')
                             ->type('hidden')
