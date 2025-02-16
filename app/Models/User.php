@@ -30,6 +30,7 @@ class User extends Authenticatable
         'diploma',
         'phone',
         'password',
+        'is_verification',
     ];
 
     /**

@@ -51,24 +51,32 @@ class ProfileController extends Controller
         
         // Files
         // photo
-        $imageData = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $request->photo));
-        $tmpFile = tmpfile();
-        $tmpFilePath = stream_get_meta_data($tmpFile)['uri'];
-        file_put_contents($tmpFilePath, $imageData);
-        $fileRequest = new \Illuminate\Http\UploadedFile($tmpFilePath, 'profile_photo.png', 'image/png', null, true);
-        $filePhoto = new File($fileRequest, null,'profilePhoto');
-        $attachmentPhoto = $filePhoto->load();
-        $user->attachments()->syncWithoutDetaching(
-            $attachmentPhoto->id
-        );
-        unlink($tmpFilePath);
-        
+        if($request->photo){
+            $isPhoto = $user->attachments()->first();
+            if($isPhoto){
+                $this->deleteDocument($isPhoto->id);
+            }
+            $imageData = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $request->photo));
+            $tmpFile = tmpfile();
+            $tmpFilePath = stream_get_meta_data($tmpFile)['uri'];
+            file_put_contents($tmpFilePath, $imageData);
+            $fileRequest = new \Illuminate\Http\UploadedFile($tmpFilePath, 'profile_photo.png', 'image/png', null, true);
+            $filePhoto = new File($fileRequest, null,'profilePhoto');
+            $attachmentPhoto = $filePhoto->load();
+            $user->attachments()->syncWithoutDetaching(
+                $attachmentPhoto->id
+            );
+            unlink($tmpFilePath);
+        }
         // documents
-        $file = new File($request->file('diplomas'), null,'profileDocument');
-        $attachment = $file->load();
-        $user->attachments()->syncWithoutDetaching(
-            $attachment->id
-        );
+        if($request->file('diplomas')){
+            $file = new File($request->file('diplomas'), null,'profileDocument');
+            $attachment = $file->load();
+            $user->attachments()->syncWithoutDetaching(
+                $attachment->id
+            );
+        }
+        
         $user->is_verification = true;
         return ApiResponseHelper::success(new ProfileResource($user));
     }
