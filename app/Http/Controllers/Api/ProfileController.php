@@ -15,6 +15,7 @@ use App\Models\CoursePart;
 use App\Http\Controllers\Api\CourseController;
 use App\Models\CourseSpeciality;
 use App\Helper\Helper;
+use Orchid\Attachment\Models\Attachment;
 
 
 class ProfileController extends Controller
@@ -107,5 +108,14 @@ class ProfileController extends Controller
             return $courseBuy;
         });
         return ApiResponseHelper::success($courseBuy);
+    }
+
+    public function deleteDocument($document_id){
+        $attachment = Attachment::find($document_id);
+        if ($attachment) {
+            $attachment->delete();
+            return ApiResponseHelper::success();
+        }
+        return ApiResponseHelper::error();
     }
 }

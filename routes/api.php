@@ -70,7 +70,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/profile/certificate', [ProfileController::class, 'certificate'])->name('profile.certificate');
     Route::get('/profile/course', [ProfileController::class, 'course'])->name('profile.course');
     Route::get('/profile/notification', [ProfileController::class, 'notification'])->name('profile.notification');
-
+    Route::get('/profile/document/delete/{document_id}', [ProfileController::class, 'deleteDocument'])->name('profile.document.delete');
+    
 
     Route::get('article/list/user', [ArticleController::class, 'showUserArticle'])->name('article.user');    
     Route::post('article/create', [ArticleController::class, 'create'])->name('article.create');

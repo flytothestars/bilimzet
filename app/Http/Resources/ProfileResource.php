@@ -22,7 +22,7 @@ class ProfileResource extends JsonResource
             'position' => $this->position,
             'company_name' => $this->company_name,
             'photo' => $this->attachment('profilePhoto')->first(),
-            'diploma' => $this->attachment('profileDocument')->latest()->take(2)->get(),
+            'diploma' => $this->attachment('profileDocument')->get(),
             'iin' => $this->iin,
             'phone' => $this->phone,
             'is_verification' => $this->is_verification
