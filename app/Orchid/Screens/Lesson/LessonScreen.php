@@ -14,6 +14,8 @@ use Orchid\Support\Facades\Toast;
 use Orchid\Screen\Layouts\Modal;
 use Orchid\Screen\Fields\Upload;
 use Illuminate\Http\Request;
+use Orchid\Screen\Fields\TextArea;
+use App\Http\Requests\CourseLessonRequest;
 
 class LessonScreen extends Screen
 {
@@ -49,9 +51,7 @@ class LessonScreen extends Screen
     public function commandBar(): iterable
     {
         return [
-            Button::make('Создать')->method('createOrUpdateLesson')->parameters([
-                'courseModule' => $this->courseModule,
-            ])
+            ModalToggle::make('Создать')->modal('createCourseLesson')->method('createOrUpdateLesson')
         ];
     }
 
@@ -64,6 +64,41 @@ class LessonScreen extends Screen
     {
         return [
             LessonListTable::class,
+            Layout::modal('createCourseLesson', 
+                Layout::rows([
+                    Input::make('lesson.title')->title('Заголовок вопроса RU')->required(),
+                    Input::make('lesson.title_kz')->title('Заголовок вопроса KZ')->required(),
+                    TextArea::make('lesson.goal')->title('Цель RU')->required(),
+                    TextArea::make('lesson.goal_kz')->title('Цель KZ')->required(),
+                    TextArea::make('lesson.task')->title('Задача RU')->required(),
+                    TextArea::make('lesson.task_kz')->title('Задача KZ')->required(),
+                    TextArea::make('lesson.result')->title('Ожидаемый результат RU')->required(),
+                    TextArea::make('lesson.result_kz')->title('Ожидаемый результат KZ')->required(),
+                    TextArea::make('lesson.content')->title('Содержание урока RU')->required(),
+                    TextArea::make('lesson.content_kz')->title('Содержание урока KZ')->required(),
+                    Input::make('lesson.course_module_id')
+                            ->type('hidden')
+                            ->value($this->courseModule),
+                ]))->title('Урок')->size(Modal::SIZE_LG)->applyButton('Создать'),
+            Layout::modal('editCourseLesson', 
+                Layout::rows([
+                    Input::make('lesson.title')->title('Заголовок вопроса RU')->required(),
+                    Input::make('lesson.title_kz')->title('Заголовок вопроса KZ')->required(),
+                    TextArea::make('lesson.goal')->title('Цель RU')->required(),
+                    TextArea::make('lesson.goal_kz')->title('Цель KZ')->required(),
+                    TextArea::make('lesson.task')->title('Задача RU')->required(),
+                    TextArea::make('lesson.task_kz')->title('Задача KZ')->required(),
+                    TextArea::make('lesson.result')->title('Ожидаемый результат RU')->required(),
+                    TextArea::make('lesson.result_kz')->title('Ожидаемый результат KZ')->required(),
+                    TextArea::make('lesson.content')->title('Содержание урока RU')->required(),
+                    TextArea::make('lesson.content_kz')->title('Содержание урока KZ')->required(),
+                    Input::make('lesson.course_module_id')
+                        ->type('hidden')
+                        ->value($this->courseModule),
+                    Input::make('lesson.id')
+                        ->type('hidden')
+                ]))->title('Урок')->size(Modal::SIZE_LG)->async('asyncGetLesson'),
+
             Layout::modal('createOrEditVideo', 
                     Layout::rows([
                         Input::make('lesson.id')
@@ -87,16 +122,19 @@ class LessonScreen extends Screen
         ];
     }
 
-    public function createOrUpdateLesson(Request $request )
+    public function createOrUpdateLesson(CourseLessonRequest $request )
     {
-        $count = Lesson::where('course_module_id', $request->courseModule)->count();
+        $validated = $request->validated();
+        $lessonId = $request->input('lesson.id');
+        $lesson = Lesson::updateOrCreate([
+                'id' => $lessonId
+            ], $validated['lesson']
+        );
+        $lesson->attachments()->syncWithoutDetaching(
+            $request->input('lesson.attachments', [])
+        );
 
-        $lesson = Lesson::create([
-            'title' => 'Уроки ' . $count+1,
-            'title_kz' => 'Сабак ' . $count+1,
-            'course_module_id' => $request->courseModule
-        ]);
-        is_null($lesson) ? Toast::info('Урок успешно добавлено') : Toast::info('Урок успешно обновлено');
+        is_null($lessonId) ? Toast::info('Урок успешно добавлено') : Toast::info('Урок успешно обновлено');
 
     }
 

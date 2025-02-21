@@ -82,16 +82,16 @@ class LessonListTable extends Table
                         ])
                         ->class('btn text-center rounded-2')
                         ->style($this->styleButton),
-                    // ModalToggle::make('')
-                    //     ->icon('bs.pencil')
-                    //     ->modal('editCourseModule')
-                    //     ->method('createOrUpdateCourseModule')
-                    //     ->modalTitle('Редактирование категорию ' . $courseModule->title)
-                    //     ->asyncParameters([
-                    //         'courseModule' => $courseModule->id
-                    //     ])
-                    //     ->class('btn btn-warning text-center rounded-2')
-                    //     ->style($this->styleButton),
+                    ModalToggle::make('')
+                        ->icon('bs.pencil')
+                        ->modal('editCourseLesson')
+                        ->method('createOrUpdateLesson')
+                        ->modalTitle('Редактирование категорию ' . $lesson->title)
+                        ->asyncParameters([
+                            'lesson' => $lesson->id
+                        ])
+                        ->class('btn btn-warning text-center rounded-2')
+                        ->style($this->styleButton),
                     Button::make('')
                         ->icon('trash')
                         ->method('delete')
