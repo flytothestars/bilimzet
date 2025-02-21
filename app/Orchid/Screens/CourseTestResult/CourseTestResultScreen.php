@@ -7,6 +7,7 @@ use App\Models\CourseTestResult;
 use App\Models\User;
 use App\Models\CoursePart;
 use App\Models\Course;
+use App\Models\CourseModule;
 use Orchid\Screen\TD;
 use Orchid\Screen\Fields\Group;
 use Orchid\Support\Facades\Layout;
@@ -144,6 +145,7 @@ class CourseTestResultScreen extends Screen
     {
         $user = User::find($item->user_id);
         $part = CoursePart::where('id', $item->course_part_id)->first();
+        $modules = CourseModule::where('course_part_id', $item->course_part_id)->get();
         $course = Course::where('id', $part->course_id)->first();
         $reg_number = rand(000000, 999999);
         $date_day = date('d');
@@ -208,14 +210,19 @@ class CourseTestResultScreen extends Screen
         $pdf->SetXY(218, 100);
         $pdf->Cell(30, 8, $header[3], 1, 0, 'C');
         // Content
-        $pdf->SetXY(50, 108);
-        $pdf->Cell(8,8, '1', 1, 0, 'C');
-        $pdf->SetXY(58, 108);
-        $pdf->Cell(110, 8, $part->title, 1, 'C'); 
-        $pdf->SetXY(168, 108);
-        $pdf->Cell(50, 8, $part->duration_hours, 1, 1, 'C');
-        $pdf->SetXY(218, 108);
-        $pdf->Cell(30, 8, 'Сынақ / Зачет', 1, 0, 'C');
+        
+        $padding = 108;        
+        foreach($modules as $module) {
+            $pdf->SetXY(50, $padding);
+            $pdf->Cell(8,8, '1', 1, 0, 'C');
+            $pdf->SetXY(58, $padding);
+            $pdf->Cell(110, 8, $module->title, 1, 'C'); 
+            $pdf->SetXY(168, $padding);
+            $pdf->Cell(50, 8, $module->duration_hours, 1, 1, 'C');
+            $pdf->SetXY(218, $padding);
+            $pdf->Cell(30, 8, 'Сынақ / Зачет', 1, 0, 'C');
+            $padding += 8;
+        }
         
         $outputPath = storage_path('app/public/cert-'.$item->user_id.'-'.$item->id.'-'.$reg_number.'.pdf');
         $pdf->Output($outputPath, 'F');

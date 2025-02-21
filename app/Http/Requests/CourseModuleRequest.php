@@ -33,6 +33,8 @@ class CourseModuleRequest extends FormRequest
             'courseModule.content' => ['nullable'],
             'courseModule.content_kz' => ['nullable'],
             'courseModule.course_part_id' => ['required'],
+            'courseModule.duration_hours' => ['required'],
+
         ];
     }
 }

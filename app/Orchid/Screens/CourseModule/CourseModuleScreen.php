@@ -65,14 +65,16 @@ class CourseModuleScreen extends Screen
                 Layout::rows([
                     Input::make('courseModule.title')->title('Заголовок вопроса RU')->required(),
                     Input::make('courseModule.title_kz')->title('Заголовок вопроса KZ')->required(),
-                    Input::make('courseModule.goal')->title('Цель RU')->required(),
-                    Input::make('courseModule.goal_kz')->title('Цель KZ')->required(),
-                    Input::make('courseModule.task')->title('Задача RU')->required(),
-                    Input::make('courseModule.task_kz')->title('Задача KZ')->required(),
-                    Input::make('courseModule.result')->title('Ожидаемый результат RU')->required(),
-                    Input::make('courseModule.result_kz')->title('Ожидаемый результат KZ')->required(),
-                    Input::make('courseModule.content')->title('Содержание урока RU')->required(),
-                    Input::make('courseModule.content_kz')->title('Содержание урока KZ')->required(),
+                    Input::make('courseModule.duration_hours')->title('Длительность (академических часов)')->required(),
+
+                    // Input::make('courseModule.goal')->title('Цель RU')->required(),
+                    // Input::make('courseModule.goal_kz')->title('Цель KZ')->required(),
+                    // Input::make('courseModule.task')->title('Задача RU')->required(),
+                    // Input::make('courseModule.task_kz')->title('Задача KZ')->required(),
+                    // Input::make('courseModule.result')->title('Ожидаемый результат RU')->required(),
+                    // Input::make('courseModule.result_kz')->title('Ожидаемый результат KZ')->required(),
+                    // Input::make('courseModule.content')->title('Содержание урока RU')->required(),
+                    // Input::make('courseModule.content_kz')->title('Содержание урока KZ')->required(),
                     Input::make('courseModule.course_part_id')
                         ->type('hidden')
                         ->value($this->coursePart),
@@ -81,14 +83,15 @@ class CourseModuleScreen extends Screen
                 Layout::rows([
                     Input::make('courseModule.title')->title('Заголовок вопроса RU')->required(),
                     Input::make('courseModule.title_kz')->title('Заголовок вопроса KZ')->required(),
-                    Input::make('courseModule.goal')->title('Цель RU')->required(),
-                    Input::make('courseModule.goal_kz')->title('Цель KZ')->required(),
-                    Input::make('courseModule.task')->title('Задача RU')->required(),
-                    Input::make('courseModule.task_kz')->title('Задача KZ')->required(),
-                    Input::make('courseModule.result')->title('Ожидаемый результат RU')->required(),
-                    Input::make('courseModule.result_kz')->title('Ожидаемый результат KZ')->required(),
-                    Input::make('courseModule.content')->title('Содержание урока RU')->required(),
-                    Input::make('courseModule.content_kz')->title('Содержание урока KZ')->required(),
+                    Input::make('courseModule.duration_hours')->title('Длительность (академических часов)')->required(),
+                    // Input::make('courseModule.goal')->title('Цель RU')->required(),
+                    // Input::make('courseModule.goal_kz')->title('Цель KZ')->required(),
+                    // Input::make('courseModule.task')->title('Задача RU')->required(),
+                    // Input::make('courseModule.task_kz')->title('Задача KZ')->required(),
+                    // Input::make('courseModule.result')->title('Ожидаемый результат RU')->required(),
+                    // Input::make('courseModule.result_kz')->title('Ожидаемый результат KZ')->required(),
+                    // Input::make('courseModule.content')->title('Содержание урока RU')->required(),
+                    // Input::make('courseModule.content_kz')->title('Содержание урока KZ')->required(),
                     Input::make('courseModule.course_part_id')
                         ->type('hidden')
                         ->value($this->coursePart),

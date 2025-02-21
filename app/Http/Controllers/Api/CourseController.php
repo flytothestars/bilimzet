@@ -113,16 +113,16 @@ class CourseController extends Controller
                                     } else {
                                         $lesson->passed = false;
                                     }
-                                    $modulePassedVideo = ModulePassed::where('lesson_id', $lesson->id)->where('course_module_id', $module->id)->where('type','basic')->first();
-                                    if($modulePassed) {
+                                    $modulePassedBasic = ModulePassed::where('lesson_id', $lesson->id)->where('course_module_id', $module->id)->where('type','basic')->first();
+                                    if($modulePassedBasic) {
                                         $lesson->passed_basic = true;
                                     } else {
                                         $lesson->passed_basic = false;
                                     }
                                     $lesson->lecture = CourseModuleLecture::where('lesson_id', $lesson->id)->get()
                                         ->map(function($lecture) use ($lesson){
-                                            $modulePassed = ModulePassed::where('lesson_id', $lesson->id)->where('lecture_id', $lecture->id)->where('type', 'lecture')->first();
-                                            if($modulePassed) {
+                                            $modulePassedLecture = ModulePassed::where('lesson_id', $lesson->id)->where('lecture_id', $lecture->id)->where('type', 'lecture')->first();
+                                            if($modulePassedLecture) {
                                                 $lecture->passed = true;
                                             } else {
                                                 $lecture->passed = false;
@@ -135,14 +135,14 @@ class CourseController extends Controller
 
                                     $lesson->video = Helper::getUrls($lesson, 'lessonVideo');
                                     $modulePassedVideo = ModulePassed::where('lesson_id', $lesson->id)->where('course_module_id', $module->id)->where('type','video')->first();
-                                    if($modulePassed) {
+                                    if($modulePassedVideo) {
                                         $lesson->passed_video = true;
                                     } else {
                                         $lesson->passed_video = false;
                                     }
                                     $lesson->present = Helper::getUrls($lesson, 'lessonPresent');
-                                    $modulePassedVideo = ModulePassed::where('lesson_id', $lesson->id)->where('course_module_id', $module->id)->where('type','present')->first();
-                                    if($modulePassed) {
+                                    $modulePassedPresent = ModulePassed::where('lesson_id', $lesson->id)->where('course_module_id', $module->id)->where('type','present')->first();
+                                    if($modulePassedPresent) {
                                         $lesson->passed_present = true;
                                     } else {
                                         $lesson->passed_present = false;
@@ -171,16 +171,16 @@ class CourseController extends Controller
                         } else {
                             $lesson->passed = false;
                         }
-                        $modulePassedVideo = ModulePassed::where('lesson_id', $lesson->id)->where('course_module_id', $module->id)->where('type','basic')->first();
-                        if($modulePassed) {
+                        $modulePassedBasic = ModulePassed::where('lesson_id', $lesson->id)->where('course_module_id', $module->id)->where('type','basic')->first();
+                        if($modulePassedBasic) {
                             $lesson->passed_basic = true;
                         } else {
                             $lesson->passed_basic = false;
                         }
                         $lesson->lecture = CourseModuleLecture::where('lesson_id', $lesson->id)->get()
                             ->map(function($lecture) use ($lesson){
-                                $modulePassed = ModulePassed::where('lesson_id', $lesson->id)->where('lecture_id', $lecture->id)->where('type', 'lecture')->first();
-                                if($modulePassed) {
+                                $modulePassedLecture = ModulePassed::where('lesson_id', $lesson->id)->where('lecture_id', $lecture->id)->where('type', 'lecture')->first();
+                                if($modulePassedLecture) {
                                     $lecture->passed = true;
                                 } else {
                                     $lecture->passed = false;
@@ -193,14 +193,14 @@ class CourseController extends Controller
 
                         $lesson->video = Helper::getUrls($lesson, 'lessonVideo');
                         $modulePassedVideo = ModulePassed::where('lesson_id', $lesson->id)->where('course_module_id', $module->id)->where('type','video')->first();
-                        if($modulePassed) {
+                        if($modulePassedVideo) {
                             $lesson->passed_video = true;
                         } else {
                             $lesson->passed_video = false;
                         }
                         $lesson->present = Helper::getUrls($lesson, 'lessonPresent');
-                        $modulePassedVideo = ModulePassed::where('lesson_id', $lesson->id)->where('course_module_id', $module->id)->where('type','present')->first();
-                        if($modulePassed) {
+                        $modulePassedPresent = ModulePassed::where('lesson_id', $lesson->id)->where('course_module_id', $module->id)->where('type','present')->first();
+                        if($modulePassedPresent) {
                             $lesson->passed_present = true;
                         } else {
                             $lesson->passed_present = false;

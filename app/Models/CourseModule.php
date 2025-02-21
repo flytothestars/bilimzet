@@ -14,7 +14,7 @@ class CourseModule extends Model
     protected $fillable = [
         'title', 'title_kz', 'course_part_id',
         'is_lecture','is_video','is_present',
-        'goal','goal_kz','task','task_kz','result','result_kz','content','content_kz',
+        'goal','goal_kz','task','task_kz','result','result_kz','content','content_kz','duration_hours'
     ];
 
     public function coursePart()
