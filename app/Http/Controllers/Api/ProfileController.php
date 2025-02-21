@@ -22,8 +22,17 @@ class ProfileController extends Controller
 {
     public function get()
     {
-        $profile = auth()->user(); 
-        return ApiResponseHelper::success(new ProfileResource($profile));
+        $user = auth()->user(); 
+        $user->photo = $user->attachment('profilePhoto')->first();
+        if ($user->photo) {
+            $user->photo->link = url($user->photo->relativeUrl);
+        }
+        $user->diploma = $user->attachment('profileDocument')->get();
+        $user->diploma->map(function($item){
+            $item->link = url($item->relativeUrl);
+            return $item;
+        });
+        return ApiResponseHelper::success($user);
     }
 
     public function update(ProfileRequest $request)
@@ -51,23 +60,25 @@ class ProfileController extends Controller
         
         // Files
         // photo
-        if($request->photo){
-            $isPhoto = $user->attachments()->first();
-            if($isPhoto){
-                $this->deleteDocument($isPhoto->id);
+        if ($request->photo) {
+            $isPhoto = $user->attachments('profilePhoto')->get();
+            foreach ($isPhoto as $key => $photo) {
+                if ($photo->id) {
+                    $attachment = Attachment::find($photo->id);
+                    if ($attachment) {
+                        $attachment->delete();
+                    }
+                }
             }
-            $imageData = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $request->photo));
-            $tmpFile = tmpfile();
-            $tmpFilePath = stream_get_meta_data($tmpFile)['uri'];
-            file_put_contents($tmpFilePath, $imageData);
-            $fileRequest = new \Illuminate\Http\UploadedFile($tmpFilePath, 'profile_photo.png', 'image/png', null, true);
-            $filePhoto = new File($fileRequest, null,'profilePhoto');
-            $attachmentPhoto = $filePhoto->load();
+            
+            $file = new File($request->file('photo'), null,'profilePhoto');
+            $attachment = $file->load();
             $user->attachments()->syncWithoutDetaching(
-                $attachmentPhoto->id
+                $attachment->id
             );
-            unlink($tmpFilePath);
         }
+        
+        
         // documents
         if($request->file('diplomas')){
             $file = new File($request->file('diplomas'), null,'profileDocument');
@@ -78,7 +89,18 @@ class ProfileController extends Controller
         }
         
         $user->is_verification = true;
-        return ApiResponseHelper::success(new ProfileResource($user));
+        $user->save();
+        $user->photo = $user->attachment('profilePhoto')->first();
+        if ($user->photo) {
+            $user->photo->link = url($user->photo->relativeUrl);
+        }
+        $user->diploma = $user->attachment('profileDocument')->get();
+        $user->diploma->map(function($item){
+            $item->link = url($item->relativeUrl);
+            return $item;
+        });
+
+        return ApiResponseHelper::success($user);
     }
 
     public function certificate(){
