@@ -30,7 +30,7 @@ class ProfileRequest extends FormRequest
             'user.email' => 'nullable|email|max:255|unique:users,email',
 			'user.photo' => 'nullable|string',
             'user.diplomas' => 'nullable|array',
-			'user.diplomas.*' => 'nullable|file|mimes:pdf,doc,docx,txt,jpg,jpeg,png|max:10240',
+			'user.diplomas.*' => 'nullable|file|max:10240',
         ];
     }
 }

@@ -16,6 +16,7 @@ use App\Models\CourseModuleLecture;
 use App\Models\ModulePassed;
 use App\Models\Lesson;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class CourseController extends Controller
 {
@@ -287,19 +288,23 @@ class CourseController extends Controller
             foreach($modules as $module)
             {
                 $lessons = $module->courseLessons()->get();
-                $count++;
+                Log::debug("basic " . $count);
                 foreach ($lessons as $lesson) {
+                    $count++;
                     if($lesson->is_lecture)
                     {
                         $count += $lesson->courseModuleLecture()->count();
+                        Log::debug("lecture " . $lesson->courseModuleLecture()->count());
                     }
                     if($lesson->is_video)
                     {
                         $count++;
+                        Log::debug("video " . $count);
                     }
                     if($lesson->is_present)
                     {
                         $count++;
+                        Log::debug("present " . $count);
                     }
                 }
             }
@@ -309,7 +314,10 @@ class CourseController extends Controller
         if($passed){
             $count_passed = $passed->count();
         }
-        
+        Log::debug("first " . $count_passed);
+        Log::debug("second " . $count);
+        Log::debug("====================");
+
         if($count > 0){
             $data = [
                 'total' => round(($count_passed/$count)*100, 2),

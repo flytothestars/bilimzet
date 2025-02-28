@@ -16,7 +16,7 @@ use App\Http\Controllers\Api\CourseController;
 use App\Models\CourseSpeciality;
 use App\Helper\Helper;
 use Orchid\Attachment\Models\Attachment;
-
+use Illuminate\Support\Facades\Log;
 
 class ProfileController extends Controller
 {
@@ -35,7 +35,7 @@ class ProfileController extends Controller
         return ApiResponseHelper::success($user);
     }
 
-    public function update(ProfileRequest $request)
+    public function update(Request $request)
     {
 		$user = auth()->user();
         
@@ -49,7 +49,7 @@ class ProfileController extends Controller
             "platform.systems.roles" => "0",
             "platform.index" => "1"
         ];
-
+        // dd('asd');
         $role = [2]; //User
 
         $user->fill($request->collect()->except(['photo', 'diplomas','password', 'permissions', 'roles'])->toArray())
@@ -78,14 +78,36 @@ class ProfileController extends Controller
             );
         }
         
-        
         // documents
         if($request->file('diplomas')){
-            $file = new File($request->file('diplomas'), null,'profileDocument');
-            $attachment = $file->load();
-            $user->attachments()->syncWithoutDetaching(
-                $attachment->id
-            );
+            $isDocuments = $user->attachments('profileDocument')->get();
+            foreach ($isDocuments as $key => $document) {
+                if ($document->id) {
+                    $attachment = Attachment::find($document->id);
+                    if ($attachment) {
+                        $attachment->delete();
+                    }
+                }
+            }
+            
+            if ($request->hasFile('diplomas')) {
+                $attachments = [];
+            
+                $file = $request->file('diplomas');
+                foreach ($request->file('diplomas') as $uploadedFile) {
+                    $file = new File($uploadedFile, null, 'profileDocument');
+                    $attachment = $file->load();
+                    $attachments[] = $attachment->id;
+                }
+                
+                $user->attachments()->syncWithoutDetaching($attachments);
+            }
+
+            // $file = new File($request->file('diplomas'), null,'profileDocument');
+            // $attachment = $file->load();
+            // $user->attachments()->syncWithoutDetaching(
+            //     $attachment->id
+            // );
         }
         
         $user->is_verification = true;
