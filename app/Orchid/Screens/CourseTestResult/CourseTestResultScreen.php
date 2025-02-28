@@ -15,6 +15,7 @@ use Orchid\Screen\Actions\Button;
 use Orchid\Support\Color;
 use setasign\Fpdi\Tcpdf\Fpdi;
 use Orchid\Support\Facades\Toast;
+use App\Events\CertificateIssued;
 
 class CourseTestResultScreen extends Screen
 {
@@ -138,6 +139,9 @@ class CourseTestResultScreen extends Screen
         $item->update([
             'status_certificate' => 2,
         ]);
+        $user = User::where('id', $item->user_id)->first();
+        event(new CertificateIssued($user, $item->coursePart->title));
+        
         Toast::info('Сертификат выдан');
     }
 

@@ -79,4 +79,9 @@ class User extends Authenticatable
         'updated_at',
         'created_at',
     ];
+
+    public function notifications()
+    {
+        return $this->hasMany(UserNotifications::class);
+    }
 }

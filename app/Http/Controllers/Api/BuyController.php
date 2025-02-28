@@ -10,6 +10,7 @@ use App\Models\Course;
 use App\Models\CourseBuy;
 use Illuminate\Support\Facades\Log;
 use App\Models\TransactionLog;
+use App\Events\CoursePurchased;
 
 class BuyController extends Controller
 {
@@ -47,6 +48,11 @@ class BuyController extends Controller
             'course_part_id' => $order[1],
             'course_id' => $order[0]
         ]);
+
+        $user = User::where('id', $order[2])->first();
+        $coursePart = CoursePart::where('id', $order[1])->where('course_id', $order[0])->first();
+        event(new CoursePurchased($user, $coursePart->title));
+        
         Log::info('=====================================');
         Log::info('Оплачен');
         Log::info($request);

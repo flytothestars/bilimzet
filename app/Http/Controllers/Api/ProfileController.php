@@ -11,6 +11,7 @@ use App\Models\CourseTestResult;
 use Orchid\Attachment\File;
 use App\Models\CourseBuy;
 use App\Models\Course;
+use App\Models\UserNotifications;
 use App\Models\CoursePart;
 use App\Http\Controllers\Api\CourseController;
 use App\Models\CourseSpeciality;
@@ -169,5 +170,11 @@ class ProfileController extends Controller
             return ApiResponseHelper::success();
         }
         return ApiResponseHelper::error();
+    }
+
+    public function notification(){
+        $user = auth()->user(); 
+        return ApiResponseHelper::success($user->notifications()->orderBy('created_at', 'desc')->get());
+
     }
 }

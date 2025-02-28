@@ -6,6 +6,10 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Event;
+use App\Events\CoursePurchased;
+use App\Listeners\CoursePurchasedListener;
+use App\Events\CertificateIssued;
+use App\Listeners\CertificateIssuedListener;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -18,6 +22,12 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
+        CoursePurchased::class => [
+            CoursePurchasedListener::class
+        ],
+        CertificateIssued::class => [
+            CertificateIssuedListener::class
+        ]
     ];
 
     /**
@@ -25,7 +35,10 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        Event::listen(
+            CertificateIssued::class,
+            [CertificateIssuedListener::class, 'handle']
+        );
     }
 
     /**
