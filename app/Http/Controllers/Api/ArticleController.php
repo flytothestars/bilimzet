@@ -12,6 +12,10 @@ use App\Helper\Helper;
 use Orchid\Attachment\File;
 use App\Http\Resources\ArticleResource;
 
+use App\Http\Controllers\Api\CapitalDTO;
+use App\Http\Controllers\Api\CapitalService;
+use Illuminate\Support\Facades\Log;
+
 class ArticleController extends Controller
 {
     public function index()
@@ -44,7 +48,7 @@ class ArticleController extends Controller
         return ApiResponseHelper::success($item);
 	}
 
-    public function show($id)
+    public function show($lang, $id)
     {
         $article = LibraryItem::where('is_published', 1)
             ->where('id', $id)
@@ -79,7 +83,7 @@ class ArticleController extends Controller
         return ApiResponseHelper::success($article);
     }
 
-    public function create(Request $request)
+    public function create(Request $request,$lang)
     {
         $user = auth()->user()->id;
         

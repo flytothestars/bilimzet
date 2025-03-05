@@ -15,14 +15,13 @@ class NewsController extends Controller
         $items = News::orderBy('created_at', 'desc')->get()->map(function ($item) {
             $item->miniature = Helper::getUrls($item);
             $item->plain_text = strip_tags($item->text);
-            $item->plain_text_kz = strip_tags($item->text_kz);
             return $item;
         });
 
         return ApiResponseHelper::success($items);
     }
 
-    public function detail($id)
+    public function detail($lang, $id)
     {
         $item = News::find($id);
         $item->update([
@@ -31,7 +30,6 @@ class NewsController extends Controller
         if($item){
             $item->miniature = Helper::getUrls($item);
             $item->plain_text = strip_tags($item->text);
-            $item->plain_text_kz = strip_tags($item->text_kz);
         }
 
         return ApiResponseHelper::success($item);

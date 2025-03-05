@@ -14,13 +14,13 @@ class MobizonService {
 
     const TEST_NUMBER = '77756554054';
 
-    const IS_PROD = false;
+    const IS_PROD = true;
 
     public function send($phone)
     {
         $api = new MobizonApi(self::TOKEN, 'api.mobizon.kz');
         $code = $this->generate();
-        $message = "Ваш код для подтверждения: $code. Для получения дополнительной информации посетите наш сайт: bilimzet.kz";
+        $message = "Код подтверждение - $code Bilimzet.kz";
         if ($phone == self::TEST_NUMBER)
         {
             // $this->save($phone, $code);

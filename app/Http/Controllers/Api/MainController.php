@@ -23,7 +23,7 @@ class MainController extends Controller
         $this->config = config('payment.services.sbp.config');
     }
     
-    public function feedback(Request $request)
+    public function feedback(Request $request, $lang)
     {
         $request->validate([
             'phone' => 'required|string',
@@ -44,7 +44,7 @@ class MainController extends Controller
         return ApiResponseHelper::success();
     }
 
-    public function search(Request $request){
+    public function search(Request $request, $lang){
         $request->validate([
             'data'  => 'nullable|string',
         ]);
@@ -68,7 +68,7 @@ class MainController extends Controller
         return ApiResponseHelper::success($resultsModelCourse);
     }
 
-    public function searchArticle(Request $request){
+    public function searchArticle(Request $request, $lang){
         $request->validate([
             'data'  => 'nullable|string',
         ]);

@@ -14,7 +14,7 @@ use App\Helper\Helper;
 
 class CommentController extends Controller
 {
-    public function list($article_id)
+    public function list($lang, $article_id)
     {
         $item = LibraryItem::where('id', $article_id)->first();
         $comment = $item->comment->map(function($item){
@@ -27,7 +27,7 @@ class CommentController extends Controller
         return ApiResponseHelper::success($comment);
     }
 
-    public function create(Request $request)
+    public function create(Request $request, $lang)
     {
         $user = auth()->user()->id;
         $comment = CommentArticle::create([
@@ -39,14 +39,14 @@ class CommentController extends Controller
 
     }
 
-    public function delete($comment_id)
+    public function delete($lang, $comment_id)
     {
         $user = auth()->user()->id;
         CommentArticle::where('id', $comment_id)->where('user_id', $user)->delete();
         return ApiResponseHelper::success();
     }
 
-    public function edit(Request $request)
+    public function edit(Request $request,$lang)
     {
         $user = auth()->id();
 
@@ -63,7 +63,7 @@ class CommentController extends Controller
         return ApiResponseHelper::success($comment);
     }
 
-    public function courseCreate(Request $request){
+    public function courseCreate(Request $request,$lang){
         $user = auth()->user()->id;
         $comment = CommentCourse::create([
             'user_id' => $user,
@@ -74,7 +74,7 @@ class CommentController extends Controller
         return ApiResponseHelper::success($comment);
     }
 
-    public function courseList($course_id, $part_id){
+    public function courseList($lang, $course_id, $part_id){
         $item = Course::where('id', $course_id)->first();
         return ApiResponseHelper::success($item->comment);
     }

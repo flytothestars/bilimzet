@@ -25,11 +25,11 @@ class PayboxService
             'pg_payment_route' => 'frame',
             'pg_currency' => 'KZT',
             'pg_language' => 'ru',
-            'pg_result_url' => route('course.result.buy'),
+            'pg_result_url' => $request->success_url,
             'pg_success_url' => $request->success_url,
             'pg_success_url_method' => 'GET',
             'pg_failure_url' => $request->failure_url,
-            'pg_testing_mode' => '1',
+            'pg_testing_mode' => '0',
             'pg_user_id' => auth()->user()->id,
         ];    
         $requestForSignature = $this->makeFlatParamsArray($requestForSignature);

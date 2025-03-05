@@ -7,13 +7,15 @@ use Orchid\Attachment\Attachable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class CoursePart extends Model
+class CoursePart extends BaseModel
 {
 	use HasFactory, AsSource, Attachable;
 
     protected $fillable = [
         'title', 'title_kz', 'duration_hours', 'price_kzt', 'course_id'
     ];
+    protected $hidden = ['title_kz'];
+
 
     public function course()
     {
@@ -29,4 +31,10 @@ class CoursePart extends Model
     {
         return $this->hasMany('App\Models\CourseTest', 'course_part_id');
     }
+
+    public function getTitleAttribute()
+    {
+        return $this->getLocalizedField('title');
+    }
+
 }

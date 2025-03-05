@@ -40,7 +40,7 @@ class CourseController extends Controller
         return ApiResponseHelper::success($result);
     }
 
-    public function courseList($id)
+    public function courseList($lang, $id)
     {
         $item = Course::where('speciality_id', $id)->get()->map(function($item){
             $item->author_photo = Helper::getUrls($item, 'courseAuthorPhoto');
@@ -49,7 +49,7 @@ class CourseController extends Controller
         return ApiResponseHelper::success($item);
     }
 
-    public function coursePartList(Request $request, $id)
+    public function coursePartList(Request $request, $lang, $id)
     {
         $item = Course::where('id',$id)->get()->map(function($course){
             $course->parts = CoursePart::where('course_id', $course->id)->get()->map(function($part){
@@ -91,7 +91,7 @@ class CourseController extends Controller
         return ApiResponseHelper::success($categories);
     }
 
-    public function coursePartModuleList($course_id, $part_id)
+    public function coursePartModuleList($lang, $course_id, $part_id)
     {
         $item = Course::where('id', $course_id)->get()->map(function($course) use ($part_id){
             $course->parts = CoursePart::where('id', $part_id)
@@ -160,7 +160,7 @@ class CourseController extends Controller
 
     }
 
-    public function coursePartModule($module_id, $lesson_id)
+    public function coursePartModule($lang, $module_id, $lesson_id)
     {
         $item = CourseModule::where('id', $module_id)
             ->get()->map(function($module) use ($lesson_id){
@@ -213,7 +213,7 @@ class CourseController extends Controller
         return ApiResponseHelper::success($item);
     }
 
-    public function coursePartModuleLectureList($lesson_id)
+    public function coursePartModuleLectureList($lang, $lesson_id)
     {
         $lecture = CourseModuleLecture::where('lesson_id', $lesson_id)->get()
         ->map(function($lecture){
@@ -225,7 +225,7 @@ class CourseController extends Controller
         return ApiResponseHelper::success($lecture);
     }
 
-    public function moduleLecture($lesson_id, $lecture_id)
+    public function moduleLecture($lang, $lesson_id, $lecture_id)
     {
         $lecture = CourseModuleLecture::where('id', $lecture_id)->get()
         ->map(function($lecture){
@@ -237,7 +237,7 @@ class CourseController extends Controller
         return ApiResponseHelper::success($lecture);
     }
 
-    public function moduleVideo($lesson_id)
+    public function moduleVideo($lang, $lesson_id)
     {
         $modules = Lesson::where('id', $lesson_id)
         ->get()->map(function($module){
@@ -249,7 +249,7 @@ class CourseController extends Controller
         return ApiResponseHelper::success($modules);
     }
 
-    public function modulePresent($lesson_id)
+    public function modulePresent($lang, $lesson_id)
     {
         $modules = Lesson::where('id', $lesson_id)
         ->get()->map(function($module){
@@ -261,7 +261,7 @@ class CourseController extends Controller
         return ApiResponseHelper::success($modules);
     }
 
-    public function process(Request $request)
+    public function process(Request $request, $lang)
     {
         ModulePassed::firstOrCreate([
             'user_id' => auth()->user()->id,
@@ -275,7 +275,7 @@ class CourseController extends Controller
         return ApiResponseHelper::success();
     }
 
-    public function courseProcess($part_id, $course_id)
+    public function courseProcess($lang, $part_id, $course_id)
     {
         $userId = auth()->id();
         
@@ -310,7 +310,7 @@ class CourseController extends Controller
             }
         }
         $count_passed = 0;
-        $passed = ModulePassed::where('course_id', $course_id)->where('part_id', $part_id)->get();
+        $passed = ModulePassed::where('course_id', $course_id)->where('part_id', $part_id)->where('user_id', $userId)->get();
         if($passed){
             $count_passed = $passed->count();
         }
@@ -331,7 +331,7 @@ class CourseController extends Controller
     }
 
 
-    public function courseModuleLessonProcess($module_id, $lesson_id)
+    public function courseModuleLessonProcess($lang, $module_id, $lesson_id)
     {
         $user = auth()->user()->id;
         $count = 1;

@@ -36,7 +36,7 @@ class ProfileController extends Controller
         return ApiResponseHelper::success($user);
     }
 
-    public function update(Request $request)
+    public function update(Request $request,$lang)
     {
 		$user = auth()->user();
         
@@ -163,7 +163,7 @@ class ProfileController extends Controller
         return ApiResponseHelper::success($courseBuy);
     }
 
-    public function deleteDocument($document_id){
+    public function deleteDocument($lang, $document_id){
         $attachment = Attachment::find($document_id);
         if ($attachment) {
             $attachment->delete();

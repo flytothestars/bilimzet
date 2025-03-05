@@ -6,11 +6,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Orchid\Screen\AsSource;
 
-class CourseTest extends Model
+class CourseTest extends BaseModel
 {
     use HasFactory, AsSource;
 
     protected $fillable = [ 'title', 'title_kz', 'duration_minutes', 'course_id', 'course_part_id' ];
+    protected $hidden = ['title_kz'];
 
     public function course()
     {
@@ -26,4 +27,10 @@ class CourseTest extends Model
     {
         return $this->hasMany('App\Models\CourseQuestion', 'course_test_id');
     }
+
+    public function getTitleAttribute()
+    {
+        return $this->getLocalizedField('title');
+    }
+
 }

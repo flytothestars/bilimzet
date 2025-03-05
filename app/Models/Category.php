@@ -7,7 +7,7 @@ use Orchid\Attachment\Attachable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Category extends Model
+class Category extends BaseModel
 {
 	use HasFactory, AsSource, Attachable;
 
@@ -16,6 +16,12 @@ class Category extends Model
         'name',
         'name_kz',
     ];
+    protected $hidden = ['name_kz'];
+    
+    public function getNameAttribute()
+    {
+        return $this->getLocalizedField('name');
+    }
 
     public function getFullAttribute(): string
     {
