@@ -20,7 +20,7 @@ class TestController extends Controller
         return ApiResponseHelper::success($test);
     }
 
-    public function sendResultTest(Request $request,$lang)
+    public function sendResultTest(Request $request)
     {
         $user = auth()->user()->id;
         $test = CourseTestResult::create([

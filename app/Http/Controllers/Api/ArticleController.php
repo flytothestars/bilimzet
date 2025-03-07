@@ -83,7 +83,7 @@ class ArticleController extends Controller
         return ApiResponseHelper::success($article);
     }
 
-    public function create(Request $request,$lang)
+    public function create(Request $request)
     {
         $user = auth()->user()->id;
         

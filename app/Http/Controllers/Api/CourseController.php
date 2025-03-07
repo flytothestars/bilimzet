@@ -261,7 +261,7 @@ class CourseController extends Controller
         return ApiResponseHelper::success($modules);
     }
 
-    public function process(Request $request, $lang)
+    public function process(Request $request)
     {
         ModulePassed::firstOrCreate([
             'user_id' => auth()->user()->id,

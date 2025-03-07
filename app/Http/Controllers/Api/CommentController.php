@@ -27,7 +27,7 @@ class CommentController extends Controller
         return ApiResponseHelper::success($comment);
     }
 
-    public function create(Request $request, $lang)
+    public function create(Request $request)
     {
         $user = auth()->user()->id;
         $comment = CommentArticle::create([
@@ -46,7 +46,7 @@ class CommentController extends Controller
         return ApiResponseHelper::success();
     }
 
-    public function edit(Request $request,$lang)
+    public function edit(Request $request)
     {
         $user = auth()->id();
 
@@ -63,7 +63,7 @@ class CommentController extends Controller
         return ApiResponseHelper::success($comment);
     }
 
-    public function courseCreate(Request $request,$lang){
+    public function courseCreate(Request $request){
         $user = auth()->user()->id;
         $comment = CommentCourse::create([
             'user_id' => $user,

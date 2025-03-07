@@ -21,7 +21,7 @@ class BuyController extends Controller
         $this->payboxService = $payboxService;
     }
 
-    public function generateFrame(Request $request,$lang)
+    public function generateFrame(Request $request)
     {
         $request->validate([
             'course_id' => 'required|string',
@@ -40,7 +40,7 @@ class BuyController extends Controller
         return ApiResponseHelper::success(['pg_redirect_url' => $paybox['pg_redirect_url']]);
     }
 
-    public function success(Request $request,$lang)
+    public function success(Request $request)
     {
         $order = explode('-', $request['pg_order_id']);
         $course = CourseBuy::create([
@@ -61,7 +61,7 @@ class BuyController extends Controller
         return redirect()->to('https://testbilimzet.kz');
     }
 
-    public function result(Request $request, $lang)
+    public function result(Request $request)
     {
         $validatedData = $request->validate([
             'pg_order_id' => 'required|string',

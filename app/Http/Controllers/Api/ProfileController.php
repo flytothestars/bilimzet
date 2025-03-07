@@ -36,7 +36,7 @@ class ProfileController extends Controller
         return ApiResponseHelper::success($user);
     }
 
-    public function update(Request $request,$lang)
+    public function update(Request $request)
     {
 		$user = auth()->user();
         
@@ -163,7 +163,7 @@ class ProfileController extends Controller
         return ApiResponseHelper::success($courseBuy);
     }
 
-    public function deleteDocument($lang, $document_id){
+    public function deleteDocument($document_id){
         $attachment = Attachment::find($document_id);
         if ($attachment) {
             $attachment->delete();
@@ -174,7 +174,29 @@ class ProfileController extends Controller
 
     public function notification(){
         $user = auth()->user(); 
-        return ApiResponseHelper::success($user->notifications()->orderBy('created_at', 'desc')->get());
-
+        return ApiResponseHelper::success([
+            'notifications' => $user->notifications()->orderBy('created_at', 'desc')->get(),
+            'read_count' => $user->read_notifications_count,
+            'unread_count' => $user->unread_notifications_count
+        ]);
     }
+
+    public function deleteNotification(Request $request){
+        $request->validate([
+            'ids' => 'required|array',
+            'ids.*' => 'integer'
+        ]);
+        $noti = UserNotifications::whereIn('id', $request->ids)->delete();
+        return ApiResponseHelper::success();
+    }
+
+    public function updateNotification(Request $request){
+        $request->validate([
+            'ids' => 'required|array',
+            'ids.*' => 'integer'
+        ]);
+        $noti = UserNotifications::whereIn('id', $request->ids)->update(['is_read' => true]);
+        return ApiResponseHelper::success();
+    }
+
 }
