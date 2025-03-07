@@ -61,6 +61,8 @@ class ArticleController extends Controller
             $item->category = Category::find($item->category);
             $item->document = Helper::getUrls($item, 'articleDocument');
             $item->document_extension = Helper::getExtension($item, 'articleDocument');
+            $item->document_extension = url('/images/extension/'.Helper::getExtension($item, 'articleDocument').'.png');
+            $item->document_size = Helper::getSize($item, 'articleDocument');        
             $item->document_size = Helper::getSize($item, 'articleDocument');
             $item->plain_text = strip_tags($item->text);
             $item->plain_text_kz = strip_tags($item->text_kz);
@@ -77,6 +79,8 @@ class ArticleController extends Controller
                 });
                 $item->document = Helper::getUrls($item, 'articleDocument');
                 $item->document_extension = Helper::getExtension($item, 'articleDocument');
+                $item->document_extension = url('/images/extension/'.Helper::getExtension($item, 'articleDocument').'.png');
+                $item->document_size = Helper::getSize($item, 'articleDocument');    
                 $item->document_size = Helper::getSize($item, 'articleDocument');
                 return $item;
             });

@@ -142,7 +142,7 @@ class ProfileController extends Controller
 
     }
 
-    public function course()
+    public function course($lang)
     {
         $user = auth()->user()->id;
         $courseBuy = CourseBuy::where('user_id', $user)->get()->map(function($courseBuy){
@@ -156,7 +156,7 @@ class ProfileController extends Controller
                 'test' => true
             ];
             $courseController = new CourseController();
-            $process = $courseController->courseProcess($courseBuy->course_part_id, $courseBuy->course_id);
+            $process = $courseController->courseProcess('ru', $courseBuy->course_part_id, $courseBuy->course_id);
             $courseBuy->process = $process->original['data'];
             return $courseBuy;
         });
