@@ -145,15 +145,16 @@ class ProfileController extends Controller
     public function course($lang)
     {
         $user = auth()->user()->id;
-        $courseBuy = CourseBuy::where('user_id', $user)->get()->map(function($courseBuy){
+        $courseBuy = CourseBuy::where('user_id', $user)->get()->map(function($courseBuy) use ($user){
             $courseBuy->course = Course::where('id', $courseBuy->course_id)->first();
             $speciality = CourseSpeciality::where('id', $courseBuy->course->speciality_id)->first();
             $courseBuy->picture = Helper::getUrls($speciality);
             $courseBuy->part = CoursePart::where('id', $courseBuy->course_part_id)->first();
+            $courseTest = CourseTestResult::where('user_id', $user)->where('course_part_id', $courseBuy->course_part_id)->count();
             $courseBuy->test = [
-                'passed' => 0,
+                'passed' => $courseTest,
                 'limit' => 2,
-                'test' => true
+                'test' => $courseTest >= 2 ? false : true
             ];
             $courseController = new CourseController();
             $process = $courseController->courseProcess('ru', $courseBuy->course_id, $courseBuy->course_part_id);
