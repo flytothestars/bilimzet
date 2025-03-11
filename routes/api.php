@@ -84,7 +84,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('course/part/buy', [BuyController::class,'generateFrame'])->name('course.part.pay');
     Route::get('/auth/token', [AuthController::class, 'token'])->name('auth.token');
     Route::get('/profile/document/delete/{document_id}', [ProfileController::class, 'deleteDocument'])->name('profile.document.delete');
-    Route::get('/profile/notification/delete', [ProfileController::class, 'deleteNotification'])->name('profile.notification.delete');
-    Route::get('/profile/notification/update', [ProfileController::class, 'updateNotification'])->name('profile.notification.update');
+    Route::post('/profile/notification/delete', [ProfileController::class, 'deleteNotification'])->name('profile.notification.delete');
+    Route::post('/profile/notification/update', [ProfileController::class, 'updateNotification'])->name('profile.notification.update');
 
 });

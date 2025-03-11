@@ -275,7 +275,7 @@ class CourseController extends Controller
         return ApiResponseHelper::success();
     }
 
-    public function courseProcess($lang, $part_id, $course_id)
+    public function courseProcess($lang, $course_id, $part_id)
     {
         $userId = auth()->id();
         

@@ -156,7 +156,7 @@ class ProfileController extends Controller
                 'test' => true
             ];
             $courseController = new CourseController();
-            $process = $courseController->courseProcess('ru', $courseBuy->course_part_id, $courseBuy->course_id);
+            $process = $courseController->courseProcess('ru', $courseBuy->course_id, $courseBuy->course_part_id);
             $courseBuy->process = $process->original['data'];
             return $courseBuy;
         });
