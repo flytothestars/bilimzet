@@ -154,7 +154,7 @@ class ProfileController extends Controller
             $courseBuy->test = [
                 'passed' => $courseTest,
                 'limit' => 2,
-                'test' => $courseTest >= 2 ? false : true
+                'test' => $courseTest > 0 ? true : false
             ];
             $courseController = new CourseController();
             $process = $courseController->courseProcess('ru', $courseBuy->course_id, $courseBuy->course_part_id);
