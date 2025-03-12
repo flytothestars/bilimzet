@@ -11,6 +11,8 @@ use App\Models\CourseBuy;
 use Illuminate\Support\Facades\Log;
 use App\Models\TransactionLog;
 use App\Events\CoursePurchased;
+use App\Models\User;
+use App\Models\CoursePart;
 
 class BuyController extends Controller
 {
@@ -37,11 +39,18 @@ class BuyController extends Controller
         }])->find($course_id);
         $part = $course->parts->first();
         $paybox = $this->payboxService->init($course, $part, $request);
+        if(!$paybox){
+            return ApiResponseHelper::error();
+        }
         return ApiResponseHelper::success(['pg_redirect_url' => $paybox['pg_redirect_url']]);
     }
 
     public function success(Request $request)
     {
+        // $user = User::where('id', 3)->first();
+        // dd($user);
+        // event(new CoursePurchased($user, 'Test notification'));
+        
         $order = explode('-', $request['pg_order_id']);
         $course = CourseBuy::create([
             'user_id' => $order[2],
@@ -94,7 +103,9 @@ class BuyController extends Controller
         ]);
 
         TransactionLog::create($validatedData);
-
+        if ($validatedData['pg_result'] == 1) {
+            $this->success(new Request(['pg_order_id' => $validatedData['pg_order_id']]));
+        }
         Log::info('=====================================');
         Log::info('result');
         Log::info($request);

@@ -3,6 +3,7 @@
 namespace App\Services\Pay;
 
 use Paybox\Pay\Facade as Paybox;
+use App\Models\CourseBuy;
 
 class PayboxService 
 {
@@ -15,17 +16,21 @@ class PayboxService
     public function init($course, $part, $request){
         $user = auth()->user();
         $orderId = $course->id.'-'.$part->id.'-'.$user->id.'-'.rand(000000,999999);
+        $courseBuy = CourseBuy::where('course_id', $course->id)->where('course_part_id', $part->id)->where('user_id', $user->id)->first();
+        if($courseBuy){
+            return false;
+        }
         $url = 'https://api.freedompay.kz/init_payment.php';
         $request = $requestForSignature = [
             'pg_order_id' => $orderId,
             'pg_merchant_id'=> self::MERCHANT,
-            'pg_amount' => '10',
+            'pg_amount' => $part->price_kzt,
             'pg_description' => $course->title,
             'pg_salt' => 'molbulak',
             'pg_payment_route' => 'frame',
             'pg_currency' => 'KZT',
             'pg_language' => 'ru',
-            'pg_result_url' => $request->success_url,
+            'pg_result_url' => route('course.result.buy'),
             'pg_success_url' => $request->success_url,
             'pg_success_url_method' => 'GET',
             'pg_failure_url' => $request->failure_url,
