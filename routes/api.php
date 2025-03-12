@@ -38,6 +38,8 @@ Route::prefix('{lang}')->middleware('locale')->group(function () {
     Route::get('/category', [CourseController::class, 'category'])->name('category');
     Route::get('/category/{id}', [CourseController::class, 'courseList'])->name('course.list');
     Route::get('/course/part/{id}', [CourseController::class, 'coursePartList'])->name('course.part.list');
+    Route::get('/popular/course', [CourseController::class, 'coursePopular'])->name('course.popular.list');
+
 });
 
 Route::get('course/buy/success', [BuyController::class,'success'])->name('course.success.buy');

@@ -17,6 +17,7 @@ use App\Models\ModulePassed;
 use App\Models\Lesson;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\DB;
 
 class CourseController extends Controller
 {
@@ -383,5 +384,19 @@ class CourseController extends Controller
             ]; 
         }
         return ApiResponseHelper::success($data);
+    }
+
+    public function coursePopular($lang) {
+        $courseBuy = CourseBuy::select('course_id', 'course_part_id', DB::raw('COUNT(*) as count'))
+            ->groupBy('course_id', 'course_part_id')
+            ->orderByDesc('count')
+            ->get()->map(function ($item) {
+                $item->course = Course::where('id', $item->course_id)->first();
+                $item->part = CoursePart::where('id', $item->course_part_id)->first();
+                
+                return $item;
+            });
+        return ApiResponseHelper::success($courseBuy);
+ 
     }
 }
