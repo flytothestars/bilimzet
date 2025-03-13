@@ -80,8 +80,9 @@ class ProfileController extends Controller
         }
         
         // documents
-        if($request->file('diplomas')){
+        // if($request->file('diplomas')){
             $isDocuments = $user->attachments('profileDocument')->get();
+            // dd($isDocuments);
             foreach ($isDocuments as $key => $document) {
                 if ($document->id) {
                     $attachment = Attachment::find($document->id);
@@ -90,7 +91,6 @@ class ProfileController extends Controller
                     }
                 }
             }
-            
             if ($request->hasFile('diplomas')) {
                 $attachments = [];
             
@@ -109,7 +109,7 @@ class ProfileController extends Controller
             // $user->attachments()->syncWithoutDetaching(
             //     $attachment->id
             // );
-        }
+        // }
         
         $user->is_verification = true;
         $user->save();

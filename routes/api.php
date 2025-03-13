@@ -59,9 +59,6 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('lesson/{lesson_id}/video', [CourseController::class,'moduleVideo'])->name('course.part.module.video');
         Route::get('lesson/{lesson_id}/present', [CourseController::class,'modulePresent'])->name('course.part.module.present');
 
-        Route::get('progress/course/{course_id}/{part_id}', [CourseController::class,'courseProcess'])->name('course.part.process.');
-        Route::get('progress/lesson/{module_id}/{lesson_id}', [CourseController::class,'courseModuleLessonProcess'])->name('course.module.process');
-
         Route::get('test/get/course/{course_id}/part/{part_id}', [TestController::class,'getTest'])->name('course.test.get');
 
         Route::get('/profile/certificate', [ProfileController::class, 'certificate'])->name('profile.certificate');
@@ -76,6 +73,9 @@ Route::middleware('auth:sanctum')->group(function () {
 
         Route::get('course/comment/list/{course_id}/{part_id}', [CommentController::class, 'courseList'])->name('course.comment.list');
     });
+    Route::get('progress/course/{course_id}/{part_id}', [CourseController::class,'courseProcess'])->name('course.part.process.');
+    Route::get('progress/lesson/{module_id}/{lesson_id}', [CourseController::class,'courseModuleLessonProcess'])->name('course.module.process');
+
     Route::get('/profile/get', [ProfileController::class, 'get'])->name('profile.get');
     Route::post('course/comment/create', [CommentController::class, 'courseCreate'])->name('course.comment.create'); 
     Route::post('article/comment/edit', [CommentController::class, 'edit'])->name('article.comment.edit');
