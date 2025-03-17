@@ -72,9 +72,9 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('article/comment/delete/{comment_id}', [CommentController::class, 'delete'])->name('article.comment.delete');
 
         Route::get('course/comment/list/{course_id}/{part_id}', [CommentController::class, 'courseList'])->name('course.comment.list');
+        Route::get('progress/course/{course_id}/{part_id}', [CourseController::class,'courseProcess'])->name('course.part.process.');
+        Route::get('progress/lesson/{module_id}/{lesson_id}', [CourseController::class,'courseModuleLessonProcess'])->name('course.module.process');
     });
-    Route::get('progress/course/{course_id}/{part_id}', [CourseController::class,'courseProcess'])->name('course.part.process.');
-    Route::get('progress/lesson/{module_id}/{lesson_id}', [CourseController::class,'courseModuleLessonProcess'])->name('course.module.process');
 
     Route::get('/profile/get', [ProfileController::class, 'get'])->name('profile.get');
     Route::post('course/comment/create', [CommentController::class, 'courseCreate'])->name('course.comment.create'); 
