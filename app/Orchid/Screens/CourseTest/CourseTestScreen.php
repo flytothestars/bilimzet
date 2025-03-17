@@ -66,7 +66,8 @@ class CourseTestScreen extends Screen
                     Input::make('courseTest.title')->title('Название RU')->required(),
                     Input::make('courseTest.title_kz')->title('Название KZ')->required(),
                     Input::make('courseTest.duration_minutes')->title('Время выполнения (минут)')->required(),
-                    Relation::make('courseTest.course_part_id')->fromModel(CoursePart::class, 'title')->title('Часть курса')->required(),
+                    Relation::make('courseTest.course_part_id')->fromModel(CoursePart::class, 'title')->title('Часть курса')
+                        ->applyScope('selectCourse', [$this->course])->required(),
                     Input::make('courseTest.course_id')
                         ->type('hidden')
                         ->value($this->course),

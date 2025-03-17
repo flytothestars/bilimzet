@@ -37,4 +37,11 @@ class CoursePart extends BaseModel
         return $this->getLocalizedField('title');
     }
 
+    public function scopeSelectCourse($query, $courseId)
+    {
+        return $query->where('course_id', $courseId);
+    }
+
+
+
 }
