@@ -10,8 +10,10 @@
         "laravel/framework": "^10.10",
         "laravel/sanctum": "^3.3",
         "laravel/tinker": "^2.8",
+        "maatwebsite/excel": "^3.1",
         "mobizon/mobizon-php": "^2.0",
         "orchid/platform": "^14.44",
+        "php-amqplib/php-amqplib": "^3.7",
         "setasign/fpdi-tcpdf": "^2.3"
     },
     "require-dev": {

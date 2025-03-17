@@ -16,7 +16,10 @@ use Orchid\Support\Color;
 use setasign\Fpdi\Tcpdf\Fpdi;
 use Orchid\Support\Facades\Toast;
 use App\Events\CertificateIssued;
-
+use Orchid\Screen\Actions\ModalToggle;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\CourseTestResultExport;
+use Illuminate\Support\Facades\Storage;
 class CourseTestResultScreen extends Screen
 {
     /**
@@ -57,7 +60,9 @@ class CourseTestResultScreen extends Screen
      */
     public function commandBar(): iterable
     {
-        return [];
+        return [
+            Button::make('Скачать')->method('downloadToExcel')->icon('cloud-download')->rawClick()
+        ];
     }
     protected $styleButton = 'border-radius: 5px;';
 
@@ -257,6 +262,18 @@ class CourseTestResultScreen extends Screen
         }
 
         return $monthsKK[$month] . ' / ' . $monthsRU[$month];
+    }
+
+    public function downloadToExcel() {
+        // $fileName = 'reports.xlsx';
+        // $filePath = 'exports/' . $fileName;
+    
+        // // Генерируем файл и сохраняем в storage
+        // Excel::store(new CourseTestResultExport, $filePath, 'public');
+    
+        // // Возвращаем ссылку на скачивание
+        // return redirect(Storage::url($filePath)); 
+        return Excel::download(new CourseTestResultExport, 'reports.xlsx');  
     }
 
 }
