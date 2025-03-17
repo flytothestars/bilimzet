@@ -118,8 +118,8 @@ class CourseTestResultScreen extends Screen
 
     public function showCertificate(CourseTestResult $item): bool
     {
-        // return $item->status_certificate === 2 ? true : false;
-        return true;
+        return $item->status_certificate === 2 ? true : false;
+        // return true;
     }
 
     public function issueCertificate(CourseTestResult $item): bool
@@ -135,7 +135,7 @@ class CourseTestResultScreen extends Screen
 
     public function show(CourseTestResult $item)
     {
-        $outputPath = storage_path('app/public/cert-'.auth()->user()->id.'-'.$item->id.'-'.$item->rand.'.pdf');
+        $outputPath = storage_path('app/public/cert-'.$item->user_id.'-'.$item->id.'-'.$item->rand.'.pdf');
         return response()->download($outputPath);
     }
 
