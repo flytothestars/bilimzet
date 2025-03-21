@@ -20,7 +20,7 @@ class TransactionLogScreen extends Screen
     public function query(): iterable
     {
         return [
-            'transaction_log_list' => TransactionLog::paginate(10)
+            'transaction_log_list' => TransactionLog::orderBy('created_at', 'desc')->paginate(10)
         ];
     }
 

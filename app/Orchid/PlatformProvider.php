@@ -70,37 +70,37 @@ class PlatformProvider extends OrchidServiceProvider
                 ->icon('bs.list-columns')
                 ->route('platform.transaction_log.list'),
         
-                Menu::make('Get Started')
-                ->icon('bs.book')
-                ->title('Navigation')
-                ->route(config('platform.index')),
+            //     Menu::make('Get Started')
+            //     ->icon('bs.book')
+            //     ->title('Navigation')
+            //     ->route(config('platform.index')),
 
-            Menu::make('Sample Screen')
-                ->icon('bs.collection')
-                ->route('platform.example')
-                ->badge(fn () => 6),
+            // Menu::make('Sample Screen')
+            //     ->icon('bs.collection')
+            //     ->route('platform.example')
+            //     ->badge(fn () => 6),
 
-            Menu::make('Form Elements')
-                ->icon('bs.card-list')
-                ->route('platform.example.fields')
-                ->active('*/examples/form/*'),
+            // Menu::make('Form Elements')
+            //     ->icon('bs.card-list')
+            //     ->route('platform.example.fields')
+            //     ->active('*/examples/form/*'),
 
-            Menu::make('Overview Layouts')
-                ->icon('bs.window-sidebar')
-                ->route('platform.example.layouts'),
+            // Menu::make('Overview Layouts')
+            //     ->icon('bs.window-sidebar')
+            //     ->route('platform.example.layouts'),
 
-            Menu::make('Grid System')
-                ->icon('bs.columns-gap')
-                ->route('platform.example.grid'),
+            // Menu::make('Grid System')
+            //     ->icon('bs.columns-gap')
+            //     ->route('platform.example.grid'),
 
-            Menu::make('Charts')
-                ->icon('bs.bar-chart')
-                ->route('platform.example.charts'),
+            // Menu::make('Charts')
+            //     ->icon('bs.bar-chart')
+            //     ->route('platform.example.charts'),
 
-            Menu::make('Cards')
-                ->icon('bs.card-text')
-                ->route('platform.example.cards')
-                ->divider(),
+            // Menu::make('Cards')
+            //     ->icon('bs.card-text')
+            //     ->route('platform.example.cards')
+            //     ->divider(),
 
             Menu::make(__('Пользователи'))
                 ->icon('bs.people')
@@ -114,10 +114,10 @@ class PlatformProvider extends OrchidServiceProvider
                 ->permission('platform.systems.roles')
                 ->divider(),
 
-            Menu::make('Настройка')
-                ->icon('bs.gear')
-                ->route('platform.settings.basic')
-                ->active('*/settings/form/*'),
+            // Menu::make('Настройка')
+            //     ->icon('bs.gear')
+            //     ->route('platform.settings.basic')
+            //     ->active('*/settings/form/*'),
 
 
             // Menu::make('Documentation')
