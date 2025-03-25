@@ -18,6 +18,7 @@ use App\Models\Lesson;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\App;
 
 class CourseController extends Controller
 {
@@ -54,7 +55,13 @@ class CourseController extends Controller
     {
         $item = Course::where('id',$id)->get()->map(function($course){
             $course->parts = CoursePart::where('course_id', $course->id)->get()->map(function($part){
-                $part->document_plan = Helper::getUrls($part, 'coursePartPlan');
+                $locale = App::getLocale();
+                if($locale === 'kz'){
+                    $groupCoursePartPlan = 'coursePartPlanKz';
+                } else {
+                    $groupCoursePartPlan = 'coursePartPlanRu';
+                }
+                $part->document_plan = Helper::getUrls($part, $groupCoursePartPlan);
 
                 $user = auth('sanctum')->user();
                 if($user){
@@ -99,7 +106,13 @@ class CourseController extends Controller
             $course->parts = CoursePart::where('id', $part_id)
                 ->where('course_id', $course->id)
                 ->get()->map(function($part) use ($user){
-                    $part->document_plan = Helper::getUrls($part, 'coursePartPlan');
+                    $locale = App::getLocale();
+                    if($locale === 'kz'){
+                        $groupCoursePartPlan = 'coursePartPlanKz';
+                    } else {
+                        $groupCoursePartPlan = 'coursePartPlanRu';
+                    }
+                    $part->document_plan = Helper::getUrls($part, $groupCoursePartPlan);
                     $part->modules = CourseModule::where('course_part_id', $part->id)
                         ->get()->map(function($module) use ($part, $user){
                             $modulePassed = ModulePassed::where('part_id', $part->id)->where('course_module_id', $module->id)->where('user_id', $user)->first();
@@ -132,18 +145,32 @@ class CourseController extends Controller
                                             }
                                             $lecture->plain_text = strip_tags($lecture->content);
                                             $lecture->plain_text_kz = strip_tags($lecture->content_kz);
-                                            $lecture->file = Helper::getUrls($lecture, 'courseModuleLecture');
+                                            $locale = App::getLocale();
+                                            if($locale === 'kz'){
+                                                $groupCourseModuleLecture = 'courseModuleLectureKz';
+                                            } else {
+                                                $groupCourseModuleLecture = 'courseModuleLectureRu';
+                                            }
+                                            $lecture->file = Helper::getUrls($lecture, $groupCourseModuleLecture);
                                             return $lecture;
                                         });
-
-                                    $lesson->video = Helper::getUrls($lesson, 'lessonVideo');
+                                    
+                                    $locale = App::getLocale();
+                                    if($locale === 'kz'){
+                                        $groupLessonVideo = 'lessonVideoKz';
+                                        $groupLessonPresent = 'lessonPresentKz';
+                                    } else {
+                                        $groupLessonVideo = 'lessonVideoRu';
+                                        $groupLessonPresent = 'lessonPresentRu';
+                                    }
+                                    $lesson->video = Helper::getUrls($lesson, $groupLessonVideo);
                                     $modulePassedVideo = ModulePassed::where('lesson_id', $lesson->id)->where('course_module_id', $module->id)->where('type','video')->where('user_id', $user)->first();
                                     if($modulePassedVideo) {
                                         $lesson->passed_video = true;
                                     } else {
                                         $lesson->passed_video = false;
                                     }
-                                    $lesson->present = Helper::getUrls($lesson, 'lessonPresent');
+                                    $lesson->present = Helper::getUrls($lesson, $groupLessonPresent);
                                     $modulePassedPresent = ModulePassed::where('lesson_id', $lesson->id)->where('course_module_id', $module->id)->where('type','present')->where('user_id', $user)->first();
                                     if($modulePassedPresent) {
                                         $lesson->passed_present = true;
@@ -192,18 +219,31 @@ class CourseController extends Controller
                                 }
                                 $lecture->plain_text = strip_tags($lecture->content);
                                 $lecture->plain_text_kz = strip_tags($lecture->content_kz);
-                                $lecture->file = Helper::getUrls($lecture, 'courseModuleLecture');
+                                $locale = App::getLocale();
+                                if($locale === 'kz'){
+                                    $groupCourseModuleLecture = 'courseModuleLectureKz';
+                                } else {
+                                    $groupCourseModuleLecture = 'courseModuleLectureRu';
+                                }
+                                $lecture->file = Helper::getUrls($lecture, $groupCourseModuleLecture);
                                 return $lecture;
                             });
-
-                        $lesson->video = Helper::getUrls($lesson, 'lessonVideo');
+                        $locale = App::getLocale();
+                        if($locale === 'kz'){
+                            $groupLessonVideo = 'lessonVideoKz';
+                            $groupLessonPresent = 'lessonPresentKz';
+                        } else {
+                            $groupLessonVideo = 'lessonVideoRu';
+                            $groupLessonPresent = 'lessonPresentRu';
+                        }
+                        $lesson->video = Helper::getUrls($lesson, $groupLessonVideo);
                         $modulePassedVideo = ModulePassed::where('lesson_id', $lesson->id)->where('course_module_id', $module->id)->where('type','video')->where('user_id', $user)->first();
                         if($modulePassedVideo) {
                             $lesson->passed_video = true;
                         } else {
                             $lesson->passed_video = false;
                         }
-                        $lesson->present = Helper::getUrls($lesson, 'lessonPresent');
+                        $lesson->present = Helper::getUrls($lesson, $groupLessonPresent);
                         $modulePassedPresent = ModulePassed::where('lesson_id', $lesson->id)->where('course_module_id', $module->id)->where('type','present')->where('user_id', $user)->first();
                         if($modulePassedPresent) {
                             $lesson->passed_present = true;
@@ -223,7 +263,13 @@ class CourseController extends Controller
         ->map(function($lecture){
             $lecture->plain_text = strip_tags($lecture->content);
             $lecture->plain_text_kz = strip_tags($lecture->content_kz);
-            $lecture->file = Helper::getUrls($lecture, 'courseModuleLecture');
+            $locale = App::getLocale();
+            if($locale === 'kz'){
+                $groupCourseModuleLecture = 'courseModuleLectureKz';
+            } else {
+                $groupCourseModuleLecture = 'courseModuleLectureRu';
+            }
+            $lecture->file = Helper::getUrls($lecture, $groupCourseModuleLecture);
             return $lecture;
         });
         return ApiResponseHelper::success($lecture);
@@ -231,11 +277,17 @@ class CourseController extends Controller
 
     public function moduleLecture($lang, $lesson_id, $lecture_id)
     {
+        $locale = App::getLocale();
         $lecture = CourseModuleLecture::where('id', $lecture_id)->get()
-        ->map(function($lecture){
+        ->map(function($lecture) use ($locale){
             $lecture->plain_text = strip_tags($lecture->content);
             $lecture->plain_text_kz = strip_tags($lecture->content_kz);
-            $lecture->file = Helper::getUrls($lecture, 'courseModuleLecture');
+            if($locale === 'kz'){
+                $groupCourseModuleLecture = 'courseModuleLectureKz';
+            } else {
+                $groupCourseModuleLecture = 'courseModuleLectureRu';
+            }
+            $lecture->file = Helper::getUrls($lecture, $groupCourseModuleLecture);
             return $lecture;
         });
         return ApiResponseHelper::success($lecture);
@@ -245,8 +297,16 @@ class CourseController extends Controller
     {
         $modules = Lesson::where('id', $lesson_id)
         ->get()->map(function($module){
-            $module->video = Helper::getUrls($module, 'lessonVideo');
-            $module->present = Helper::getUrls($module, 'lessonPresent');
+            $locale = App::getLocale();
+            if($locale === 'kz'){
+                $groupLessonVideo = 'lessonVideoKz';
+                $groupLessonPresent = 'lessonPresentKz';
+            } else {
+                $groupLessonVideo = 'lessonVideoRu';
+                $groupLessonPresent = 'lessonPresentRu';
+            }
+            $module->video = Helper::getUrls($module, $groupLessonVideo);
+            $module->present = Helper::getUrls($module, $groupLessonPresent);
 
             return $module;
         });
@@ -257,8 +317,16 @@ class CourseController extends Controller
     {
         $modules = Lesson::where('id', $lesson_id)
         ->get()->map(function($module){
-            $module->video = Helper::getUrls($module, 'lessonVideo');
-            $module->present = Helper::getUrls($module, 'lessonPresent');
+            $locale = App::getLocale();
+            if($locale === 'kz'){
+                $groupLessonVideo = 'lessonVideoKz';
+                $groupLessonPresent = 'lessonPresentKz';
+            } else {
+                $groupLessonVideo = 'lessonVideoRu';
+                $groupLessonPresent = 'lessonPresentRu';
+            }
+            $module->video = Helper::getUrls($module, $groupLessonVideo);
+            $module->present = Helper::getUrls($module, $groupLessonPresent);
 
             return $module;
         });

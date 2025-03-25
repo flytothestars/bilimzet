@@ -105,8 +105,12 @@ class LessonScreen extends Screen
                             ->type('hidden'),
                         Upload::make('lesson.attachments')
                             ->multiple()
-                            ->title('Видео файлы')
-                            ->groups('lessonVideo'),
+                            ->title('Видео файлы RU')
+                            ->groups('lessonVideoRu'),
+                        Upload::make('lesson.attachments')
+                            ->multiple()
+                            ->title('Видео файлы KZ')
+                            ->groups('lessonVideoKz'),
                     ])
             )->async('asyncGetLesson')->title('Видеоуроки')->size(Modal::SIZE_LG),
             Layout::modal('createOrEditPresent', 
@@ -115,8 +119,12 @@ class LessonScreen extends Screen
                             ->type('hidden'),
                         Upload::make('lesson.attachments')
                             ->multiple()
-                            ->title('Презентация файлы')
-                            ->groups('lessonPresent'),
+                            ->title('Презентация файлы RU')
+                            ->groups('lessonPresentRu'),
+                        Upload::make('lesson.attachments')
+                            ->multiple()
+                            ->title('Презентация файлы KZ')
+                            ->groups('lessonPresentKz'),
                     ])
             )->async('asyncGetLesson')->title('Презентация')->size(Modal::SIZE_LG),
         ];

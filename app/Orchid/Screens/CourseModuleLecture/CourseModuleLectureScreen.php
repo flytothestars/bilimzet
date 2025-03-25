@@ -69,10 +69,14 @@ class CourseModuleLectureScreen extends Screen
                     Input::make('courseModuleLecture.title_kz')->title('Заголовок вопроса KZ')->required(),
                     Quill::make('courseModuleLecture.content')->title('Содержимое RU')->required(),
                     Quill::make('courseModuleLecture.content_kz')->title('Содержимое KZ')->required(),
+                    Upload::make('courseModuleLecture.attachmentsRu')
+                        ->multiple()
+                        ->title('Лекция файлы RU')
+                        ->groups('courseModuleLectureRu'),
                     Upload::make('courseModuleLecture.attachments')
-                            ->multiple()
-                            ->title('Лекция файлы')
-                            ->groups('courseModuleLecture'),
+                        ->multiple()
+                        ->title('Лекция файлы KZ')
+                        ->groups('courseModuleLectureKz'),
                     Input::make('courseModuleLecture.lesson_id')
                         ->type('hidden')
                         ->value($this->lesson),
@@ -84,9 +88,13 @@ class CourseModuleLectureScreen extends Screen
                     Quill::make('courseModuleLecture.content')->title('Содержимое RU')->required(),
                     Quill::make('courseModuleLecture.content_kz')->title('Содержимое KZ')->required(),
                     Upload::make('courseModuleLecture.attachments')
-                            ->multiple()
-                            ->title('Лекция файлы')
-                            ->groups('courseModuleLecture'),
+                        ->multiple()
+                        ->title('Лекция файлы RU')
+                        ->groups('courseModuleLectureRu'),
+                    Upload::make('courseModuleLecture.attachments')
+                        ->multiple()
+                        ->title('Лекция файлы KZ')
+                        ->groups('courseModuleLectureKz'),
                     Input::make('courseModuleLecture.lesson_id')
                         ->type('hidden')
                         ->value($this->lesson),
