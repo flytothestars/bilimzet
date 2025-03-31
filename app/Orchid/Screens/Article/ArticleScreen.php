@@ -65,8 +65,8 @@ class ArticleScreen extends Screen
         return [
             ArticleListTable::class,
             Layout::modal('createArticle', Layout::rows([
-                Input::make('article.title')->title('Заголовка RU')->required(),
-                Input::make('article.title_kz')->title('Заголовка KZ')->required(),
+                Input::make('article.title')->title('Заголовок RU')->required(),
+                Input::make('article.title_kz')->title('Заголовок KZ')->required(),
                 Select::make('article.is_published')
                         ->options([
                             '0'   => 'Нет',
@@ -84,8 +84,8 @@ class ArticleScreen extends Screen
             
             Layout::modal('editArticle', Layout::rows([
                 Input::make('article.id')->type('hidden'),
-                Input::make('article.title')->title('Заголовка RU')->required(),
-                Input::make('article.title_kz')->title('Заголовка KZ')->required(),
+                Input::make('article.title')->title('Заголовок RU')->required(),
+                Input::make('article.title_kz')->title('Заголовок KZ')->required(),
                 Select::make('article.is_published')
                         ->options([
                             '0'   => 'Нет',

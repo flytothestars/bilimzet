@@ -66,8 +66,8 @@ class LessonScreen extends Screen
             LessonListTable::class,
             Layout::modal('createCourseLesson', 
                 Layout::rows([
-                    Input::make('lesson.title')->title('Заголовок вопроса RU')->required(),
-                    Input::make('lesson.title_kz')->title('Заголовок вопроса KZ')->required(),
+                    Input::make('lesson.title')->title('Заголовок урока RU')->required(),
+                    Input::make('lesson.title_kz')->title('Заголовок урока KZ')->required(),
                     TextArea::make('lesson.goal')->title('Цель RU')->required(),
                     TextArea::make('lesson.goal_kz')->title('Цель KZ')->required(),
                     TextArea::make('lesson.task')->title('Задача RU')->required(),
@@ -82,8 +82,8 @@ class LessonScreen extends Screen
                 ]))->title('Урок')->size(Modal::SIZE_LG)->applyButton('Создать'),
             Layout::modal('editCourseLesson', 
                 Layout::rows([
-                    Input::make('lesson.title')->title('Заголовок вопроса RU')->required(),
-                    Input::make('lesson.title_kz')->title('Заголовок вопроса KZ')->required(),
+                    Input::make('lesson.title')->title('Заголовок урока RU')->required(),
+                    Input::make('lesson.title_kz')->title('Заголовок урока KZ')->required(),
                     TextArea::make('lesson.goal')->title('Цель RU')->required(),
                     TextArea::make('lesson.goal_kz')->title('Цель KZ')->required(),
                     TextArea::make('lesson.task')->title('Задача RU')->required(),

@@ -58,7 +58,7 @@ class PlatformProvider extends OrchidServiceProvider
                 ->icon('bs.collection')
                 ->route('platform.article.list'),
                 
-            Menu::make('Общий категория')
+            Menu::make('Общие категорий')
                 ->icon('bs.bookmark')
                 ->route('platform.category.list'),
 

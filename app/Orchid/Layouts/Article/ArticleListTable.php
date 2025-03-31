@@ -78,7 +78,7 @@ class ArticleListTable extends Table
                         ->icon('bs.pencil')
                         ->modal('editArticle')
                         ->method('createOrUpdateArticle')
-                        ->modalTitle('Редактирование статью ' . $article->name)
+                        ->modalTitle('Редактировать статью ' . $article->name)
                         ->asyncParameters([
                             'article' => $article->id
                         ])

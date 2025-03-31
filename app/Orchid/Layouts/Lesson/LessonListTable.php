@@ -86,7 +86,7 @@ class LessonListTable extends Table
                         ->icon('bs.pencil')
                         ->modal('editCourseLesson')
                         ->method('createOrUpdateLesson')
-                        ->modalTitle('Редактирование категорию ' . $lesson->title)
+                        ->modalTitle('Редактирование урока ' . $lesson->title)
                         ->asyncParameters([
                             'lesson' => $lesson->id
                         ])

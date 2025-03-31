@@ -50,7 +50,7 @@ class CoursePartListTable extends Table
                         ->icon('bs.pencil')
                         ->modal('editCoursePart')
                         ->method('createOrUpdateCoursePart')
-                        ->modalTitle('Редактирование категорию ' . $coursePart->name)
+                        ->modalTitle('Редактирование части курса - ' . $coursePart->name)
                         ->asyncParameters([
                             'coursePart' => $coursePart->id
                         ])

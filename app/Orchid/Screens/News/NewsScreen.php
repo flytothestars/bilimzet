@@ -48,7 +48,7 @@ class NewsScreen extends Screen
     public function commandBar(): iterable
     {
         return [
-            ModalToggle::make('Создать новости')->modal('createNews')->method('createOrUpdateNews')
+            ModalToggle::make('Создать новость')->modal('createNews')->method('createOrUpdateNews')
         ];
     }
 
@@ -71,7 +71,7 @@ class NewsScreen extends Screen
                 Quill::make('news.text')->title('Описание RU')->required(),
                 Quill::make('news.text_kz')->title('Описание KZ')->required(),
                 
-            ]))->title('Создать новости')->applyButton('Создать')->size(Modal::SIZE_LG),
+            ]))->title('Создать новость')->applyButton('Создать')->size(Modal::SIZE_LG),
             Layout::modal('editNews', Layout::rows([
                 Input::make('news.id')->type('hidden'),
                 Input::make('news.name')->title('Заголовка RU')->required(),

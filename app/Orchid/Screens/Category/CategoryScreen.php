@@ -71,7 +71,7 @@ class CategoryScreen extends Screen
                     ->title('Иконка')
                     ->groups('categoryIcon')
                     ->required(),
-            ]))->title('Создать новости')->applyButton('Создать')->size(Modal::SIZE_LG),
+            ]))->title('Создать новость')->applyButton('Создать')->size(Modal::SIZE_LG),
 
             Layout::modal('editCategory', Layout::rows([
                 Input::make('category.id')->type('hidden'),

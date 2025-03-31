@@ -75,7 +75,7 @@ class CourseModuleListTable extends Table
                         ->icon('bs.pencil')
                         ->modal('editCourseModule')
                         ->method('createOrUpdateCourseModule')
-                        ->modalTitle('Редактирование категорию ' . $courseModule->title)
+                        ->modalTitle('Редактирование модуля - ' . $courseModule->title)
                         ->asyncParameters([
                             'courseModule' => $courseModule->id
                         ])
@@ -84,7 +84,7 @@ class CourseModuleListTable extends Table
                     Button::make('')
                         ->icon('trash')
                         ->method('delete')
-                        ->confirm('Вы уверены, что хотите удалить категорию?')
+                        ->confirm('Вы уверены, что хотите удалить модуля?')
                         ->parameters([
                             'courseModule' => $courseModule->id,
                         ])

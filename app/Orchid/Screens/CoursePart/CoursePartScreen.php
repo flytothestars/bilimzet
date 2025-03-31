@@ -62,8 +62,8 @@ class CoursePartScreen extends Screen
             CoursePartListTable::class,
             Layout::modal('createCoursePart', 
                 Layout::rows([
-                    Input::make('coursePart.title')->title('Название курса RU')->required(),
-                    Input::make('coursePart.title_kz')->title('Название курса KZ')->required(),
+                    Input::make('coursePart.title')->title('Название части курса RU')->required(),
+                    Input::make('coursePart.title_kz')->title('Название части курса KZ')->required(),
                     Input::make('coursePart.duration_hours')->title('Длительность (академических часов)')->required(),
                     Input::make('coursePart.price_kzt')->title('Стоимость (тенге)')->required(),
                     Upload::make('coursePart.attachments')
@@ -83,8 +83,8 @@ class CoursePartScreen extends Screen
 
             Layout::modal('editCoursePart',
                 Layout::rows([
-                    Input::make('coursePart.title')->title('Название курса RU')->required(),
-                    Input::make('coursePart.title_kz')->title('Название курса KZ')->required(),
+                    Input::make('coursePart.title')->title('Название части курса RU')->required(),
+                    Input::make('coursePart.title_kz')->title('Название части курса KZ')->required(),
                     Input::make('coursePart.duration_hours')->title('Длительность (академических часов)')->required(),
                     Input::make('coursePart.price_kzt')->title('Стоимость (тенге)')->required(),
                     Upload::make('coursePart.attachments')

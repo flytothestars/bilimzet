@@ -63,8 +63,8 @@ class CourseModuleScreen extends Screen
             CourseModuleListTable::class,
             Layout::modal('createCourseModule', 
                 Layout::rows([
-                    Input::make('courseModule.title')->title('Заголовок вопроса RU')->required(),
-                    Input::make('courseModule.title_kz')->title('Заголовок вопроса KZ')->required(),
+                    Input::make('courseModule.title')->title('Заголовок модуля RU')->required(),
+                    Input::make('courseModule.title_kz')->title('Заголовок модуля KZ')->required(),
                     Input::make('courseModule.duration_hours')->title('Длительность (академических часов)')->required(),
 
                     // Input::make('courseModule.goal')->title('Цель RU')->required(),
@@ -78,11 +78,11 @@ class CourseModuleScreen extends Screen
                     Input::make('courseModule.course_part_id')
                         ->type('hidden')
                         ->value($this->coursePart),
-                ]))->title('Вопросы')->size(Modal::SIZE_LG),
+                ]))->title('Модуль')->size(Modal::SIZE_LG),
             Layout::modal('editCourseModule', 
                 Layout::rows([
-                    Input::make('courseModule.title')->title('Заголовок вопроса RU')->required(),
-                    Input::make('courseModule.title_kz')->title('Заголовок вопроса KZ')->required(),
+                    Input::make('courseModule.title')->title('Заголовок модуля RU')->required(),
+                    Input::make('courseModule.title_kz')->title('Заголовок модуля KZ')->required(),
                     Input::make('courseModule.duration_hours')->title('Длительность (академических часов)')->required(),
                     // Input::make('courseModule.goal')->title('Цель RU')->required(),
                     // Input::make('courseModule.goal_kz')->title('Цель KZ')->required(),
@@ -97,7 +97,7 @@ class CourseModuleScreen extends Screen
                         ->value($this->coursePart),
                     Input::make('courseModule.id')
                         ->type('hidden')
-                ]))->async('asyncGetCourseModule')->title('Вопросы')->size(Modal::SIZE_LG),
+                ]))->async('asyncGetCourseModule')->title('Модуль')->size(Modal::SIZE_LG),
 
             // Layout::modal('createOrEditVideo', 
             //         Layout::rows([

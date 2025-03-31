@@ -65,8 +65,8 @@ class CourseModuleLectureScreen extends Screen
             CourseModuleLectureListTable::class,
             Layout::modal('createCourseModuleLecture', 
                 Layout::rows([
-                    Input::make('courseModuleLecture.title')->title('Заголовок вопроса RU')->required(),
-                    Input::make('courseModuleLecture.title_kz')->title('Заголовок вопроса KZ')->required(),
+                    Input::make('courseModuleLecture.title')->title('Заголовок лекций RU')->required(),
+                    Input::make('courseModuleLecture.title_kz')->title('Заголовок лекций KZ')->required(),
                     Quill::make('courseModuleLecture.content')->title('Содержимое RU')->required(),
                     Quill::make('courseModuleLecture.content_kz')->title('Содержимое KZ')->required(),
                     Upload::make('courseModuleLecture.attachmentsRu')
@@ -80,11 +80,11 @@ class CourseModuleLectureScreen extends Screen
                     Input::make('courseModuleLecture.lesson_id')
                         ->type('hidden')
                         ->value($this->lesson),
-                ]))->title('Вопросы')->size(Modal::SIZE_LG),
+                ]))->title('Лекций')->size(Modal::SIZE_LG),
             Layout::modal('editCourseModuleLecture', 
                 Layout::rows([
-                    Input::make('courseModuleLecture.title')->title('Заголовок вопроса RU')->required(),
-                    Input::make('courseModuleLecture.title_kz')->title('Заголовок вопроса KZ')->required(),
+                    Input::make('courseModuleLecture.title')->title('Заголовок лекций RU')->required(),
+                    Input::make('courseModuleLecture.title_kz')->title('Заголовок лекций KZ')->required(),
                     Quill::make('courseModuleLecture.content')->title('Содержимое RU')->required(),
                     Quill::make('courseModuleLecture.content_kz')->title('Содержимое KZ')->required(),
                     Upload::make('courseModuleLecture.attachments')
@@ -100,7 +100,7 @@ class CourseModuleLectureScreen extends Screen
                         ->value($this->lesson),
                     Input::make('courseModuleLecture.id')
                         ->type('hidden')
-                ]))->async('asyncGetCourseModuleLecture')->title('Вопросы')->size(Modal::SIZE_LG),
+                ]))->async('asyncGetCourseModuleLecture')->title('Лекций')->size(Modal::SIZE_LG),
         ];
     }
 

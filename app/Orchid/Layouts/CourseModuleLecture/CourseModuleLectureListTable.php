@@ -42,7 +42,7 @@ class CourseModuleLectureListTable extends Table
                         ->icon('bs.pencil')
                         ->modal('editCourseModuleLecture')
                         ->method('createOrUpdateCourseModuleLecture')
-                        ->modalTitle('Редактирование лекцию ' . $courseModuleLecture->title)
+                        ->modalTitle('Редактирование лекций - ' . $courseModuleLecture->title)
                         ->asyncParameters([
                             'courseModuleLecture' => $courseModuleLecture->id
                         ])
