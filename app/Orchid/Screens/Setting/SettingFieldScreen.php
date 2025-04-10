@@ -59,15 +59,17 @@ class SettingFieldScreen extends Screen
         $filePath = config_path('config_file.json');
         if (File::exists($filePath)) {
             $jsonData = json_decode(File::get($filePath), true);
-            $address = isset($jsonData['address']) ? $jsonData['address'] : '';
-            $email = isset($jsonData['email']) ? $jsonData['email'] : '';
-            $telegram = isset($jsonData['telegram']) ? $jsonData['telegram'] : '';
-            $instagram = isset($jsonData['instagram']) ? $jsonData['instagram'] : '';
-            $whatsapp = isset($jsonData['whatsapp']) ? $jsonData['whatsapp'] : '';
-            $phone = isset($jsonData['phone']) ? $jsonData['phone'] : '';
-            $twogis_link = isset($jsonData['twogis_link']) ? $jsonData['twogis_link'] : '';
-            $iinbin = isset($jsonData['iinbin']) ? $jsonData['iinbin'] : '';
-            $name_company = isset($jsonData['name_company']) ? $jsonData['name_company'] : '';
+            $basic = &$jsonData['basic'];
+
+            $address = isset($basic['address']) ? $basic['address'] : '';
+            $email = isset($basic['email']) ? $basic['email'] : '';
+            $telegram = isset($basic['telegram']) ? $basic['telegram'] : '';
+            $instagram = isset($basic['instagram']) ? $basic['instagram'] : '';
+            $whatsapp = isset($basic['whatsapp']) ? $basic['whatsapp'] : '';
+            $phone = isset($basic['phone']) ? $basic['phone'] : '';
+            $twogis_link = isset($basic['twogis_link']) ? $basic['twogis_link'] : '';
+            $iinbin = isset($basic['iinbin']) ? $basic['iinbin'] : '';
+            $name_company = isset($basic['name_company']) ? $basic['name_company'] : '';
         } else {
             $address = '';
             $email = '';
@@ -171,19 +173,20 @@ class SettingFieldScreen extends Screen
 
         if (File::exists($filePath)) {
             $jsonData = json_decode(File::get($filePath), true);
+            $basic = &$jsonData['basic'];
         } else {
-            $jsonData = [];
+            $basic = ['basic' => []];
         }
 
-        $jsonData['address'] = $request->input('address');
-        $jsonData['email'] = $request->input('email');
-        $jsonData['instagram'] = $request->input('instagram');
-        $jsonData['telegram'] = $request->input('telegram');
-        $jsonData['phone'] = $request->input('phone');
-        $jsonData['whatsapp'] = $request->input('whatsapp');
-        $jsonData['twogis_link'] = $request->input('twogis_link');
-        $jsonData['iinbin'] = $request->input('iinbin');
-        $jsonData['name_company'] = $request->input('name_company');
+        $basic['address'] = $request->input('address');
+        $basic['email'] = $request->input('email');
+        $basic['instagram'] = $request->input('instagram');
+        $basic['telegram'] = $request->input('telegram');
+        $basic['phone'] = $request->input('phone');
+        $basic['whatsapp'] = $request->input('whatsapp');
+        $basic['twogis_link'] = $request->input('twogis_link');
+        $basic['iinbin'] = $request->input('iinbin');
+        $basic['name_company'] = $request->input('name_company');
 
         File::put($filePath, json_encode($jsonData));
 

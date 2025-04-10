@@ -20,6 +20,12 @@ class SettingsElements extends TabMenu
 
             Menu::make('Advanced Настройки')
                 ->route('platform.settings.advanced'),
+
+            Menu::make('О центре')
+                ->route('platform.settings.about'),
+            
+            Menu::make('Акции')
+                ->route('platform.settings.promotion'),
         ];
     }
 }

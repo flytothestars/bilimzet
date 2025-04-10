@@ -86,6 +86,8 @@ Route::screen('transaction_log', TransactionLogScreen::class)
             
 Route::screen('/settings/form/basic', \App\Orchid\Screens\Setting\SettingFieldScreen::class)->name('platform.settings.basic');
 Route::screen('/settings/form/advanced', \App\Orchid\Screens\Setting\SettingsFieldsAdvancedScreen::class)->name('platform.settings.advanced');
+Route::screen('/settings/form/about', \App\Orchid\Screens\Setting\SettingsFieldsAboutScreen::class)->name('platform.settings.about');
+Route::screen('/settings/form/promotion', \App\Orchid\Screens\Setting\SettingsFieldsPromotionScreen::class)->name('platform.settings.promotion');
 
 Route::screen('course_speciality', CourseSpecialityScreen::class)
     ->name('platform.course_speciality.list')

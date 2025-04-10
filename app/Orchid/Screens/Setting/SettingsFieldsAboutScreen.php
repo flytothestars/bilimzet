@@ -14,8 +14,11 @@ use Orchid\Screen\Fields\Input;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use App\Orchid\Layouts\Settings\SettingsElements;
+use Orchid\Screen\Fields\TextArea;
+use Orchid\Support\Facades\Alert;
 
-class SettingsFieldsAdvancedScreen extends Screen
+
+class SettingsFieldsAboutScreen extends Screen
 {
     /**
      * Fetch data to be displayed on the screen.
@@ -62,30 +65,52 @@ class SettingsFieldsAdvancedScreen extends Screen
      */
     public function layout(): iterable
     {
+        $filePath = config_path('config_file.json');
+        if (File::exists($filePath)) {
+            $jsonData = json_decode(File::get($filePath), true);
+            $basic = &$jsonData['about'];
+
+            $description = isset($basic['description']) ? $basic['description'] : '';
+        } else {
+            $description = '';
+        }
         return [
 
             SettingsElements::class,
             Layout::rows([
                 Group::make([
+                    TextArea::make('description')->title('О нас')->required()->rows(10)->value($description),
                     Upload::make('attachments')
-                        ->title('Картинка на обратный связь')
-                        ->groups('aboutImage'),
-                    Upload::make('attachments')
-                        ->title('Логотип сайта')
-                        ->groups('aboutImage'),
-                    Upload::make('attachments')
-                        ->title('Картинка баннер')
+                        ->title('Картинка')
                         ->groups('aboutImage'),
                 ]),
+                
                 Button::make('Сохранить')
-                    ->method('updateIcon')
+                    ->method('saveAbout')
                     ->type(Color::PRIMARY)
             ]),
         ];
     }
 
-    public function updateIcon(Request $request)
-    {  
+    public function saveAbout(Request $request)
+    {
+        
+        $filePath = config_path('config_file.json');
+
+        if (File::exists($filePath)) {
+            $jsonData = json_decode(File::get($filePath), true);
+            $basic = &$jsonData['about'];
+        } else {
+            $basic = ['about' => []];
+        }
+
+        $basic['description'] = $request->input('description');
+        $basic['attachments_id'] = $request->input('attachments');
+
+        File::put($filePath, json_encode($jsonData));
+
+        Alert::success('Данные успешно сохранены');
+
         return back()->with('success', 'Images uploaded successfully.');
     }
 }
