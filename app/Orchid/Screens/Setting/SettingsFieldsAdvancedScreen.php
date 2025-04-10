@@ -76,9 +76,9 @@ class SettingsFieldsAdvancedScreen extends Screen
                         ->title('Баннер')
                         ->horizontal(),
                 ]),
-                Button::make('Submit')
+                Button::make('Сохранить')
                     ->method('updateIcon')
-                    ->type(Color::BASIC),
+                    ->type(Color::PRIMARY)
             ]),
         ];
     }

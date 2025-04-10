@@ -155,7 +155,7 @@ class SettingFieldScreen extends Screen
 
                 Button::make('Сохранить')
                     ->method('buttonClickProcessing')
-                    ->type(Color::BASIC)
+                    ->type(Color::PRIMARY)
                     ->confirm('Подтвердите вашу изменение в настройках для продолжения')
                     ->parameters([
                         'modalTitle' => 'Подтверждение изменение',

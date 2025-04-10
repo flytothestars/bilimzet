@@ -14,6 +14,7 @@ use App\Models\Category;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Exception;
+use Illuminate\Support\Facades\File;
 
 class MainController extends Controller
 {
@@ -93,6 +94,17 @@ class MainController extends Controller
             
         // dd($resultsModelCourse);
         return ApiResponseHelper::success($resultsModelArticle);
+    }
+
+    public function settingBasic()
+    {
+        $jsonData = '';
+        $filePath = config_path('config_file.json');
+        if (File::exists($filePath)) {
+            $jsonData = json_decode(File::get($filePath), true);
+        }
+        return ApiResponseHelper::success($jsonData);
+
     }
 
     public function sbp()

@@ -26,6 +26,8 @@ use App\Http\Controllers\Api\CommentController;
 Route::post('/auth/send', [AuthController::class, 'send'])->name('auth.send');
 Route::post('/auth/verify', [AuthController::class, 'verify'])->name('auth.verify');
 Route::post('/feedback', [MainController::class, 'feedback'])->name('feedback');
+Route::get('/settings/basic', [MainController::class, 'settingBasic'])->name('settings.basic');
+Route::get('/settings/advanced', [MainController::class, 'settingAdvanced'])->name('settings.advanced');
 
 Route::prefix('{lang}')->middleware('locale')->group(function () {
     Route::get('/news', [NewsController::class, 'list'])->name('news.list');

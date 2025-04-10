@@ -114,10 +114,10 @@ class PlatformProvider extends OrchidServiceProvider
                 ->permission('platform.systems.roles')
                 ->divider(),
 
-            // Menu::make('Настройка')
-            //     ->icon('bs.gear')
-            //     ->route('platform.settings.basic')
-            //     ->active('*/settings/form/*'),
+            Menu::make('Настройка')
+                ->icon('bs.gear')
+                ->route('platform.settings.basic')
+                ->active('*/settings/form/*'),
 
 
             // Menu::make('Documentation')
