@@ -7,6 +7,8 @@ use Orchid\Screen\Layouts\Table;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Actions\ModalToggle;
 use Orchid\Screen\Fields\Group;
+use Orchid\Support\Color;
+use App\Models\Promotion;
 
 class PromotionListTable extends Table
 {
@@ -28,8 +30,28 @@ class PromotionListTable extends Table
         return [
             TD::make('title', 'Заголовка'),
             TD::make('description', 'Описание'),
+            TD::make('banner', 'Баннер')->render(function(Promotion $promotion){
+                return $promotion->banner === 1 ? 'Да' : 'Нет';
+            }),
+            TD::make('is_active', 'Активен?')->render(function(Promotion $promotion){
+                return $promotion->is_active === 1 ? 'Да' : 'Нет';
+            }),
             TD::make('action', 'Действие')->render(function ($promotion) {
                 return Group::make([
+                    Button::make('Активен')
+                        ->method('actived')
+                        ->parameters([
+                            'promotion' => $promotion->id,
+                        ])
+                        ->type(Color::SUCCESS)
+                        ->style($this->styleButton),
+                    Button::make('Не активен')
+                        ->method('noActived')
+                        ->parameters([
+                            'promotion' => $promotion->id,
+                        ])
+                        ->type(Color::DANGER)
+                        ->style($this->styleButton),
                     ModalToggle::make('')
                         ->icon('bs.pencil')
                         ->modal('editPromotion')

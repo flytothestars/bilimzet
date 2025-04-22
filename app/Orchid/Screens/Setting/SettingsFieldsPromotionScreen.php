@@ -19,6 +19,9 @@ use App\Orchid\Layouts\Settings\PromotionListTable;
 use App\Models\Promotion;
 use Orchid\Screen\Actions\ModalToggle;
 use Orchid\Screen\Layouts\Modal;
+use App\Http\Requests\PromotionRequest;
+use Orchid\Support\Facades\Toast;
+use Orchid\Screen\Fields\CheckBox;
 
 class SettingsFieldsPromotionScreen extends Screen
 {
@@ -79,7 +82,11 @@ class SettingsFieldsPromotionScreen extends Screen
                 Input::make('promotion.title_kz')->title('Заголовка KZ')->required(),
                 Input::make('promotion.description')->title('Описание RU')->required(),
                 Input::make('promotion.description_kz')->title('Описание KZ')->required(),
-                
+                Input::make('promotion.link')->title('Ссылка'),
+                CheckBox::make('promotion.banner')
+                        ->title('Баннер')
+                        ->placeholder('Показать')
+                        ->sendTrueOrFalse(),
             ]))->title('Создать')->applyButton('Создать')->size(Modal::SIZE_LG),
             Layout::modal('editpromotion', Layout::rows([
                 Input::make('promotion.id')->type('hidden'),
@@ -87,21 +94,41 @@ class SettingsFieldsPromotionScreen extends Screen
                 Input::make('promotion.title_kz')->title('Заголовка KZ')->required(),
                 Input::make('promotion.description')->title('Описание RU')->required(),
                 Input::make('promotion.description_kz')->title('Описание KZ')->required(),
+                Input::make('promotion.link')->title('Ссылка'),
+                CheckBox::make('promotion.banner')
+                        ->title('Баннер')
+                        ->placeholder('RemeПоказать')
+                        ->sendTrueOrFalse(),
             ]))->async('asyncGetPromotion')->size(Modal::SIZE_LG)
         ];
     }
 
-    public function createOrUpdatePromotion(NewsRequest $request )
+    public function createOrUpdatePromotion(PromotionRequest $request )
     {
         $validated = $request->validated();
         $promotionId = $request->input('promotion.id');
         $promotion = Promotion::updateOrCreate([
             'id' => $promotionId
         ], $validated['promotion']);
-        $promotion->attachments()->syncWithoutDetaching(
-            $request->input('promotion.attachments', [])
-        );
         is_null($promotionId) ? Toast::info('Успешно добавлено') : Toast::info('Успешно обновлено');
+
+    }
+
+    public function noActived(Promotion $promotion)
+    {
+        $promotion->update([
+            'is_active' => 0,
+        ]);
+        Toast::info('Не активен');
+
+    }
+
+    public function actived(Promotion $promotion)
+    {
+        $promotion->update([
+            'is_active' => 1,
+        ]);
+        Toast::info('Активен');
 
     }
 

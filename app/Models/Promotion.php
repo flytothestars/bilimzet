@@ -11,7 +11,7 @@ class Promotion extends BaseModel
 {
     use HasFactory, AsSource, Attachable;
     
-    protected $fillable = [ 'id','title', 'title_kz', 'description', 'description_kz'];
+    protected $fillable = [ 'id','title', 'title_kz', 'description', 'description_kz', 'link', 'is_active', 'banner'];
     protected $hidden = ['title_kz', 'description_kz'];
 
     public function getTitleAttribute()

@@ -11,6 +11,7 @@ use App\Models\LibraryItem;
 use App\Helper\Helper;
 use App\Models\User;
 use App\Models\Category;
+use App\Models\Promotion;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Exception;
@@ -107,10 +108,18 @@ class MainController extends Controller
 
     }
 
+    public function promotions()
+    {
+        $list = [
+            'main' => Promotion::where('is_active', 1)->where('banner', 1)->first(),
+            'list' => Promotion::where('is_active', 1)->orderBy('created_at', 'desc')->get(),
+        ];
+        return ApiResponseHelper::success($list);
+    }
+
     public function sbp()
     {
         $url = $this->generate();
-        // dd($url['link']);
         return [
             'url' => '',
             'paymentUrl' => $url['link'],
