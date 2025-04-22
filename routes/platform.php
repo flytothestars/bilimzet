@@ -33,6 +33,7 @@ use App\Orchid\Screens\Feedback\FeedbackScreen;
 use App\Orchid\Screens\Lesson\LessonScreen;
 use App\Orchid\Screens\TransactionLog\TransactionLogScreen;
 use App\Orchid\Screens\CourseModuleLecture\CourseModuleLectureScreen;
+use App\Orchid\Screens\CourseComment\CourseCommentScreen;
 
 /*
 |--------------------------------------------------------------------------
@@ -135,6 +136,15 @@ Route::screen('course_module', CourseModuleScreen::class)
         ->push(__('Курс '), route('platform.course.list', ['courseSpeciality' => request()->get('courseSpeciality')]))
         ->push(__('Части курса'), route('platform.course_part.list', ['course' => request()->get('course'), 'courseSpeciality' => request()->get('courseSpeciality')]))
         ->push(__('Модули '), route('platform.course_module.list')));
+
+Route::screen('course_comment', CourseCommentScreen::class)
+    ->name('platform.course_comment.list')
+    ->breadcrumbs(fn (Trail $trail) => $trail
+        ->parent('platform.index')
+        ->push(__('Специализации'), route('platform.course_speciality.list'))
+        ->push(__('Курс '), route('platform.course.list', ['courseSpeciality' => request()->get('courseSpeciality')]))
+        ->push(__('Части курса'), route('platform.course_part.list', ['course' => request()->get('course'), 'courseSpeciality' => request()->get('courseSpeciality')]))
+        ->push(__('Комментарии '), route('platform.course_comment.list')));
 
 Route::screen('lesson', LessonScreen::class)
     ->name('platform.lesson.list')

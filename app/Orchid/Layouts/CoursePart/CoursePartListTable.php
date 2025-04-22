@@ -41,7 +41,7 @@ class CoursePartListTable extends Table
             TD::make('price_kzt', 'Стоимость (тенге)'),
             TD::make('action', 'Действие')->render(function ($coursePart) {
                 return Group::make([
-                    Link::make('Комментарии')->href(route('platform.course_module.list', [
+                    Link::make('Комментарии')->href(route('platform.course_comment.list', [
                         'courseSpeciality' => $coursePart->course->speciality_id,
                         'course' => $coursePart->course_id,
                         'coursePart' => $coursePart->id

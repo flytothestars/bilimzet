@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Orchid\Screen\AsSource;
 
 class CommentCourse extends Model
 {
-    use HasFactory;
+    use HasFactory, AsSource;
 
     protected $fillable = [
         'id', 'user_id', 'course_id', 'part_id', 'comment'
