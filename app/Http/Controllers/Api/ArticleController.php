@@ -11,6 +11,7 @@ use App\Helper\ApiResponseHelper;
 use App\Helper\Helper;
 use Orchid\Attachment\File;
 use App\Http\Resources\ArticleResource;
+use Illuminate\Support\Facades\App;
 
 use App\Http\Controllers\Api\CapitalDTO;
 use App\Http\Controllers\Api\CapitalService;
@@ -58,8 +59,14 @@ class ArticleController extends Controller
                 $user->photo = Helper::getUrls($user, 'profilePhoto');
                 return $user;
             });
+            $locale = App::getLocale();
+            if($locale === 'kz'){
+                $groupArticleDocument = 'articleDocumentKz';
+            } else {
+                $groupArticleDocument = 'articleDocumentRu';
+            }
             $item->category = Category::find($item->category);
-            $item->document = Helper::getUrls($item, 'articleDocument');
+            $item->document = Helper::getUrls($item, $groupArticleDocument);
             $item->document_extension = Helper::getExtension($item, 'articleDocument');
             $item->document_extension = url('/images/extension/'.Helper::getExtension($item, 'articleDocument').'.png');
             $item->document_size = Helper::getSize($item, 'articleDocument');        

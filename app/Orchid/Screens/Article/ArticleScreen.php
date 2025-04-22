@@ -75,8 +75,12 @@ class ArticleScreen extends Screen
                 Relation::make('article.category')->fromModel(Category::class, 'name')->displayAppend('full')->title('Категория')->required(),
                 Relation::make('article.author_id')->fromModel(User::class, 'full_name')->title('Автор')->required(),
                 Upload::make('article.attachments')
-                    ->title('Документ')
-                    ->groups('articleDocument')
+                    ->title('Документ RU')
+                    ->groups('articleDocumentRu')
+                    ->required(),
+                Upload::make('article.attachments')
+                    ->title('Документ KZ')
+                    ->groups('articleDocumentKz')
                     ->required(),
                 Quill::make('article.text')->title('Описание RU')->required(),
                 Quill::make('article.text_kz')->title('Описание KZ')->required(),
@@ -94,8 +98,12 @@ class ArticleScreen extends Screen
                 Relation::make('article.category')->fromModel(Category::class, 'name')->displayAppend('full')->title('Категория')->required(),
                 Relation::make('article.author_id')->fromModel(User::class, 'full_name')->title('Автор')->required(),
                 Upload::make('article.attachments')
-                    ->title('Документ')
-                    ->groups('articleDocument')
+                    ->title('Документ RU')
+                    ->groups('articleDocumentRu')
+                    ->required(),
+                Upload::make('article.attachments')
+                    ->title('Документ KZ')
+                    ->groups('articleDocumentKz')
                     ->required(),
                 Quill::make('article.text')->title('Описание RU')->required(),
                 Quill::make('article.text_kz')->title('Описание KZ')->required(),

@@ -84,7 +84,11 @@ class SettingsFieldsAboutScreen extends Screen
                         ->title('Картинка')
                         ->groups('aboutImage'),
                 ]),
-                
+                Group::make([
+                    Upload::make('attachments')
+                        ->title('Слайдер')
+                        ->groups('aboutSliderImage'),
+                ]),
                 Button::make('Сохранить')
                     ->method('saveAbout')
                     ->type(Color::PRIMARY)

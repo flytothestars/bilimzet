@@ -70,6 +70,8 @@ class SettingFieldScreen extends Screen
             $twogis_link = isset($basic['twogis_link']) ? $basic['twogis_link'] : '';
             $iinbin = isset($basic['iinbin']) ? $basic['iinbin'] : '';
             $name_company = isset($basic['name_company']) ? $basic['name_company'] : '';
+            $count_courses_completed = isset($basic['count_courses_completed']) ? $basic['count_courses_completed'] : '';
+
         } else {
             $address = '';
             $email = '';
@@ -80,6 +82,7 @@ class SettingFieldScreen extends Screen
             $twogis_link = '';
             $iinbin = '';
             $name_company = '';
+            $count_courses_completed = '';
         }
 
         return [
@@ -154,7 +157,13 @@ class SettingFieldScreen extends Screen
                         ->horizontal()
                         ->value($whatsapp),
                 ]),
-
+                Group::make([
+                    Input::make('count_courses_completed')
+                        ->type('text')
+                        ->title('Пройденных курсов')
+                        ->horizontal()
+                        ->value($count_courses_completed),
+                ]),
                 Button::make('Сохранить')
                     ->method('buttonClickProcessing')
                     ->type(Color::PRIMARY)
@@ -187,6 +196,7 @@ class SettingFieldScreen extends Screen
         $basic['twogis_link'] = $request->input('twogis_link');
         $basic['iinbin'] = $request->input('iinbin');
         $basic['name_company'] = $request->input('name_company');
+        $basic['count_courses_completed'] = $request->input('count_courses_completed');
 
         File::put($filePath, json_encode($jsonData));
 

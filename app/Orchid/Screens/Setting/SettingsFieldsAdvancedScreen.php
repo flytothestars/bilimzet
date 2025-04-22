@@ -74,7 +74,10 @@ class SettingsFieldsAdvancedScreen extends Screen
                         ->title('Логотип сайта')
                         ->groups('aboutImage'),
                     Upload::make('attachments')
-                        ->title('Картинка баннер')
+                        ->title('Картинка баннер слева')
+                        ->groups('aboutImage'),
+                    Upload::make('attachments')
+                        ->title('Картинка баннер справа')
                         ->groups('aboutImage'),
                 ]),
                 Button::make('Сохранить')
